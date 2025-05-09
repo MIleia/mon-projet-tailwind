@@ -11,6 +11,10 @@
       @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
       body {
         font-family: 'Lexend', sans-serif;
+        background-image: url('images/Page contact/medicine-capsules-global-health-with-geometric-pattern-digital-remix.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
       }
     </style>
   </head>
@@ -29,92 +33,81 @@
     </div>
 
     <!-- Header principal -->
-    <div class="bg-white border-b py-4">
-      <div class="max-w-screen-xl mx-auto flex justify-end items-center px-4 space-x-6">
-        <div class="flex items-center space-x-2">
-          <i class="fas fa-phone text-green-700"></i>
-          <div>
-            <p class="text-xs">Appeler à tout moment</p>
-            <strong class="text-sm">+92 3800 8060</strong>
-          </div>
+    <div class="bg-[#3C74A8] border-b py-4">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center px-6">
+            <div class="w-1/4"></div>
+            <div class="flex items-center space-x-4 text-white ml-4">
+                <i class="fas fa-phone text-lg font-bold"></i>
+                <div>
+                    <p class="text-xs">Appeler à tout moment</p>
+                    <strong class="text-sm font-bold">+92 3800 8060</strong>
+                </div>
+            <div class="w-px h-6 bg-white"></div>
+            <i class="fas fa-search"></i>
         </div>
-        <div class="w-px h-6 bg-gray-300"></div>
-        <div><i class="fas fa-search"></i></div>
-        <div class="flex space-x-3">
-          <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
-          <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
-          <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a>
-          <a href="https://www.linkedin.com/company/agence-pharmacol/"><i class="fab fa-linkedin"></i></a>
+            <div class="flex space-x-5 text-white w-1/4 justify-end mr-4">
+                <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a>
+                <a href="https://www.linkedin.com/company/agence-pharmacol/"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
-      </div>
     </div>
 
-    <!-- Navigation -->
-    <!-- Barre de navigation avec Tailwind CSS -->
-<nav class="bg-white border-t border-b border-gray-200 shadow-sm">
-  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center py-4">
-      
-      <!-- Logo -->
-      <div class="flex-shrink-0">
-        <a href="/">
-          <img class="h-12 w-auto" src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol">
-        </a>
-      </div>
+    <!-- Navbar -->
+    <nav class="relative z-20 bg-white bg-opacity-75 backdrop-blur-md w-4/5 mx-auto mt-4">
+    <div class="qcontainer flex justify-center items-center px-4 py-3">
+        <ul class="qnav-links flex items-center space-x-8">
+        <!-- Logo -->
+        <li class="qlogo-nav">
+            <div class="qlogo">
+            <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
+            </div>
+        </li>
 
-      <!-- Liens de navigation -->
-      <ul class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-700">
-        <li>
-          <a href="/index.html" class="hover:text-green-700 transition">PHARMACOL</a>
+        <!-- Liens de navigation -->
+        <li><a href="/index.html" class="text-gray-900 hover:text-green-600">PHARMACOL</a></li>
+        
+        <!-- Dropdown Prestation -->
+        <li class="qdropdown relative group">
+            <a href="#" class="text-green-900 hover:text-green-600 flex items-center space-x-2">
+            <span>Prestations</span>
+            <i class="fas fa-chevron-down"></i>
+            </a>
+            <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 mt-2 group-hover:block">
+            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Consultations</a></li>
+            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Analyses</a></li>
+            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Pharmacie</a></li>
+            </ul>
         </li>
-        <li class="relative group">
-          <a href="#" class="flex items-center gap-1 hover:text-green-700 transition">
-            Prestations <i class="fas fa-chevron-down text-xs"></i>
-          </a>
-          <ul class="absolute left-0 mt-2 w-48 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Consultations</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Analyses</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Pharmacie</a></li>
-          </ul>
-        </li>
-        <li class="relative group">
-          <a href="/propos.html" class="flex items-center gap-1 hover:text-green-700 transition">
-            À Propos <i class="fas fa-chevron-down text-xs"></i>
-          </a>
-          <ul class="absolute left-0 mt-2 w-48 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Notre équipe</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Notre histoire</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="/recrutement.html" class="hover:text-green-700 transition">Recrutement</a>
-        </li>
-        <li>
-          <a href="/blogs.html" class="hover:text-green-700 transition">Blogs</a>
-        </li>
-        <li>
-          <a href="/contact.html" class="hover:text-green-700 transition">Contact</a>
-        </li>
-      </ul>
 
-      <!-- Icône menu mobile (facultatif à ajouter avec JS plus tard) -->
-      <div class="md:hidden">
-        <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
-      </div>
+        <!-- Dropdown À Propos -->
+        <li class="qdropdown relative group">
+            <a href="/propos.html" class="text-gray-900 hover:text-green-600 flex items-center space-x-2">
+            <span>À Propos</span>
+            <i class="fas fa-chevron-down"></i>
+            </a>
+            <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 mt-2 group-hover:block">
+            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notre équipe</a></li>
+            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notre histoire</a></li>
+            </ul>
+        </li>
+
+        <!-- Liens supplémentaires -->
+        <li><a href="/recrutement.html" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
+        <li><a href="/blogs.html" class="text-gray-900 hover:text-green-600">Blogs</a></li>
+        <li><a href="/contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
+        </ul>
     </div>
-  </div>
-</nav>
+    </nav>
 
     <!-- Bandeau Prestations -->
-    <header class="bg-[#3f73a3] py-12">
-      <div class="max-w-screen-xl mx-auto text-center">
-        <h1 class="text-white text-3xl md:text-5xl font-bold">Prestations</h1>
-      </div>
+    <header class="qhero-prestations bg-cover bg-center" style="background-image: url('images/Page contact/medicine-capsules-global-health-with-geometric-pattern-digital-remix.jpg');">
+        <div class="qcontainer text-center py-20">
+            <h1 class="qtitre-prestations text-white text-5xl font-bold">Prestations</h1>
+        </div>
     </header>
-
 
     <!-- Contenu page prestations -->
     <section class="bg-gray-50 py-16 px-4">
