@@ -51,62 +51,34 @@
     </div>
 
     <!-- Navigation -->
-    <!-- Barre de navigation avec Tailwind CSS -->
-<nav class="bg-white border-t border-b border-gray-200 shadow-sm">
-  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center py-4">
-      
-      <!-- Logo -->
-      <div class="flex-shrink-0">
-        <a href="/">
-          <img class="h-12 w-auto" src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol">
+    <nav class="bg-[#437305] text-white">
+      <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between px-4 py-3">
+        <a href="/index.html" class="flex items-center space-x-3">
+          <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="w-12 h-12" />
+          <span class="font-bold text-lg">PHARMACOL</span>
         </a>
+        <ul class="flex flex-wrap items-center space-x-6">
+          <li class="relative group">
+            <a href="#" class="hover:underline">Prestations <i class="fas fa-chevron-down text-xs"></i></a>
+            <ul class="absolute hidden group-hover:block bg-white text-gray-800 mt-2 shadow-lg rounded w-48">
+              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Consultations</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Analyses</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Pharmacie</a></li>
+            </ul>
+          </li>
+          <li class="relative group">
+            <a href="/propos.html" class="hover:underline">A Propos <i class="fas fa-chevron-down text-xs"></i></a>
+            <ul class="absolute hidden group-hover:block bg-white text-gray-800 mt-2 shadow-lg rounded w-48">
+              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Notre équipe</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Notre histoire</a></li>
+            </ul>
+          </li>
+          <li><a href="/recrutement.html" class="hover:underline">Recrutement</a></li>
+          <li><a href="/blogs.html" class="hover:underline">Blogs</a></li>
+          <li><a href="/contact.html" class="hover:underline">Contact</a></li>
+        </ul>
       </div>
-
-      <!-- Liens de navigation -->
-      <ul class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-700">
-        <li>
-          <a href="/index.html" class="hover:text-green-700 transition">PHARMACOL</a>
-        </li>
-        <li class="relative group">
-          <a href="#" class="flex items-center gap-1 hover:text-green-700 transition">
-            Prestations <i class="fas fa-chevron-down text-xs"></i>
-          </a>
-          <ul class="absolute left-0 mt-2 w-48 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Consultations</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Analyses</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Pharmacie</a></li>
-          </ul>
-        </li>
-        <li class="relative group">
-          <a href="/propos.html" class="flex items-center gap-1 hover:text-green-700 transition">
-            À Propos <i class="fas fa-chevron-down text-xs"></i>
-          </a>
-          <ul class="absolute left-0 mt-2 w-48 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Notre équipe</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Notre histoire</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="/recrutement.html" class="hover:text-green-700 transition">Recrutement</a>
-        </li>
-        <li>
-          <a href="/blogs.html" class="hover:text-green-700 transition">Blogs</a>
-        </li>
-        <li>
-          <a href="/contact.html" class="hover:text-green-700 transition">Contact</a>
-        </li>
-      </ul>
-
-      <!-- Icône menu mobile (facultatif à ajouter avec JS plus tard) -->
-      <div class="md:hidden">
-        <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</nav>
+    </nav>
 
     <!-- Bandeau Prestations -->
     <header class="bg-[#3f73a3] py-12">
