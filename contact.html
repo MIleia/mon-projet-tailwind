@@ -1,280 +1,123 @@
 <!DOCTYPE html>
 <html lang="fr">
- <head>
-   <meta charset="utf-8">
-   <title> Contact </title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Contact</title>
+    <script type="module" src="main.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-   <link href="contact.css" rel="stylesheet">
+  <body class="font-sans">
 
-   <link href="header&footer.css" rel="stylesheet">
-   <script type="module" src="main.js" defer></script>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <!-- Contact Section -->
+    <div class="relative flex flex-row justify-self-center gap-20 pl-36 mb-32">
 
+        <div class="bg-[#437305] text-white relative flex flex-col pt-10 gap-8 w-[420px] h-[660px]">
 
-   <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
-  />
-  <script
-    src="https://unpkg.com/leaflet/dist/leaflet.js">
-  </script>
-
-
- </head>
- <body>
-
-    <div class="qhero-wrapper">
-        
-        <!-- Bandeau top -->
-        <div class="qheader-top">
-            <div class="qcontainer">
-                <div class="qheader-top-left">
-                    <span><i class="fas fa-map-marker-alt"></i> 184 rue agnan quartier djidjolé</span>
-                    <span><i class="fas fa-envelope"></i> contact@agence-pharmacol.com</span>
+            <div class="pl-12 flex items-start gap-4">
+                <div class="flex items-center justify-center bg-[#6b973d] rounded-full w-12 h-12">
+                    <i class="fas fa-phone-alt text-white text-xl"></i>
                 </div>
-                <div class="qheader-top-right">
-                    <span><i class="fas fa-clock"></i> Lun-Ven: 7h30-12h 14h30-18h / Fermé les weekends et jours fériés</span>
+                <div>
+                    <h2>Vous avez des questions ?</h2>
+                    <p class="font-bold text-xl">Gratuit +92 3800 8060</p>
+                </div>  
+            </div>
+
+            <div class="pl-12 flex items-start gap-4">
+                <div class="flex items-center justify-center bg-[#6b973d] rounded-full w-12 h-12">
+                    <i class="fas fa-envelope text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold text-lg">Envoyer un mail</h2>
+                    <p class="w-64">contact@agence-pharmacol.com</p>
                 </div>
             </div>
+
+            <div class="pl-12 flex items-start gap-4">
+                <div class="flex items-center justify-center bg-[#6b973d] rounded-full w-12 h-12">
+                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold text-lg">Visiter à tout moment</h2>
+                    <p>184 Rue Agnan Quartier Djidjolé</p>
+                </div>
+            </div>
+
+            <img src="images/Page accueil togo/medical-doctor-girl-working-with-microscope-young-female-scientist-doing-vaccine-research.jpg" class="absolute bottom-[-30px] ml-[40px] mr-[40px] w-[340px] h-[378px]" />
+     
+            <div class="flex gap-8 justify-around items-center text-[#3C74A8] bg-white w-[250px] h-[70px] pl-7 pr-7 mx-[85px] absolute bottom-[-30px]">
+                <a href="#"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#"><i class="fab fa-facebook-f text-xl"></i></a>
+                <a href="#"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p text-xl"></i></a>
+            </div>
+
         </div>
-    
-        <!-- Header principal -->
-        <div class="qheader-main">
-            <div class="qcontainer">
-                <div class="qheader-right">
-                    <div class="qcontact-phone">
-                        <i class="fas fa-phone"></i>
-                        <div class="qcontact-text">
-                            <p>Appeler à tout moment</p>
-                            <strong>+92 3800 8060</strong>
-                        </div>
-                    </div>
-                    <div class="qseparator"></div>
-                    <div class="qsearch">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="qsocial-icons">
-                        <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a>
-                        <a href="https://www.linkedin.com/company/agence-pharmacol/"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
+
+        <div class="w-[816px]">
+
+            <h4 class="text-green-700 text-lg font-medium mb-2 uppercase tracking-wide">🧬 Nous contacter</h4>
+
+            <h2 class="text-[40px] font-bold text-black mb-10">N'hésitez pas à nous écrire à tout moment</h2>
+
+            <div class="flex gap-4 mb-4">
+                <input type="text" placeholder="Votre nom" class="outline-none bg-gray-100 p-4 w-[325px]" />
+                <input type="email" placeholder="Votre adresse mail" class="outline-none bg-gray-100 p-4 w-[325px]" />
             </div>
+
+            <div class="flex gap-4 mb-4">
+                <input type="text" placeholder="Téléphone" class="outline-none bg-gray-100 p-4 w-[325px]" />
+                <input type="text" placeholder="Sujet" class="outline-none bg-gray-100 p-4 w-[325px]" />
+            </div>
+
+            <textarea placeholder="Laisser un message" class=" outline-none resize-none w-[666px] h-80 bg-gray-100 p-4 mb-4"></textarea>
+
+            <button class="bg-[#437305] text-white text-xl font-semibold px-8 py-3 w-[150px]">Envoyer</button>
         </div>
-    
-        <!-- Barre de navigation -->
-        <nav class="qnavbar">
-            <div class="qcontainer">
-                <ul class="qnav-links">
-                    <li class="qlogo-nav">
-                        <div class="qlogo">
-                            <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol">
-                        </div>
-                    </li>
-                    <li><a href="/index.html">PHARMACOL</a></li>
-                    <li class="qdropdown">
-                        <a href="#">Prestations <i class="fas fa-chevron-down"></i></a>
-                        <ul class="qdropdown-menu">
-                            <li><a href="#">Consultations</a></li>
-                            <li><a href="#">Analyses</a></li>
-                            <li><a href="#">Pharmacie</a></li>
-                        </ul>
-                    </li>
-                    <li class="qdropdown">
-                        <a href="/propos.html">À Propos <i class="fas fa-chevron-down"></i></a>
-                        <ul class="qdropdown-menu">
-                            <li><a href="#">Notre équipe</a></li>
-                            <li><a href="#">Notre histoire</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/recrutement.html">Recrutement</a></li>
-                    <li><a href="/blogs.html">Blogs</a></li>
-                    <li><a href="/contact.html" class="active">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    
-        <!-- Bandeau Prestations -->
-        <header class="qhero-prestations">
-            <div class="qcontainer">
-                <h1 class="qtitre-prestations">Contact</h1>
-            </div>
-        </header>
+
     </div>
 
-    <div id="eglobal">
-
-        <div id="einfo">
-            
-                <div class="e2c">
-                    <div class="einfo-icons">
-                        <i class="fas fa-phone-alt"></i> 
-                    </div>      
-                    <div class="e2l">
-                        <h1>Vous avez des questions ?</h1>
-                        <h3>Gratuit +92 3800 8060</h3>
-                    </div>
-                </div>
-                <div class="e2c">
-                    <div class="einfo-icons">
-                        <i class="fas fa-envelope"></i>
-                    </div>    
-                    <div class="e2l">
-                        <h1>Envoyer un mail</h1>
-                        <h1>contact@agence-pharmacol.com</h1>
-                    </div>
-                </div>
-                <div class="e2c">
-                    <div class="einfo-icons">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div> 
-                    <div class="e2l">
-                        <h1>Visiter à tout moment</h1>
-                        <h1>184 Rue Agnan Quartier Djidjolé</h1>
-                    </div>
-                </div>
-            
-            
-            <img src="images/Page accueil togo/medical-doctor-girl-working-with-microscope-young-female-scientist-doing-vaccine-research.jpg">
-            <div class="social-icons-blue">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-pinterest-p"></i></a>
-            </div>
-        </div>
-
-        <div id="eformulaire">
-            <h4>🧬 Nous contacter</h4>
-            <h2>N'hésitez pas à nous écrire à tout moment</h2>
-            <div><input type="text" placeholder="Votre nom"> <input type="email" placeholder="Votre adresse mail"></div>
-            <div><input type="text" placeholder="Telephone"> <input type="text" placeholder="Sujet"></div>
-            <textarea placeholder="Laisser un message"></textarea>
-            <button type="submit">Envoyer</button>
-        </div>
-    </div>
-
-    <div id="map" style="height: 400px;"></div>
+    <!-- Carte -->
+    <div id="map" class="h-[400px] grayscale"></div>
     <script>
-        const lat = 6.1860;
-        const lon = 1.2045;
-    
-        const map = L.map('map', {
-          zoomControl: false,
-          dragging: false,
-          scrollWheelZoom: false,
-          doubleClickZoom: false,
-          boxZoom: false,
-          keyboard: false
-        }).setView([lat, lon], 16);
-    
-        // 🗺️ Fond clair AVEC les noms
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; <a href="https://carto.com/">Carto</a>',
-        }).addTo(map);
-    
-        // 📍 Marqueur
-        L.marker([lat, lon]).addTo(map)
-          .bindPopup("<b>184 Rue Agnan</b><br>Quartier Djidjolé, Lomé.")
-          .openPopup();
-    
-        // 🎯 Activation des interactions au clic
-        document.getElementById("map").addEventListener("click", () => {
-          const mapEl = document.getElementById("map");
-          mapEl.classList.add("active");
-          map.dragging.enable();
-          map.scrollWheelZoom.enable();
-          map.doubleClickZoom.enable();
-          map.boxZoom.enable();
-          map.keyboard.enable();
-          map.zoomControl.enable();
-        });
+      const lat = 6.1860;
+      const lon = 1.2045;
+      const map = L.map("map", {
+        zoomControl: false,
+        dragging: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+      }).setView([lat, lon], 16);
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+        attribution: '&copy; <a href="https://carto.com/">Carto</a>',
+      }).addTo(map);
+      L.marker([lat, lon])
+        .addTo(map)
+        .bindPopup("<b>184 Rue Agnan</b><br>Quartier Djidjolé, Lomé.")
+        .openPopup();
+
+      document.getElementById("map").addEventListener("click", () => {
+        const mapEl = document.getElementById("map");
+        mapEl.classList.remove("grayscale");
+        map.dragging.enable();
+        map.scrollWheelZoom.enable();
+        map.doubleClickZoom.enable();
+        map.boxZoom.enable();
+        map.keyboard.enable();
+        map.zoomControl.enable();
+      });
     </script>
-  
-   <footer>
-    <div id="ehaut">
-        <div id="ecol1">
-            <img src="./images/Page contact/logo-350100.png">
-            <div id="etxtinput">
-                <h2>Un réseau de délégués médicaux sur le togo, le Bénin et le Niger </h2>
-                <div id="ebutton">
-                    <input type="text" placeholder="Email">
-                    <button class="arrow-button">
-                        <i class="fas fa-arrow-up" style="transform: rotate(65deg);"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="ecol2">
-            <h2>Liens rapides</h2>
-            <ul>
-                <li>
-                    <a href="index.html">A propos</a>
-                </li>
-                <li>
-                    <a href="index.html">Contact</a>
-                </li>
-                <li>
-                    <a href="index.html">Blog</a>
-                </li>
-                <li>
-                    <a href="index.html">Service</a>
-                </li>
-              </ul>
-        </div>
-        <div id="ecol3">
-            <h2>Contact</h2>
-            <ul>
-                <li>
-                    <p>184 rue Agnan quartier djidjolé</p>
-                </li>
-                <li>
-                    <p> derrière EPP Aflao gakli</p>
-                </li>
-                <li>
-                    <i class="asset fas fa-phone-alt"></i><h3> +228 22 50 75 10</h3>
-                  </li>
-                  <li>
-                    <i class="asset fas fa-envelope"></i><h1> contact@agence-pharmacol.com</h1>
-                  </li>                  
-                <li>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div id="ecol4">
-            <h2>heures d’ouvertures</h2>
-            <ul>
-                <li>
-                    <div><i class="asset fas fa-clock"></i> Lundi</div>
-                    <div>7h30 - 18h</div>
-                </li>
-                <li>
-                    <div><i class="asset fas fa-clock"></i> Mardi</div>
-                    <div>7h30 - 18h</div>
-                </li>
-                <li>
-                    <div><i class="asset fas fa-clock"></i> Mercredi</div>
-                    <div>7h30 - 18h</div>
-                </li>
-                <li>
-                    <div><i class="asset fas fa-clock"></i> Jeudi</div>
-                    <div>7h30 - 18h</div>
-                </li>
-              </ul>
-        </div>
-    </div>
-    <div id="ebas">© Copyright 2023 by company.com</div>
-   </footer>
-
- </body>
+  </body>
 </html>
-
-
