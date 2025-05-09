@@ -56,7 +56,8 @@
 
         <!-- Bandeau Prestations & navbar -->
         <header class="relative z-0 qhero-prestations bg-cover bg-center h-48 md:h-72" style="background-image: url('images/Page contact/medicine-capsules-global-health-with-geometric-pattern-digital-remix.jpg');">
-            <div class="bg-white bg-opacity-75 backdrop-blur-md w-4/5 mx-auto">
+            <div class="bg-white bg-opacity-75 backdrop-blur-md w-4/5 mx-auto relative z-30">
+
                 <nav class="relative z-20">
                     <div class="qcontainer flex justify-center items-center px-4 py-3">
                         <ul class="qnav-links flex items-center space-x-8">
@@ -162,29 +163,55 @@
         </section>
 
         <section class="bg-gray-50 px-4 pb-20">
-            <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
-                 <div class="flex flex-col justify-between space-y-6">
-                    <div class="bg-gradient-to-br from-[#3f73a3] to-[#2b4e75] text-white rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center text-center h-full">
-                        <svg class="w-12 h-12 mb-4 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" />
+            <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+                <div class="flex flex-col justify-between space-y-6 self-start h-auto">
+                    <div class="bg-gradient-to-br from-[#3f73a3] to-[#2b4e75] text-white rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center text-center">
+                        <svg class="w-14 h-14 mb-4 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" />
                         </svg>
-                        <h2 class="text-2xl font-bold mb-2">Besoin d'aide rapide ?</h2>
+                        <h2 class="text-3xl font-bold mb-2">Besoin d'une aide rapide ?</h2>
                         <p class="mb-6 text-lg">Obtenez une solution rapide et gratuite du corps médical.</p>
-                        <a href="/contact.html" class="inline-block bg-white text-[#3f73a3] font-bold px-6 py-3 rounded-full shadow hover:bg-blue-100 transition">
-                        Contact
-                        </a>
+                        <a href="/contact.html" class="inline-block bg-white text-[#3f73a3] font-bold px-6 py-3 rounded-full shadow hover:bg-blue-100 transition">Contact</a>
                     </div>
                 </div>
+
                 <div class="md:col-span-2 flex flex-col space-y-10">
-                    <div class="bg-white p-8 rounded-2xl shadow-lg space-y-6">
-                        <h2 class="text-2xl font-bold text-[#3f73a3]">Tests génétiques spécialisés</h2>
-                        <p class="text-gray-700 leading-relaxed">
-                        Les infrastructures du système public du Togo se composent de : 3 CHU (Centre Hospitalier Universitaire), 6 CHR (Centre Hospitalier Régional), 101 hôpitaux (72 de type 1, 29 de type 2 et 4 spécialisés), 1047 Unités de Soins Périphériques (744 de type 1 et 303 de type 2), 54 infirmeries et 59 autres formations sanitaires.
-                        </p>
-                        <h3 class="text-xl font-semibold text-[#437305]">Nos valeurs</h3>
+                    <div class="space-y-5">
+                        <h2 class="text-3xl font-bold text-[#3f73a3]">Tests génétiques spécialisés</h2>
+                        <p class="text-gray-700 leading-relaxed">Les infrastructures du système public du Togo se composent de : 3 CHU (Centre Hospitalier Universitaire), 6 CHR (Centre Hospitalier Régional), 101 hôpitaux (72 de type 1, 29 de type 2 et 4 spécialisés), 1047 Unités de Soins Périphériques (744 de type 1 et 303 de type 2), 54 infirmeries et 59 autres formations sanitaires.</p>
+                    </div>
+                    <div class="space-y-5">
+                        <h3 class="text-2xl font-semibold text-[#437305]">Nos valeurs</h3>
                         <p class="text-gray-700 leading-relaxed">Réactivité, Adaptabilité, Rigueur et Transparence font parties intégrantes de notre leitmotiv.</p>
-                        <h3 class="text-xl font-semibold text-[#437305]">Pourquoi nous choisir ?</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-[#437305]">Pourquoi nous choisir ?</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="flex bg-white shadow-md overflow-hidden w-full">
+                                <div class="flex items-center justify-center bg-[#437305] w-32">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 2v6l-4 8v6h14v-6l-4-8V2H9z" />
+                                    </svg>
+                                </div>
+                                <div class="p-6 flex flex-col justify-center space-y-2">
+                                    <h4 class="text-xl font-bold text-[#3f73a3]">Derniers équipements</h4>
+                                    <p class="text-gray-700">Des technologies innovantes pour des soins de qualité</p>
+                                </div>
+                            </div>
+
+                            <div class="flex bg-white shadow-md overflow-hidden w-full">
+                                <div class="flex items-center justify-center bg-[#437305] w-32">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h6l4 4v12a2 2 0 01-2 2z" />
+                                    </svg>
+                                </div>
+                                <div class="p-6 flex flex-col justify-center space-y-2">
+                                    <h4 class="text-xl font-bold text-[#3f73a3]">Diagnostics sûrs</h4>
+                                    <p class="text-gray-700">Des analyses précises et fiables pour des décisions médicales éclairées</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
