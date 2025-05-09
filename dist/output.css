@@ -613,6 +613,10 @@ video {
   width: 1px;
 }
 
+.w-12 {
+  width: 3rem;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -993,6 +997,10 @@ video {
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.group:hover .group-hover\:block {
+  display: block;
 }
 
 .group:hover .group-hover\:opacity-100 {
