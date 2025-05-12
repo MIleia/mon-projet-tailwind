@@ -5,18 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pharmacol - Prestations</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-        <script src="main.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
                 body {
-            font-family: 'Lexend', sans-serif;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+                font-family: 'Lexend', sans-serif;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            body { font-family: 'Inter', sans-serif; }
+            .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+            .accordion-content.open {
+            padding-bottom: 0.75rem;
+            }
         </style>
     </head>
+
     <body class="bg-white text-gray-800">
         <!-- Bandeau top -->
         <div class="bg-gray-100 text-sm border-b border-gray-300 py-2">
@@ -36,7 +47,9 @@
             <div class="max-w-screen-xl mx-auto flex justify-between items-center px-6">
                 <div class="w-1/4"></div>
                 <div class="flex items-center space-x-4 text-white ml-4">
-                    <i class="fas fa-phone text-lg font-bold"></i>
+                    <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full">
+                        <i class="fas fa-phone text-[#3C74A8] text-lg font-bold"></i>
+                    </div>
                     <div>
                         <p class="text-xs">Appeler à tout moment</p>
                         <strong class="text-sm font-bold">+92 3800 8060</strong>
@@ -57,7 +70,6 @@
         <!-- Bandeau Prestations & navbar -->
         <header class="relative z-0 qhero-prestations bg-cover bg-center h-48 md:h-72" style="background-image: url('images/Page contact/medicine-capsules-global-health-with-geometric-pattern-digital-remix.jpg');">
             <div class="bg-white bg-opacity-75 backdrop-blur-md w-4/5 mx-auto relative z-30">
-
                 <nav class="relative z-20">
                     <div class="qcontainer flex justify-center items-center px-4 py-3">
                         <ul class="qnav-links flex items-center space-x-8">
@@ -66,15 +78,24 @@
                                     <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
                                 </div>
                             </li>
-                            <li><a href="/index.html" class="text-gray-900 hover:text-green-600">PHARMACOL</a></li>
+                            <li class="qdropdown relative group">
+                                <a href="#" class="text-gray-900 hover:text-green-600 flex items-center space-x-2">
+                                    <span>PHARMACOL</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
+                                <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
+                                    <li><a href="/index.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accueil</a></li>
+                                    <li><a href="/accueil togo.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Pharmacol Togo</a></li>
+                                </ul>
+                            </li>
                             <li class="qdropdown relative group">
                                 <a href="#" class="text-green-900 hover:text-green-600 flex items-center space-x-2">
                                     <span>Prestations</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
-                                <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 mt-2 group-hover:block">
-                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Consultations</a></li>
-                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Analyses</a></li>
+                                <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
+                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Actualités</a></li>
+                                    <li><a href="/prestation.html" class="block px-4 py-2 text-green-900 hover:bg-gray-100">Prestations</a></li>
                                 </ul>
                             </li>
                             <li class="qdropdown relative group">
@@ -82,9 +103,9 @@
                                     <span>À Propos</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
-                                <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 mt-2 group-hover:block">
-                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notre équipe</a></li>
-                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notre histoire</a></li>
+                                <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
+                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Propos 1</a></li>
+                                    <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Propos 2</a></li>
                                 </ul>
                             </li>
                             <li><a href="/recrutement.html" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
@@ -99,7 +120,6 @@
                 <h1 class="text-4xl md:text-5xl font-bold">Prestations</h1>
             </div>
         </header>
-
 
 
         <!-- Contenu de la page -->
@@ -163,7 +183,7 @@
         <section class="bg-gray-50 px-4 pb-20">
             <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
                 <div class="flex flex-col justify-between space-y-6 self-start h-auto">
-                    <div class="bg-gradient-to-br from-[#3f73a3] to-[#2b4e75] text-white rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center text-center">
+                    <div class="bg-gradient-to-br from-[#3C74A8F5] to-[#437305] text-white rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center text-center">
                         <svg class="w-14 h-14 mb-4 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" />
@@ -212,101 +232,226 @@
                         </div>
                     </div>
 
-                    <section class="bg-gray-50 py-16">
-                        <div class="max-w-6xl mx-auto px-6 text-center">
-                            <h2 class="text-3xl md:text-4xl font-bold text-[#3f73a3] mb-4">Nos quelques avantages</h2>
-                            <p class="text-lg text-black font-medium">Des services optimisés pour une expérience de qualité.</p>
-                            <h2 class="text-2xl text-[#437305] mt-6">Nam nec eros id magna hendrerit</h2>
-
-                        <div class="grid md:grid-cols-3 gap-8">
-                        <div class="bg-white shadow-md p-6 rounded-lg flex flex-col items-center text-center space-y-4">
-                            <div class="bg-[#437305] p-4 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 2v6l-4 8v6h14v-6l-4-8V2H9z" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-[#3f73a3]">Technologie avancée</h3>
-                            <p class="text-gray-600">Des équipements de pointe pour garantir des soins modernes et efficaces.</p>
-                        </div>
-
-                        <div class="bg-white shadow-md p-6 rounded-lg flex flex-col items-center text-center space-y-4">
-                            <div class="bg-[#437305] p-4 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#3f73a3] mb-4 text-left">Nos quelques avantages</h2>
+                    <p class="text-lg text-black font-medium text-left">Des services optimisés pour une expérience de qualité.</p>
+                    <h3 class="text-2xl text-[#437305] mt-6 mb-12 text-left">Nam nec eros id magna hendrerit</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-[#437305] p-2 rounded-full flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-[#3f73a3]">Fiabilité garantie</h3>
-                                <p class="text-gray-600">Des processus rigoureux pour des résultats sûrs et reproductibles.</p>
-                        </div>
-
-                        <div class="bg-white shadow-md p-6 rounded-lg flex flex-col items-center text-center space-y-4">
-                            <div class="bg-[#437305] p-4 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-9 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-[#3f73a3]">Service de qualité</h3>
-                                <p class="text-gray-600">Une prise en charge personnalisée, centrée sur l'humain et l'efficacité.</p>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-[#3f73a3]">Technologie avancée</h3>
                             </div>
                         </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-[#437305] p-2 rounded-full flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-[#3f73a3]">Fiabilité garantie</h3>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-[#437305] p-2 rounded-full flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-[#3f73a3]">Service de qualité</h3>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="max-w-7xl mx-auto px-4 space-y-3">
+                            <div class="w-full border border-gray-200 rounded-md">
+                                <button onclick="toggleAccordion(this)" class="w-full flex justify-between items-center px-4 py-3 cursor-pointer">
+                                    <span class="text-blue-800 font-semibold text-left">Pourquoi faut-il parfois répéter les tests de laboratoire ?</span>
+                                    <span class="icon relative w-6 h-6 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-blue-600 transition-transform duration-300 plus" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    <div class="hidden minus bg-green-700 rounded-full w-6 h-6 flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                        </svg>
+                                    </div>
+                                    </span>
+                                </button>
+                                <div class="accordion-content px-4 text-sm text-gray-700 leading-relaxed">
+                                    Les tests peuvent être répétés pour confirmer les résultats, surveiller l'évolution d'une maladie ou vérifier l'efficacité d'un traitement.
+                                </div>
+                            </div>
+
+                            <!-- Répéter les blocs suivants en copiant/collant -->
+                            <div class="w-full border border-gray-200 rounded-md">
+                                <button onclick="toggleAccordion(this)" class="w-full flex justify-between items-center px-4 py-3 cursor-pointer">
+                                    <span class="text-blue-800 font-semibold text-left">Le cancer peut-il être détecté à l’aide d’une analyse de sang ?</span>
+                                    <span class="icon relative w-6 h-6 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-blue-600 transition-transform duration-300 plus" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                        </svg>
+                                        <div class="hidden minus bg-green-700 rounded-full w-6 h-6 flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                            </svg>
+                                        </div>
+                                    </span>
+                                </button>
+                                <div class="accordion-content px-4 text-sm text-gray-700 leading-relaxed">
+                                    Il existe de nombreuses variantes de passages de lorem ipsum, mais la plupart d’entre eux ont été altérés d'une manière ou d'une autre par l’ajout d’humour ou de mots aléatoires.
+                                </div>
+                            </div>
+
+                            <div class="w-full border border-gray-200 rounded-md">
+                                <button onclick="toggleAccordion(this)" class="w-full flex justify-between items-center px-4 py-3 cursor-pointer">
+                                    <span class="text-blue-800 font-semibold text-left">Quels types d’équipements proposez-vous ?</span>
+                                    <span class="icon relative w-6 h-6 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-blue-600 transition-transform duration-300 plus" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    <div class="hidden minus bg-green-700 rounded-full w-6 h-6 flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                        </svg>
+                                    </div>
+                                    </span>
+                                </button>
+                                <div class="accordion-content px-4 text-sm text-gray-700 leading-relaxed">
+                                    Nous proposons une gamme complète d’équipements médicaux de diagnostic et d’analyse pour les professionnels de santé.
+                                </div>
+                            </div>
+
+                            <div class="w-full border border-gray-200 rounded-md">
+                                <button onclick="toggleAccordion(this)" class="w-full flex justify-between items-center px-4 py-3 cursor-pointer">
+                                    <span class="text-blue-800 font-semibold text-left">Vos diagnostics sont-ils certifiés et fiables ?</span>
+                                    <span class="icon relative w-6 h-6 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-blue-600 transition-transform duration-300 plus" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    <div class="hidden minus bg-green-700 rounded-full w-6 h-6 flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                        </svg>
+                                    </div>
+                                    </span>
+                                </button>
+                                <div class="accordion-content px-4 text-sm text-gray-700 leading-relaxed">
+                                    Oui, tous nos diagnostics sont réalisés conformément aux normes en vigueur et sont validés par des professionnels certifiés.
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            function toggleAccordion(button) {
+                            const content = button.nextElementSibling;
+                            const plus = button.querySelector('.plus');
+                            const minus = button.querySelector('.minus');
+
+                            content.classList.toggle('open');
+
+                            if (content.classList.contains('open')) {
+                                content.style.maxHeight = content.scrollHeight + "px";
+                                plus.classList.add('hidden');
+                                minus.classList.remove('hidden');
+                            } else {
+                                content.style.maxHeight = null;
+                                plus.classList.remove('hidden');
+                                minus.classList.add('hidden');
+                            }
+                            }
+
+                            window.addEventListener("load", () => {
+                            document.querySelectorAll('.accordion-content').forEach(c => {
+                                c.style.maxHeight = null;
+                            });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
         </section>
 
 
+        <script>
+    function searchCards() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.getElementsByClassName("prestation");
+
+      for (let card of cards) {
+        const title = card.getElementsByTagName("h3")[0].innerText.toLowerCase();
+        const description = card.getElementsByTagName("p")[0].innerText.toLowerCase();
+
+        if (title.includes(input) || description.includes(input)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      }
+    }
+  </script>
+
         <!-- Footer -->
-        <footer class="bg-gray-900 text-gray-100">
+        <footer class="bg-[#3C74A8E8] text-gray-100 relative">
             <div class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="space-y-4">
-                <img src="./images/Page contact/logo-350100.png" class="h-12 mb-4 mx-auto md:mx-0" />
-                <h2 class="text-xl font-semibold">Un réseau de délégués médicaux sur le Togo, le Bénin et le Niger</h2>
-                <div class="flex items-center border border-gray-600 rounded overflow-hidden">
-                    <input type="text" placeholder="Email" class="w-full px-3 py-2 bg-gray-800 text-white" />
-                    <button class="bg-green-600 px-4 py-2">
-                    <i class="fas fa-arrow-up transform rotate-45"></i>
-                    </button>
-                </div>
+                <div class="space-y-4 relative">
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 w-44 h-16 bg-white rounded-full blur-md z-0"></div>
+                    <img src="./images/Page contact/logo-350100.png" class="h-12 mb-4 mx-auto md:ml-10 relative z-10" />
+                    <h2 class="text font-semibold relative z-10">Un réseau de délégués médicaux sur le Togo, le Bénin et le Niger</h2>
+                    <div class="flex items-center">
+                        <input type="text" placeholder="Email"
+                            class="w-full px-3 py-2 bg-white text-black border border-gray-600 rounded-md" />
+                        <button class="bg-[#437305] px-4 py-2 ml-2 border border-[#437305] rounded-md">
+                            <i class="fas fa-arrow-up transform rotate-45 text-white"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="md:ml-8">
-                <h2 class="mb-4 font-semibold text-lg">Liens rapides</h2>
-                <ul class="space-y-2">
-                    <li><a href="index.html" class="hover:underline">À propos</a></li>
-                    <li><a href="index.html" class="hover:underline">Contact</a></li>
-                    <li><a href="index.html" class="hover:underline">Blog</a></li>
-                    <li><a href="index.html" class="hover:underline">Service</a></li>
-                </ul>
+                    <h2 class="mb-4 font-semibold text-lg">Liens rapides</h2>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:underline">À propos</a></li>
+                        <li><a href="index.html" class="hover:underline">Contact</a></li>
+                        <li><a href="index.html" class="hover:underline">Blog</a></li>
+                        <li><a href="index.html" class="hover:underline">Service</a></li>
+                    </ul>
                 </div>
 
                 <div>
-                <h2 class="mb-4 font-semibold text-lg">Contact</h2>
-                <ul class="space-y-2">
-                    <li>184 rue Agnan quartier djidjolé</li>
-                    <li>derrière EPP Aflao gakli</li>
-                    <li><i class="fas fa-phone-alt text-green-500"></i> +228 22 50 75 10</li>
-                    <li><i class="fas fa-envelope text-green-500"></i> contact@agence-pharmacol.com</li>
-                    <li class="flex gap-5 mt-2">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    </li>
-                </ul>
+                    <h2 class="mb-4 font-semibold text-lg">Contact</h2>
+                    <ul class="space-y-2">
+                        <li>184 rue Agnan quartier djidjolé</li>
+                        <li>derrière EPP Aflao gakli</li>
+                        <li><i class="fas fa-phone-alt text-[#437305]"></i> +228 22 50 75 10</li>
+                        <li><i class="fas fa-envelope text-[#437305]"></i> contact@agence-pharmacol.com</li>
+                        <li class="flex gap-5 mt-2">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="md:ml-8">
-                <h2 class="mb-4 font-semibold text-lg">Heures d’ouvertures</h2>
-                <ul class="space-y-1">
-                    <li>Lundi : 7h30 - 18h</li>
-                    <li>Mardi : 7h30 - 18h</li>
-                    <li>Mercredi : 7h30 - 18h</li>
-                    <li>Jeudi : 7h30 - 18h</li>
-                </ul>
+                    <h2 class="mb-4 font-semibold text-lg">Heures d’ouvertures</h2>
+                    <ul class="space-y-1">
+                        <li>Lundi : 7h30 - 18h</li>
+                        <li>Mardi : 7h30 - 18h</li>
+                        <li>Mercredi : 7h30 - 18h</li>
+                        <li>Jeudi : 7h30 - 18h</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="bg-gray-800 text-center py-4 text-sm">
+            <div class="bg-[#3C74A8] text-center py-4 text-sm">
                 © Copyright 2023 by company.com
             </div>
         </footer>
