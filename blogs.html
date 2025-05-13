@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="utf-8" />
-        <title>Contact</title>
-        <script type="module" src="main.js" defer></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Prestations</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+                body {
+                font-family: 'Lexend', sans-serif;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            body { font-family: 'Inter', sans-serif; }
+            .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+            .accordion-content.open {
+            padding-bottom: 0.75rem;
+            }
+        </style>
     </head>
 
-    <body class="font-sans">
+    <body class="bg-white text-gray-800">
         <header>
             <!-- Bandeau top -->
             <div class="bg-gray-100 text-sm border-b border-gray-300 py-2">
@@ -97,107 +115,8 @@
             </div>
         </header>
 
-        <!-- Contact Section -->
-        <div class="relative flex flex-row justify-self-center gap-20 pl-36 mb-32 mt-12">
-
-            <div class="bg-[#437305] text-white relative flex flex-col pt-10 gap-8 w-[420px] h-[660px]">
-
-                <div class="pl-[40px] flex items-start gap-4">
-                    <div class="flex items-center justify-center bg-[#6b973d] rounded-full w-12 h-12">
-                        <i class="fas fa-phone-alt text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-[#DBDBDB] font-medium text-[14px]">Vous avez des questions ?</h2>
-                        <p class="text-white font-semibold text-[18px]">Gratuit +92 3800 8060</p>
-                    </div>  
-                </div>
-
-                <div class="pl-[40px] flex items-start gap-4">
-                    <div class="flex items-center justify-center bg-[#6b973d] rounded-full w-12 h-12">
-                        <i class="fas fa-envelope text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-[#DBDBDB] font-medium text-[14px]">Envoyer un mail</h2>
-                        <p class="text-white font-medium text-[14px]">contact@agence-pharmacol.com</p>
-                    </div>
-                </div>
-
-                <div class="pl-[40px] flex items-start gap-4">
-                    <div class="flex items-center justify-center bg-[#6b973d] rounded-full w-12 h-12">
-                        <i class="fas fa-map-marker-alt text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-[#DBDBDB] font-medium text-[14px]">Visiter à tout moment</h2>
-                        <p classe="text-white font-medium text-[14px]">184 Rue Agnan Quartier Djidjolé</p>
-                    </div>
-                </div>
-
-                <img src="images/Page accueil togo/medical-doctor-girl-working-with-microscope-young-female-scientist-doing-vaccine-research.jpg" class="absolute bottom-[-30px] ml-[40px] mr-[40px] w-[340px] h-[378px]" />
-        
-                <div class="flex gap-8 justify-around items-center text-[#3C74A8] bg-white w-[250px] h-[70px] pl-7 pr-7 mx-[85px] absolute bottom-[-30px]">
-                    <a href="#"><i class="fab fa-instagram text-xl"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f text-xl"></i></a>
-                    <a href="#"><i class="fab fa-twitter text-xl"></i></a>
-                    <a href="#"><i class="fab fa-pinterest-p text-xl"></i></a>
-                </div>
-
-            </div>
-
-            <div class="w-[816px]">
-
-                <h4 class="text-green-700 text-lg font-medium mb-2 uppercase tracking-wide">🧬 Nous contacter</h4>
-
-                <h2 class="text-[40px] font-bold text-black mb-10">N'hésitez pas à nous écrire à tout moment</h2>
-
-                <div class="flex gap-4 mb-4">
-                    <input type="text" placeholder="Votre nom" class=" bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
-                    <input type="email" placeholder="Votre adresse mail" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
-                </div>
-
-                <div class="flex gap-4 mb-4">
-                    <input type="text" placeholder="Téléphone" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
-                    <input type="text" placeholder="Sujet" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
-                </div>
-
-                <textarea placeholder="Laisser un message" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none resize-none w-[666px] h-80 p-4 mb-4"></textarea>
-
-                <button class="bg-[#437305] text-white text-xl font-semibold px-8 py-3 w-[150px]">Envoyer</button>
-            </div>
-
-        </div>
-
-        <!-- Carte -->
-        <div id="map" class="h-[400px] grayscale"></div>
-        <script>
-        const lat = 6.1860;
-        const lon = 1.2045;
-        const map = L.map("map", {
-            zoomControl: false,
-            dragging: false,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
-            boxZoom: false,
-            keyboard: false,
-        }).setView([lat, lon], 16);
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-            attribution: '&copy; <a href="https://carto.com/">Carto</a>',
-        }).addTo(map);
-        L.marker([lat, lon])
-            .addTo(map)
-            .bindPopup("<b>184 Rue Agnan</b><br>Quartier Djidjolé, Lomé.")
-            .openPopup();
-
-        document.getElementById("map").addEventListener("click", () => {
-            const mapEl = document.getElementById("map");
-            mapEl.classList.remove("grayscale");
-            map.dragging.enable();
-            map.scrollWheelZoom.enable();
-            map.doubleClickZoom.enable();
-            map.boxZoom.enable();
-            map.keyboard.enable();
-            map.zoomControl.enable();
-        });
-        </script>
+        <!-- Contenu de la page -->
+    
 
         <!-- Footer -->
         <footer class="bg-[#3C74A8E8] text-gray-100 relative">
@@ -257,5 +176,7 @@
                 <a href="https://www.neostart.tech/">© Copyright 2023 by company.com</a>
            </div>
         </footer>
-  </body>
+    </body>
 </html>
+
+
