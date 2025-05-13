@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Formulaire de recrutement</title>
+    <script type="module" src="main.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+<body class="font-sans">
+
+
+    <div class="flex flex-rows gap-40 self-center justify-center my-16">
+
+        <div class="flex flex-col w-[800px] ">
+            <a href="prestation.html" class="bg-green-700 w-44 p-2 rounded-md text-white"> <- Revenir aux offres</a>
+            <h2 class="text-[40px] font-bold text-green-700 mb-20">Intitulé du poste</h2>
+
+            <h4 class="text-lg font-medium uppercase tracking-wide mb-5">Descripton</h4>
+        </div>
+
+        <div class="w-[666px]">
+            
+            <div class="flex gap-4 mb-4">
+                <input type="text" placeholder="Votre Nom" class=" bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
+                <input type="text" placeholder="Votre Prénom" class=" bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
+            </div>
+
+            <div class="flex flex-row gap-4 mb-4">
+                <div class="flex flex-col gap-4">
+                    <input type="text" placeholder="Téléphone" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
+                    <input type="email" placeholder="Votre adresse mail" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
+                </div>
+                
+                <div class="flex flex-col gap-4 justify-center items-center bg-[#F3F3F3]  w-[325px]">
+                    <label for="cv" class="text-[16px] font-medium text-[#6A6A6A]">Insérer votre CV (PDF)</label>
+                    <input class="text-[16px] font-medium text-[#6A6A6A]" type="file" id="cv" accept=".pdf">
+                </div>
+
+
+            </div>
+
+            <textarea placeholder="Lettre de motivation" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none resize-none w-[666px] h-80 p-4 mb-4"></textarea>
+
+            <button class="bg-[#437305] text-white text-xl font-semibold px-8 py-3 w-[150px]">Envoyer</button>
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-[#3C74A8E8] text-gray-100 relative">
+        <div class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-4 relative">
+                <div class="absolute top-2 left-[120px] -translate-x-1/2 w-44 h-16 bg-white rounded-full blur-md z-0"></div>
+                <img src="./images/Page contact/logo-350100.png" class="h-12 mb-4 mx-auto md:ml-10 relative z-10" />
+                <h2 class="text font-semibold relative z-10">Un réseau de délégués médicaux sur le Togo, le Bénin et le Niger</h2>
+                <div class="flex items-center">
+                    <input type="text" placeholder="Email"
+                        class="w-full px-3 py-2 bg-white text-black border border-gray-600 rounded-md" />
+                    <button class="bg-[#437305] px-4 py-2 ml-2 border border-[#437305] rounded-md">
+                        <i class="fas fa-arrow-up transform rotate-45 text-white"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="md:ml-8">
+                <h2 class="mb-4 font-semibold text-lg">Liens rapides</h2>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="hover:underline">À propos</a></li>
+                    <li><a href="index.html" class="hover:underline">Contact</a></li>
+                    <li><a href="index.html" class="hover:underline">Blog</a></li>
+                    <li><a href="index.html" class="hover:underline">Service</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="mb-4 font-semibold text-lg">Contact</h2>
+                <ul class="space-y-2">
+                    <li>184 rue Agnan quartier djidjolé</li>
+                    <li>derrière EPP Aflao gakli</li>
+                    <li><i class="fas fa-phone-alt text-[#437305]"></i> +228 22 50 75 10</li>
+                    <li><i class="fas fa-envelope text-[#437305]"></i> contact@agence-pharmacol.com</li>
+                    <li class="flex gap-5 mt-2">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="md:ml-8">
+                <h2 class="mb-4 font-semibold text-lg">Heures d’ouvertures</h2>
+                <ul class="space-y-1">
+                    <li>Lundi : 7h30 - 18h</li>
+                    <li>Mardi : 7h30 - 18h</li>
+                    <li>Mercredi : 7h30 - 18h</li>
+                    <li>Jeudi : 7h30 - 18h</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bg-[#3C74A8] text-center py-4 text-sm">
+            <a href="https://www.neostart.tech/">© Copyright 2023 by company.com</a>
+       </div>
+    </footer>
+  </body>
+</html>
