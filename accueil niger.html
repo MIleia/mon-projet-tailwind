@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Prestations</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+                body {
+                font-family: 'Lexend', sans-serif;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            body { font-family: 'Inter', sans-serif; }
+            .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+            .accordion-content.open {
+            padding-bottom: 0.75rem;
+            }
+        </style>
+    </head>
+
+    <body class="bg-white text-gray-800">
+        <header>
+            <!-- Bandeau top -->
+            <div class="bg-gray-100 text-sm border-b border-gray-300 py-2">
+                <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-between text-gray-700">
+                    <div class="flex gap-4">
+                        <span><i class="fas fa-map-marker-alt text-green-700"></i> 184 rue agnan quartier djidjolé</span>
+                        <span><i class="fas fa-envelope text-green-700"></i> contact@agence-pharmacol.com</span>
+                    </div>
+                    <div>
+                        <span><i class="fas fa-clock text-green-700"></i> Lun-Ven: 7h30-12h 14h30-18h / Fermé les weekends et jours fériés</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header principal -->
+            <div class="bg-[#3C74A8] border-b py-4">
+                <div class="max-w-screen-xl mx-auto flex justify-between items-center px-6">
+                    <div class="w-1/4"></div>
+                    <div class="flex items-center space-x-4 text-white ml-4">
+                        <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full">
+                            <i class="fas fa-phone text-[#3C74A8] text-lg font-bold"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs">Appeler à tout moment</p>
+                            <strong class="text-sm font-bold">+92 3800 8060</strong>
+                        </div>
+                        <div class="w-px h-6 bg-white"></div>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="flex space-x-5 text-white w-1/4 justify-end mr-4">
+                        <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.linkedin.com/company/agence-pharmacol/"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bandeau Prestations & navbar -->
+            <div class="relative z-0 qhero-prestations bg-cover bg-center h-48 md:h-72" style="background-image: url('images/Page contact/medicine-capsules-global-health-with-geometric-pattern-digital-remix.jpg');">
+                <div class="bg-white bg-opacity-75 backdrop-blur-md w-4/5 mx-auto relative z-30">
+                    <nav class="relative z-20">
+                        <div class="qcontainer flex justify-center items-center px-4 py-3">
+                            <ul class="qnav-links flex items-center space-x-8">
+                                <li class="qlogo-nav">
+                                    <div class="qlogo">
+                                        <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
+                                    </div>
+                                </li>
+                                <li><a href="/index.html" class="text-gray-900 hover:text-green-600">PHARMACOL</a></li>
+                                <li class="qdropdown relative group">
+                                    <a class="text-gray-900 hover:text-green-600 flex items-center space-x-2">
+                                        <span>Nos Implentations</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
+                                        <li><a href="/accueil togo.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">🇹🇬 Togo</a></li>
+                                        <li><a href="/accueil benin.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">🇧🇯 Benin</a></li>
+                                        <li><a href="/accueil niger.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">🇳🇪 Niger</a></li>
+                                    </ul>
+                                </li>
+                                <li class="qdropdown relative group">
+                                    <a href="#" class="text-gray-900 hover:text-green-600 flex items-center space-x-2">
+                                        <span>Prestations</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
+                                        <li><a href="/prestation2.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Actualités</a></li>
+                                        <li><a href="/prestation.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Prestations</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/recrutement.html" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
+                                <li><a href="/blogs.html" class="text-gray-900 hover:text-green-600">Blogs</a></li>
+                                <li><a href="/contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="absolute inset-0 flex items-center justify-center text-white">
+                    <h1 class="text-4xl md:text-5xl font-bold">Prestations</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenu de la page -->
+    
+
+        <!-- Footer -->
+        <footer class="bg-[#3C74A8E8] text-gray-100 relative">
+            <div class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4 relative">
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 w-44 h-16 bg-white rounded-full blur-md z-0"></div>
+                    <img src="./images/Page contact/logo-350100.png" class="h-12 mb-4 mx-auto md:ml-10 relative z-10" />
+                    <h2 class="text font-semibold relative z-10">Un réseau de délégués médicaux sur le Togo, le Bénin et le Niger</h2>
+                    <div class="flex items-center">
+                        <input type="text" placeholder="Email"
+                            class="w-full px-3 py-2 bg-white text-black border border-gray-600 rounded-md" />
+                        <button class="bg-[#437305] px-4 py-2 ml-2 border border-[#437305] rounded-md">
+                            <i class="fas fa-arrow-up transform rotate-45 text-white"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="md:ml-8">
+                    <h2 class="mb-4 font-semibold text-lg">Liens rapides</h2>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:underline">À propos</a></li>
+                        <li><a href="index.html" class="hover:underline">Contact</a></li>
+                        <li><a href="index.html" class="hover:underline">Blog</a></li>
+                        <li><a href="index.html" class="hover:underline">Service</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="mb-4 font-semibold text-lg">Contact</h2>
+                    <ul class="space-y-2">
+                        <li>184 rue Agnan quartier djidjolé</li>
+                        <li>derrière EPP Aflao gakli</li>
+                        <li><i class="fas fa-phone-alt text-[#437305]"></i> +228 22 50 75 10</li>
+                        <li><i class="fas fa-envelope text-[#437305]"></i> contact@agence-pharmacol.com</li>
+                        <li class="flex gap-5 mt-2">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="md:ml-8">
+                    <h2 class="mb-4 font-semibold text-lg">Heures d’ouvertures</h2>
+                    <ul class="space-y-1">
+                        <li>Lundi : 7h30 - 18h</li>
+                        <li>Mardi : 7h30 - 18h</li>
+                        <li>Mercredi : 7h30 - 18h</li>
+                        <li>Jeudi : 7h30 - 18h</li>
+                        <li>Vendredi : 7h30 - 18h</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-[#3C74A8] text-center py-4 text-sm">
+                <a href="https://www.neostart.tech/">© Copyright 2023 by company.com</a>
+           </div>
+        </footer>
+    </body>
+</html>
+
+
