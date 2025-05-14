@@ -26,6 +26,8 @@
             padding-bottom: 0.75rem;
             }
         </style>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     </head>
 
     <body class="bg-white text-gray-800">
@@ -69,7 +71,7 @@
             </div>
 
             <!-- Bandeau Prestations & navbar -->
-            <div class="relative z-0 qhero-prestations bg-cover bg-center h-48 md:h-72" style="background-image: url('images/Page contact/medicine-capsules-global-health-with-geometric-pattern-digital-remix.jpg');">
+            <div class="relative z-0 qhero-prestations bg-cover bg-center h-[500px]" style="background-image: url('images/Page accueil togo/header.png');">
                 <div class="bg-white bg-opacity-75 backdrop-blur-md w-4/5 mx-auto relative z-30">
                     <nav class="relative z-20">
                         <div class="qcontainer flex justify-center items-center px-4 py-3">
@@ -121,14 +123,179 @@
                     </nav>
                 </div>
 
-                <div class="absolute inset-0 flex items-center justify-center text-white">
-                    <h1 class="text-4xl md:text-5xl font-bold">Prestations</h1>
+                <div class="absolute inset-0 flex items-center justify-start text-white px-6">
+                    <div class="w-1/2 max-w-xl text-center ml-12">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4">PHARMACOL NIGER</h1>
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-4">Vous accompagne</h2><br>
+                        <a href="#contact" class="inline-block bg-[#437305] hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg shadow">Évaluer la faisabilité de votre projet</a>
+                    </div>
                 </div>
             </div>
         </header>
 
         <!-- Contenu de la page -->
-    
+        <!-- HERO SECTION -->
+        <section class="bg-gradient-to-r from-[#3C74A8] to-[#14b8a6] text-white pt-20 pb-12 px-6 relative overflow-hidden">
+            <div class="absolute inset-0 bg-opacity-10 bg-white rounded-full blur-3xl w-[400px] h-[400px] top-[-100px] left-[-100px]"></div>
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-3">Bienvenue chez Pharmacol Niger</h2>
+                <p class="text-lg md:text-xl mb-6">
+                Ancrée au cœur du Sahel, notre agence soutient les laboratoires pharmaceutiques dans leur croissance en Afrique de l’Ouest, avec une approche résolument humaine et adaptée aux réalités locales.
+                </p>
+                <a href="#presentation" class="inline-block bg-white text-[#06788f] font-semibold px-8 py-3 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
+                Découvrez notre action
+                </a>
+            </div>
+        </section>
+
+        <!-- CHIFFRES CLÉS -->
+        <section class="py-20 px-6 bg-gray-50">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div class="transform hover:scale-105 transition">
+                <p class="text-6xl font-extrabold text-[#14b8a6]">3</p>
+                <p class="mt-3 text-gray-700">Pays couverts : Togo, Bénin, Niger</p>
+                </div>
+                <div class="transform hover:scale-105 transition">
+                <p class="text-6xl font-extrabold text-[#14b8a6]">9</p>
+                <p class="mt-3 text-gray-700">Partenariats pharmaceutiques au Niger</p>
+                </div>
+                <div class="transform hover:scale-105 transition">
+                <p class="text-6xl font-extrabold text-[#14b8a6]">38</p>
+                <p class="mt-3 text-gray-700">Professionnels terrain mobilisés</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÉSENTATION -->
+        <section id="presentation" class="py-20 px-6 bg-white">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/3 mb-8 md:mb-0 md:pr-6">
+                <img src="images/Page accueil niger/directeur-niger.jpg" alt="Directeur Pharmacol Niger" class="w-full rounded-lg shadow-lg">
+                </div>
+                <div class="md:w-2/3">
+                <h2 class="text-3xl font-bold text-[#06788f] mb-6">Pharmacol Niger, une implantation stratégique</h2>
+                <p class="text-lg mb-4 text-justify leading-relaxed">
+                    Présente à Niamey depuis 2010, Pharmacol Niger développe une approche terrain solide au service des laboratoires. Notre engagement repose sur une parfaite connaissance du tissu sanitaire nigérien, des circuits logistiques et des exigences réglementaires.
+                </p>
+                <p class="text-lg mb-4 text-justify leading-relaxed">
+                    Grâce à une équipe pluridisciplinaire, nous accompagnons la mise en marché de vos produits dans un environnement en mutation, avec une attention particulière portée à l’éthique, à la qualité de service, et au respect des spécificités locales.
+                </p>
+                <p class="text-lg text-justify leading-relaxed">
+                    Pharmacol Niger se positionne comme votre passerelle de confiance vers un marché à fort potentiel, dans une dynamique de santé publique durable.
+                </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEXTE NIGER -->
+        <section class="py-20 px-6 bg-gray-100">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 items-center">
+                <!-- Texte -->
+                <div class="col-span-2">
+                <h2 class="text-3xl font-bold text-[#06788f] mb-6">Le contexte sanitaire au Niger</h2>
+                <p class="text-lg text-gray-800 mb-6 text-justify">
+                    Le Niger, vaste pays sahélien de 1,27 million de km², est un territoire en pleine transformation sanitaire. Avec une population jeune et croissante de plus de 25 millions d’habitants, les besoins en santé sont immenses et les opportunités de collaboration pharmaceutique y sont réelles.
+                </p>
+                <p class="text-lg text-gray-800 mb-6 text-justify">
+                    Le système de santé nigérien s’appuie sur plusieurs niveaux de soins répartis entre zones rurales et urbaines. Malgré les défis logistiques, l’État nigérien et les partenaires privés multiplient les efforts pour améliorer la couverture médicale sur l’ensemble du territoire.
+                </p>
+                <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                    <li>1 267 000 km² pour 8 régions sanitaires</li>
+                    <li>Plus de 1800 structures de santé recensées</li>
+                    <li>Environ 150 pharmacies et points de distribution actifs</li>
+                </ul>
+                <div class="bg-white border rounded-xl shadow-lg p-4 mt-8">
+                    <div id="map-niger" class="rounded w-full h-96"></div>
+                    <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Niger</p>
+                    </div>
+
+                <script>
+                    var mapNiger = L.map('map-niger').setView([16.0, 8.0], 6);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(mapNiger);
+
+                    // Marqueurs
+                    L.marker([13.5128, 2.1126]).addTo(mapNiger).openPopup();
+                </script>
+            </div>
+        </section>
+
+        <!-- MODE OPÉRATOIRE -->
+        <section class="py-20 px-6 bg-white">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-[#06788f] mb-12">Notre méthode au Niger</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Implémentation ciblée</h3>
+                    <ul class="text-left list-disc list-inside text-gray-700">
+                    <li>Cartographie sanitaire</li>
+                    <li>Accords avec les autorités locales</li>
+                    <li>Formation des relais terrain</li>
+                    </ul>
+                </div>
+                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Croissance accompagnée</h3>
+                    <ul class="text-left list-disc list-inside text-gray-700">
+                    <li>Promotion médicale proactive</li>
+                    <li>Visibilité institutionnelle</li>
+                    <li>Campagnes santé publique</li>
+                    </ul>
+                </div>
+                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Suivi transparent</h3>
+                    <ul class="text-left list-disc list-inside text-gray-700">
+                    <li>Reporting mensuel</li>
+                    <li>Audits qualité réguliers</li>
+                    <li>Tableaux de bord partagés</li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- POURQUOI CHOISIR PHARMACOL NIGER -->
+        <section class="py-20 px-6 bg-[#3C74A8] text-white text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-4">Pourquoi choisir Pharmacol Niger ?</h2>
+                <p class="text-lg mb-6 leading-relaxed">
+                Une implantation stratégique à Niamey, une équipe expérimentée sur le terrain, et une vision durable de la représentation pharmaceutique dans un pays en forte croissance sanitaire.
+                </p>
+                <a href="#contact" class="inline-block mt-4 bg-white text-[#3C74A8] font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition">
+                Démarrons un partenariat
+                </a>
+            </div>
+        </section>
+
+        <!-- OFFRES -->
+        <section class="py-20 px-6 bg-white" id="recrutement">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-[#06788f] mb-6 text-center">Rejoignez Pharmacol Niger</h2>
+                <p class="text-center text-lg mb-10 text-gray-700">Passion, impact, engagement : nous recrutons des talents motivés pour contribuer à un système de santé plus équitable au Niger.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                <div class="border rounded-xl p-6 shadow text-center hover:shadow-md transition">
+                    <h3 class="text-xl font-bold text-[#14b8a6]">Chargé de promotion</h3>
+                    <p class="mt-2 text-gray-600">Responsable de la visibilité des produits en zone urbaine et rurale.</p>
+                </div>
+                <div class="border rounded-xl p-6 shadow text-center hover:shadow-md transition">
+                    <h3 class="text-xl font-bold text-[#14b8a6]">Coordinateur logistique</h3>
+                    <p class="mt-2 text-gray-600">Supervision des flux pharmaceutiques et du reporting national.</p>
+                </div>
+                <div class="border rounded-xl p-6 shadow text-center hover:shadow-md transition">
+                    <h3 class="text-xl font-bold text-[#14b8a6]">Délégué médical</h3>
+                    <p class="mt-2 text-gray-600">Relai direct auprès des prescripteurs dans les zones prioritaires.</p>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="py-20 px-6 bg-gray-100" id="contact">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-[#06788f] mb-4">Contactez-nous</h2>
+                <p class="text-lg mb-6">Intéressé par notre accompagnement ? Échangeons sur la faisabilité de votre projet au Togo.</p>
+                <a href="mailto:contact@agence-pharmacol.com" class="inline-block bg-[#14b8a6] text-white px-10 py-4 rounded-full hover:bg-[#0f827d] transition">contact@agence-pharmacol.com</a>
+            </div>
+        </section>
+
 
         <!-- Footer -->
         <footer class="bg-[#3C74A8E8] text-gray-100 relative">
@@ -186,7 +353,7 @@
 
             <div class="bg-[#3C74A8] text-center py-4 text-sm">
                 <a href="https://www.neostart.tech/">Copyright © 2025 Neo Start Technology Tous droits réservés.</a>
-           </div>
+            </div>
         </footer>
     </body>
 </html>
