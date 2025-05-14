@@ -26,6 +26,8 @@
             padding-bottom: 0.75rem;
             }
         </style>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     </head>
 
     <body class="bg-white text-gray-800">
@@ -195,10 +197,18 @@
 
             <!-- Carte du Bénin -->
             <div class="bg-white border rounded-xl shadow-lg p-4">
-            <img src="images/Page accueil benin/carte-benin.png" alt="Carte du Bénin" class="rounded w-full object-cover" />
-            <p class="mt-2 text-center text-sm text-gray-500 italic">Carte du Bénin</p>
+            <div id="map" class="rounded w-full h-96"></div>
+            <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Bénin</p>
             </div>
-        </div>
+
+            <script>
+                var map = L.map('map').setView([9.0, 2.0], 6);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(map);
+
+                // Marqueurs
+                L.marker([6.4969, 2.6289]).addTo(map).openPopup();
+                </script>
+            </div>
         </section>
 
         <!-- NOS SERVICES -->
