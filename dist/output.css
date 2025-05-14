@@ -560,16 +560,12 @@ video {
   left: 0px;
 }
 
-.left-1\/2 {
-  left: 50%;
+.left-\[120px\] {
+  left: 120px;
 }
 
 .top-2 {
   top: 0.5rem;
-}
-
-.left-\[120px\] {
-  left: 120px;
 }
 
 .z-0 {
