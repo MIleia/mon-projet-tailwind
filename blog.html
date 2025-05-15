@@ -28,6 +28,23 @@
         </style>
     </head>
 
+    <button onclick="scrollToTop()" 
+        class="fixed bottom-6 right-6 w-12 h-12 bg-[#06788f] text-white text-xl flex items-center justify-center rounded-full shadow-lg hover:bg-[#055c6e] transition z-50" aria-label="Remonter en haut">↑
+    </button>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        const btn = document.querySelector('button[onclick="scrollToTop()"]');
+        window.addEventListener('scroll', () => {
+            btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        });
+        btn.style.display = 'none';
+    </script>
+
     <body class="bg-white text-gray-800">
         <header>
             <!-- Bandeau top -->
@@ -128,6 +145,94 @@
         </header>
 
         <!-- Contenu de la page -->
+         <div class="max-w-6xl mx-auto px-4 py-10 space-y-16">
+            <section>
+                <h1 class="text-3xl font-bold text-[#3C74A8] mb-6">Dernières nouvelles</h1>
+                <article class="bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                <div class="md:w-1/3">
+                    <img src="images/Page accueil togo/side-view-researcher-biotechnology-laboratory-with-plant-test-tube.jpg" alt="Image article" class="w-full h-full object-cover">
+                </div>
+                <div class="md:w-2/3 p-6">
+                    <h2 class="text-2xl font-bold text-[#3C74A8] mb-2">Focus sur un événement</h2>
+                    <p class="text-sm text-gray-500 mb-4">Publié le 5 mai 2025</p>
+                    <p class="text-gray-800 mb-4">
+                    Integer vitae felis erat. Donec sed augue vel odio commodo iaculis. Nulla feugiat ultricies erat, vitae consectetur mauris pellentesque ut...
+                    </p>
+                    <a href="#" class="text-[#437305] hover:underline">En savoir plus</a>
+                </div>
+                </article>
+            </section>
+
+            <section class="space-y-12">
+                <h2 class="text-2xl font-semibold text-[#3C74A8] mb-4">Autres articles</h2>
+                <div class="grid md:grid-cols-2 gap-10">
+
+                <!-- Article 1 -->
+                <article class="bg-white shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden">
+                    <div class="md:w-1/3">
+                    <img src="images/Page accueil togo/side-view-researcher-biotechnology-laboratory-with-plant-test-tube.jpg" alt="Image article" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                    <h2 class="text-2xl font-bold text-[#3C74A8] mb-2">Focus sur un événement</h2>
+                    <p class="text-sm text-gray-500 mb-4">Publié le 4 mai 2025</p>
+                    <p class="text-gray-800 mb-4">
+                        Integer vitae felis erat. Donec sed augue vel odio commodo iaculis. Nulla feugiat ultricies erat...
+                    </p>
+                    <a href="#" class="text-[#437305] hover:underline">En savoir plus</a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="bg-white shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden">
+                    <div class="md:w-1/3">
+                    <img src="images/Page accueil togo/side-view-researcher-biotechnology-laboratory-with-plant-test-tube.jpg" alt="Image article" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                    <h2 class="text-2xl font-bold text-[#3C74A8] mb-2">Focus sur un événement</h2>
+                    <p class="text-sm text-gray-500 mb-4">Publié le 2 mai 2025</p>
+                    <p class="text-gray-800 mb-4">
+                        Nulla vitae gravida diam, et mattis nulla. Nullam nec erat eget libero cursus luctus...
+                    </p>
+                    <a href="#" class="text-[#437305] hover:underline">En savoir plus</a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="bg-white shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden">
+                    <div class="md:w-1/3">
+                    <img src="images/Page accueil togo/side-view-researcher-biotechnology-laboratory-with-plant-test-tube.jpg" alt="Image article" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                    <h2 class="text-2xl font-bold text-[#3C74A8] mb-2">Focus sur un événement</h2>
+                    <p class="text-sm text-gray-500 mb-4">Publié le 30 avril 2025</p>
+                    <p class="text-gray-800 mb-4">
+                        Quisque viverra nibh id varius scelerisque. Integer vitae felis erat...
+                    </p>
+                    <a href="#" class="text-[#437305] hover:underline">En savoir plus</a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="bg-white shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden">
+                    <div class="md:w-1/3">
+                    <img src="images/Page accueil togo/side-view-researcher-biotechnology-laboratory-with-plant-test-tube.jpg" alt="Image article" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                    <h2 class="text-2xl font-bold text-[#3C74A8] mb-2">Focus sur un événement</h2>
+                    <p class="text-sm text-gray-500 mb-4">Publié le 28 avril 2025</p>
+                    <p class="text-gray-800 mb-4">
+                        Etiam id eros a purus condimentum mollis. Nulla vitae gravida diam...
+                    </p>
+                    <a href="#" class="text-[#437305] hover:underline">En savoir plus</a>
+                    </div>
+                </article>
+
+                </div>
+            </section>
+        </div>
+
+
+        <!-- Type d'articles (A définir)-->
          <div class="max-w-5xl mx-auto px-4 py-10 space-y-12">
 
             <!-- Article 1-->
