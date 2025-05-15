@@ -8,6 +8,7 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="main.js"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
                 body {
@@ -31,19 +32,6 @@
     <button onclick="scrollToTop()" 
         class="fixed bottom-6 right-6 w-12 h-12 bg-[#06788f] text-white text-xl flex items-center justify-center rounded-full shadow-lg hover:bg-[#055c6e] transition z-50" aria-label="Remonter en haut">↑
     </button>
-    <script>
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        const btn = document.querySelector('button[onclick="scrollToTop()"]');
-        window.addEventListener('scroll', () => {
-            btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-        });
-        btn.style.display = 'none';
-    </script>
 
     <body class="bg-white text-gray-800">
         <header>
@@ -120,16 +108,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="qdropdown relative group">
-                                    <a href="#" class="text-gray-900 hover:text-green-600 flex items-center space-x-2">
-                                        <span>Prestations</span>
-                                        <i class="fas fa-chevron-down"></i>
-                                    </a>
-                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
-                                        <li><a href="/actualites.html" class="block px-4 py-2 text-gray-700 hover:text-green-600">Actualités</a></li>
-                                        <li><a href="/prestation.html" class="block px-4 py-2 text-gray-700 hover:text-green-600">Prestations</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="/prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
                                 <li><a href="/recrutement.html" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
                                 <li><a href="/blog.html" class="text-[#437305] hover:text-green-600 font-bold">Blog</a></li>
                                 <li><a href="/contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
