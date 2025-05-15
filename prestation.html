@@ -8,6 +8,7 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="main.js"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
                 body {
@@ -27,6 +28,10 @@
             }
         </style>
     </head>
+
+    <button onclick="scrollToTop()" 
+        class="fixed bottom-6 right-6 w-12 h-12 bg-[#06788f] text-white text-xl flex items-center justify-center rounded-full shadow-lg hover:bg-[#055c6e] transition z-50" aria-label="Remonter en haut">↑
+    </button>
 
     <body class="bg-white text-gray-800">
         <header>
@@ -119,53 +124,56 @@
         </header>
 
         <!-- Contenu de la page -->
-        <section class="bg-gray-50 py-20 px-4">
+        <section class="py-20 px-4">
             <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
                 <aside class="flex flex-col justify-between overflow-hidden shadow-lg bg-white">
-                <div class="bg-[#3f73a3] text-white text-center py-5 font-semibold text-xl">
-                    Tous les services
-                </div>
-
-                <div class="bg-[#437305] p-6 flex-grow flex flex-col justify-between">
-                    <ul class="space-y-4">
-                    <li>
-                        <a href="#" class="group flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
-                        Promotion médicale
-                        <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="group flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
-                        Encadrement force de vente
-                        <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="group flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
-                        Représentation pharmaceutique
-                        <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="group flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
-                        Autorisation sur le marché
-                        <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="group flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
-                        Marketing communication
-                        <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="group flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
-                        Consulting
-                        <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
-                        </a>
-                    </li>
-                    </ul>
-                </div>
+                    <div class="bg-[#3f73a3] text-white text-center py-5 font-semibold text-xl">Tous les services</div>
+                    <div class="bg-[#437305] p-6 flex-grow flex flex-col justify-between">
+                        <ul class="space-y-4">
+                            <li>
+                            <button onclick="showContent('promotion')" data-key="promotion"
+                                class="service-btn group w-full text-left flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
+                                Promotion médicale
+                                <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
+                            </button>
+                            </li>
+                            <li>
+                            <button onclick="showContent('encadrement')" data-key="encadrement"
+                                class="service-btn group w-full text-left flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
+                                Encadrement force de vente
+                                <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
+                            </button>
+                            </li>
+                            <li>
+                            <button onclick="showContent('representation')" data-key="representation"
+                                class="service-btn group w-full text-left flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
+                                Représentation pharmaceutique
+                                <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
+                            </button>
+                            </li>
+                            <li>
+                            <button onclick="showContent('autorisation')" data-key="autorisation"
+                                class="service-btn group w-full text-left flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
+                                Autorisation sur le marché
+                                <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
+                            </button>
+                            </li>
+                            <li>
+                            <button onclick="showContent('marketing')" data-key="marketing"
+                                class="service-btn group w-full text-left flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
+                                Marketing & Communication
+                                <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
+                            </button>
+                            </li>
+                            <li>
+                            <button onclick="showContent('consulting')" data-key="consulting"
+                                class="service-btn group w-full text-left flex justify-between items-center bg-white px-5 py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition">
+                                Consulting
+                                <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
+                            </button>
+                            </li>
+                        </ul>
+                    </div>
                 </aside>
 
                 <div class="md:col-span-2 flex items-center justify-center">
@@ -176,6 +184,15 @@
             </div>
         </section>
 
+        <section class="bg-gray-50 px-4 py-20">
+            <div class="md:col-span-2 p-20" id="content-area">
+                <h2 class="text-2xl font-bold text-[#3f73a3] mb-4">Bienvenue</h2>
+                <p class="text-gray-700">
+                Sélectionnez un service à gauche pour voir les détails ici.
+                </p>
+            </div>
+        </section>
+        
         <section class="bg-gray-50 px-4 pb-20">
             <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
                 <div class="flex flex-col justify-between space-y-6 self-start h-auto">
@@ -344,56 +361,12 @@
                                 </div>
                             </div>
                         </div>
-
-                        <script>
-                            function toggleAccordion(button) {
-                            const content = button.nextElementSibling;
-                            const plus = button.querySelector('.plus');
-                            const minus = button.querySelector('.minus');
-
-                            content.classList.toggle('open');
-
-                            if (content.classList.contains('open')) {
-                                content.style.maxHeight = content.scrollHeight + "px";
-                                plus.classList.add('hidden');
-                                minus.classList.remove('hidden');
-                            } else {
-                                content.style.maxHeight = null;
-                                plus.classList.remove('hidden');
-                                minus.classList.add('hidden');
-                            }
-                            }
-
-                            window.addEventListener("load", () => {
-                            document.querySelectorAll('.accordion-content').forEach(c => {
-                                c.style.maxHeight = null;
-                            });
-                            });
-                        </script>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <script>
-            function searchCards() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const cards = document.getElementsByClassName("prestation");
-
-      for (let card of cards) {
-        const title = card.getElementsByTagName("h3")[0].innerText.toLowerCase();
-        const description = card.getElementsByTagName("p")[0].innerText.toLowerCase();
-
-        if (title.includes(input) || description.includes(input)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      }
-    }
-        </script>
-
+        
         <!-- Footer -->
         <footer class="bg-[#3C74A8E8] text-gray-100 relative">
             <div class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
