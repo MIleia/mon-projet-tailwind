@@ -861,10 +861,6 @@ video {
   width: 6rem;
 }
 
-.w-4\/5 {
-  width: 80%;
-}
-
 .w-44 {
   width: 11rem;
 }
@@ -925,6 +921,10 @@ video {
   width: 600px;
 }
 
+.w-\[70\%\] {
+  width: 70%;
+}
+
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
@@ -936,10 +936,6 @@ video {
 
 .w-px {
   width: 1px;
-}
-
-.w-\[70\%\] {
-  width: 70%;
 }
 
 .max-w-4xl {
