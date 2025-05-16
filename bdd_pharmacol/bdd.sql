@@ -19,8 +19,7 @@ CREATE TABLE IF NOT EXISTS blog (
 
 -- Table utilisateur
 CREATE TABLE IF NOT EXISTS utilisateur (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL,
+    mail VARCHAR(100) PRIMARY KEY,
     mot_de_passe VARCHAR(255) NOT NULL
 );
 
