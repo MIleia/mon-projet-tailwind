@@ -61,7 +61,17 @@
                             <strong class="text-sm font-bold">(+228) 22 50 75 10</strong>
                         </div>
                         <div class="w-px h-6 bg-white"></div>
-                        <i class="fas fa-search"></i>
+<div class="relative">
+    <input id="searchInput" type="text" placeholder="Rechercher une section..." class="hidden md:block w-60 px-4 py-1 rounded-full text-black text-sm focus:outline-none focus:ring-2 focus:ring-green-500" oninput="updateSuggestions()" onkeydown="if(event.key === 'Enter') performSearch()">
+    <button onclick="toggleSearch()" class="absolute top-0 right-0 w-10 h-10 flex items-center justify-center rounded-full bg-white">
+        <i class="fas fa-search text-[#3C74A8]"></i>
+    </button>
+
+    <!-- Suggestions -->
+    <ul id="suggestions" class="absolute left-0 top-full w-60 mt-1 bg-white text-black border border-gray-300 rounded shadow hidden z-50 text-sm max-h-60 overflow-y-auto">
+        <!-- suggestions dynamiques -->
+    </ul>
+</div>
                     </div>
                     <div class="flex space-x-5 text-white w-1/4 justify-end mr-4">
                         <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
@@ -75,16 +85,17 @@
 
             <!-- Bandeau Prestations & navbar -->
             <div class="relative z-0 qhero-prestations bg-cover bg-center h-48 md:h-72" style="background-image: url('images/Page contact/medicine-capsules-global-health-with-geometric-pattern-digital-remix.jpg');">
-                <div class="bg-white bg-opacity-75 backdrop-blur-md w-4/5 mx-auto relative z-30">
+                <div class="bg-white bg-opacity-75 backdrop-blur-md w-[70%] mx-auto relative z-30">
                     <nav class="relative z-20">
                         <div class="qcontainer flex justify-center items-center px-4 py-3">
                             <ul class="qnav-links flex items-center space-x-8">
                                 <li class="qlogo-nav">
-                                    <div class="qlogo">
-                                        <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
-                                    </div>
+                                    <a href="/index.html" class="flex items-center space-x-2">
+                                        <div class="qlogo">
+                                            <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
+                                        </div>
+                                    </a>
                                 </li>
-                                <li><a href="/index.html" class="text-gray-900 hover:text-green-600">PHARMACOL</a></li>
                                 <li class="qdropdown relative group">
                                     <a href="#" class="text-gray-900 hover:text-green-600 flex items-center space-x-2">
                                         <span>Nos Implentations</span>
@@ -124,8 +135,8 @@
         </header>
 
         <!-- Contenu de la page -->
-         <div class="max-w-6xl mx-auto px-4 py-10 space-y-16">
-            <section>
+         <div class="max-w-6xl mx-auto px-4 py-10 space-y-16" id="blog">
+            <section id="articles">
                 <h1 class="text-3xl font-bold text-[#3C74A8] mb-6">Dernières nouvelles</h1>
                 <article class="bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row">
                 <div class="md:w-1/3">
