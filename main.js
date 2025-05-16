@@ -174,4 +174,86 @@ function searchCards(){
     }
 }
 
+// ----- ----- Barre de Recherche ----- -----
 
+    const sections = {
+        "index.html": ["accueil", "apropos", "services"],
+        "accueil togo.html": ["À propos de Pharmacol Togo", "Togo", "Chiffres Togo", "Carte Togo"],
+        "accueil benin.html": ["À propos de Pharmacol Bénin", "Bénin", "Chiffres Bénin", "Carte Bénin"],
+        "accueil niger.html": ["À propos de Pharmacol Niger", "Niger", "Chiffres Niger", "Carte Niger"],
+        "prestation.html": ["consultations", "analyses", "soins"],
+        "recrutement.html": ["offres", "process", "candidature"],
+        "blog.html": ["articles", "blog"],
+        "contact.html": ["carte", "contact"]
+    };
+
+    const flatSections = Object.entries(sections).flatMap(([page, ids]) =>
+        ids.map(id => ({ page, id }))
+    );
+
+    function toggleSearch() {
+        const input = document.getElementById("searchInput");
+        input.classList.toggle("hidden");
+        if (!input.classList.contains("hidden")) {
+            input.focus();
+        } else {
+            hideSuggestions();
+        }
+    }
+
+    function updateSuggestions() {
+        const query = document.getElementById("searchInput").value.toLowerCase().trim();
+        const suggestionsContainer = document.getElementById("suggestions");
+
+        suggestionsContainer.innerHTML = '';
+
+        if (!query) {
+            suggestionsContainer.classList.add("hidden");
+            return;
+        }
+
+        const filtered = flatSections.filter(s =>
+            s.id.toLowerCase().includes(query)
+        );
+
+        if (filtered.length === 0) {
+            suggestionsContainer.classList.add("hidden");
+            return;
+        }
+
+        filtered.forEach(s => {
+            const li = document.createElement("li");
+            li.className = "px-4 py-2 hover:bg-gray-200 cursor-pointer";
+            li.textContent = s.id;
+            li.onclick = () => {
+                window.location.href = `/${s.page}#${s.id}`;
+            };
+            suggestionsContainer.appendChild(li);
+        });
+
+        suggestionsContainer.classList.remove("hidden");
+    }
+
+    function performSearch() {
+        const query = document.getElementById("searchInput").value.toLowerCase().trim();
+
+        const result = flatSections.find(s => s.id.toLowerCase().includes(query));
+        if (result) {
+            window.location.href = `/${result.page}#${result.id}`;
+        } else {
+            alert("Aucune section trouvée.");
+        }
+    }
+
+    function hideSuggestions() {
+        const suggestionsContainer = document.getElementById("suggestions");
+        suggestionsContainer.classList.add("hidden");
+    }
+
+    document.addEventListener("click", function (e) {
+        const searchBox = document.getElementById("searchInput");
+        const suggestions = document.getElementById("suggestions");
+        if (!searchBox.contains(e.target) && !suggestions.contains(e.target)) {
+            hideSuggestions();
+        }
+    });

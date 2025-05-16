@@ -30,7 +30,7 @@
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     </head>
 
-    <body class="bg-white text-gray-800">
+    <body class="bg-white text-gray-800" id="Bénin">
         <header>
             <!-- Bandeau top -->
             <div class="bg-gray-100 text-sm border-b border-gray-300 py-2">
@@ -72,16 +72,17 @@
 
             <!-- Bandeau Prestations & navbar -->
             <div class="relative z-0 qhero-prestations bg-cover bg-center h-[500px]" style="background-image: url('images/Page accueil togo/header.png');">
-                <div class="bg-white bg-opacity-75 backdrop-blur-md w-4/5 mx-auto relative z-30">
+                <div class="bg-white bg-opacity-75 backdrop-blur-md w-[70%] mx-auto relative z-30">
                     <nav class="relative z-20">
                         <div class="qcontainer flex justify-center items-center px-4 py-3">
                             <ul class="qnav-links flex items-center space-x-8">
                                 <li class="qlogo-nav">
-                                    <div class="qlogo">
-                                        <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
-                                    </div>
+                                    <a href="/index.html" class="flex items-center space-x-2">
+                                        <div class="qlogo">
+                                            <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
+                                        </div>
+                                    </a>
                                 </li>
-                                <li><a href="/index.html" class="text-gray-900 hover:text-green-600">PHARMACOL</a></li>
                                 <li class="qdropdown relative group">
                                     <a href="#" class="text-[#437305] hover:text-green-600 flex items-center space-x-2">
                                         <span>Nos Implentations</span>
@@ -133,14 +134,14 @@
                 <p class="text-lg md:text-xl mb-6">
                 Une présence engagée au Bénin pour accompagner les laboratoires dans une expansion maîtrisée, ancrée sur plus de deux décennies de terrain.
                 </p>
-                <a href="#apropos" class="inline-block bg-white text-[#06788f] font-semibold px-8 py-3 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
+                <a href="#À propos de Pharmacol Bénin" class="inline-block bg-white text-[#06788f] font-semibold px-8 py-3 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
                 En savoir plus
                 </a>
             </div>
         </section>
 
         <!-- CHIFFRES CLÉS -->
-        <section class="py-20 px-6 bg-gray-50">
+        <section class="py-20 px-6 bg-gray-50" id="Chiffres Bénin">
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                 <div class="transform hover:scale-105 transition">
                     <p class="text-6xl font-extrabold text-[#14b8a6]">2</p>
@@ -158,10 +159,10 @@
         </section>
 
         <!-- À PROPOS -->
-        <section id="apropos" class="py-20 px-6 bg-white">
+        <section class="py-20 px-6 bg-white" id="À propos de Pharmacol Bénin">
             <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2">
-                <img src="images/Page accueil benin/dg-benin.png" alt="Directeur Pharmacol Bénin" class="rounded-lg shadow-lg w-full" />
+                <img src="images/Page accueil benin/dg-benin.png" alt="Directeur / équipe Pharmacol Bénin" class="rounded-lg shadow-lg w-full" />
                 </div>
                 <div class="md:w-1/2">
                 <h2 class="text-2xl font-bold text-[#06788f] mb-6">Une équipe dédiée au service de la santé au Bénin</h2>
@@ -187,9 +188,9 @@
             </div>
 
             <!-- Carte du Bénin -->
-            <div class="bg-white border rounded-xl shadow-lg p-4">
-            <div id="map" class="rounded w-full h-96"></div>
-            <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Bénin</p>
+            <div class="bg-white border rounded-xl shadow-lg p-4" id="Carte Bénin">
+                <div id="map" class="rounded w-full h-96"></div>
+                <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Bénin</p>
             </div>
 
             <script>
@@ -280,7 +281,7 @@
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="text-3xl font-bold text-[#3C74A8E8] mb-4">Contactez-nous</h2>
                 <p class="text-lg mb-6">Intéressé par notre accompagnement ? Échangeons sur la faisabilité de votre projet au Togo.</p>
-                <a href="mailto:contact@agence-pharmacol.com" class="inline-block bg-[#14b8a6] text-white px-10 py-4 rounded-full hover:bg-[#0f827d] transition">contact@agence-pharmacol.com</a>
+                <a href="/contact.html" class="inline-block bg-[#14b8a6] text-white px-10 py-4 rounded-full hover:bg-[#0f827d] transition">Contactez-nous</a>
             </div>
         </section>
 
@@ -316,8 +317,8 @@
                     <ul class="space-y-2">
                         <li>184 rue Agnan quartier djidjolé</li>
                         <li>derrière EPP Aflao gakli</li>
-                        <li><i class="fas fa-phone-alt text-[#437305]"></i> +228 22 50 75 10</li>
-                        <li><i class="fas fa-envelope text-[#437305]"></i> contact@agence-pharmacol.com</li>
+                        <li><i class="fas fa-phone-alt text-[#437305]"></i><a href="tel:+22890123456" class="hover:underline">+228 90 12 34 56</a></li>
+                        <li><i class="fas fa-envelope text-[#437305]"></i><a href="mailto:contact@pharmacol.com" target="_blank">contact@pharmacol.com</a></li>
                         <li class="flex gap-5 mt-2">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
