@@ -58,7 +58,13 @@
                             <strong class="text-sm font-bold">(+228) 22 50 75 10</strong>
                         </div>
                         <div class="w-px h-6 bg-white"></div>
-                        <i class="fas fa-search"></i>
+                        <div class="relative flex items-center w-60 md:w-72">
+                            <button onclick="toggleSearch()" class="absolute left-3">
+                                <i class="fas fa-search text-[#3C74A8]"></i>
+                            </button>
+                            <input id="searchInput" type="text" placeholder="Rechercher une section..." class="w-full pl-10 pr-4 py-2 rounded-full text-black text-sm focus:outline-none focus:ring-2 focus:ring-green-500" oninput="updateSuggestions()" onkeydown="if(event.key === 'Enter') performSearch()">
+                            <ul id="suggestions" class="absolute left-0 top-full w-full mt-1 bg-white text-black border border-gray-300 rounded shadow hidden z-50 text-sm max-h-60 overflow-y-auto"></ul>
+                        </div>
                     </div>
                     <div class="flex space-x-5 text-white w-1/4 justify-end mr-4">
                         <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
@@ -77,7 +83,7 @@
                         <div class="qcontainer flex justify-center items-center px-4 py-3">
                             <ul class="qnav-links flex items-center space-x-8">
                                 <li class="qlogo-nav">
-                                    <a href="/index.html" class="flex items-center space-x-2">
+                                    <a href="index.html" class="flex items-center space-x-2">
                                         <div class="qlogo">
                                             <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
                                         </div>
@@ -90,26 +96,26 @@
                                     </a>
                                     <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
                                         <li>
-                                            <a href="/accueil togo.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
+                                            <a href="accueil togo.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
                                                 <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="w-5 h-auto"> Togo
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/accueil benin.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
+                                            <a href="accueil benin.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
                                                 <img src="https://flagcdn.com/w40/bj.png" alt="Benin" class="w-5 h-auto"> Benin
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/accueil niger.html" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
+                                            <a href="accueil niger.html" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
                                                 <img src="https://flagcdn.com/w40/ne.png" alt="Niger" class="w-5 h-auto"> Niger
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="/prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
-                                <li><a href="/recrutement.html" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
-                                <li><a href="/blog.html" class="text-gray-900 hover:text-green-600">Blog</a></li>
-                                <li><a href="/contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
+                                <li><a href="prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
+                                <li><a href="recrutement.html" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
+                                <li><a href="blog.html" class="text-gray-900 hover:text-green-600">Blog</a></li>
+                                <li><a href="contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -181,33 +187,33 @@
 
         <!-- CONTEXTE NIGER -->
         <section class="py-20 px-6 bg-gray-100">
-            <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 items-center">
-                <!-- Texte -->
-                <div class="col-span-2">
-                <h2 class="text-2xl font-bold text-[#06788f] mb-6">Le contexte sanitaire au Niger</h2>
-                <p class="text-base text-gray-800 mb-6 text-justify">
-                    Le Niger, vaste pays sahélien de 1,27 million de km², est un territoire en pleine transformation sanitaire. Avec une population jeune et croissante de plus de 25 millions d’habitants, les besoins en santé sont immenses et les opportunités de collaboration pharmaceutique y sont réelles.
-                </p>
-                <p class="text-base text-gray-800 mb-6 text-justify">
-                    Le système de santé nigérien s’appuie sur plusieurs niveaux de soins répartis entre zones rurales et urbaines. Malgré les défis logistiques, l’État nigérien et les partenaires privés multiplient les efforts pour améliorer la couverture médicale sur l’ensemble du territoire.
-                </p>
-                <ul class="list-disc list-inside text-base text-gray-700 space-y-2">
-                    <li>1 267 000 km² pour 8 régions sanitaires</li>
-                    <li>Plus de 1800 structures de santé recensées</li>
-                    <li>Environ 150 pharmacies et points de distribution actifs</li>
-                </ul>
-                <div class="bg-white border rounded-xl shadow-lg p-4 mt-8" id="Carte Niger">
-                    <div id="map-niger" class="rounded w-full h-96"></div>
-                    <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Niger</p>
+            <div class="max-w-6xl mx-auto grid md:grid-cols-5 gap-10 items-start">
+                <div class="md:col-span-3">
+                    <h2 class="text-2xl font-bold text-[#06788f] mb-6">Le contexte sanitaire au Niger</h2>
+                    <p class="text-base text-gray-800 mb-6 text-justify">
+                        Le Niger, vaste pays sahélien de 1,27 million de km², est un territoire en pleine transformation sanitaire. Avec une population jeune et croissante de plus de 25 millions d’habitants, les besoins en santé sont immenses et les opportunités de collaboration pharmaceutique y sont réelles.
+                    </p>
+                    <p class="text-base text-gray-800 mb-6 text-justify">
+                        Le système de santé nigérien s’appuie sur plusieurs niveaux de soins répartis entre zones rurales et urbaines. Malgré les défis logistiques, l’État nigérien et les partenaires privés multiplient les efforts pour améliorer la couverture médicale sur l’ensemble du territoire.
+                    </p>
+                    <ul class="list-disc list-inside text-base text-gray-700 space-y-2">
+                        <li>1 267 000 km² pour 8 régions sanitaires</li>
+                        <li>Plus de 1800 structures de santé recensées</li>
+                        <li>Environ 150 pharmacies et points de distribution actifs</li>
+                    </ul>
                 </div>
 
-                <script>
-                    var mapNiger = L.map('map-niger').setView([16.0, 8.0], 6);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(mapNiger);
-
-                    // Marqueurs
-                    L.marker([13.5128, 2.1126]).addTo(mapNiger).openPopup();
-                </script>
+                <div class="md:col-span-2">
+                    <div class="bg-white border rounded-xl shadow-lg p-4" id="Carte Niger">
+                        <div id="map-niger" class="rounded w-full h-96"></div>
+                        <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Niger</p>
+                    </div>
+                    <script>
+                        var mapNiger = L.map('map-niger').setView([16.0, 8.0], 5);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(mapNiger);
+                        L.marker([13.5128, 2.1126]).addTo(mapNiger).openPopup();
+                    </script>
+                </div>
             </div>
         </section>
 

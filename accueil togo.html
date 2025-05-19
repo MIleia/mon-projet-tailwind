@@ -56,7 +56,13 @@
                             <strong class="text-sm font-bold">(+228) 22 50 75 10</strong>
                         </div>
                         <div class="w-px h-6 bg-white"></div>
-                        <i class="fas fa-search"></i>
+                        <div class="relative flex items-center w-60 md:w-72">
+                            <button onclick="toggleSearch()" class="absolute left-3">
+                                <i class="fas fa-search text-[#3C74A8]"></i>
+                            </button>
+                            <input id="searchInput" type="text" placeholder="Rechercher une section..." class="w-full pl-10 pr-4 py-2 rounded-full text-black text-sm focus:outline-none focus:ring-2 focus:ring-green-500" oninput="updateSuggestions()" onkeydown="if(event.key === 'Enter') performSearch()">
+                            <ul id="suggestions" class="absolute left-0 top-full w-full mt-1 bg-white text-black border border-gray-300 rounded shadow hidden z-50 text-sm max-h-60 overflow-y-auto"></ul>
+                        </div>
                     </div>
                     <div class="flex space-x-5 text-white w-1/4 justify-end mr-4">
                         <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
@@ -75,7 +81,7 @@
                         <div class="qcontainer flex justify-center items-center px-4 py-3">
                             <ul class="qnav-links flex items-center space-x-8">
                                 <li class="qlogo-nav">
-                                    <a href="/index.html" class="flex items-center space-x-2">
+                                    <a href="index.html" class="flex items-center space-x-2">
                                         <div class="qlogo">
                                             <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
                                         </div>
@@ -88,26 +94,26 @@
                                     </a>
                                     <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
                                         <li>
-                                            <a href="/accueil togo.html" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
+                                            <a href="accueil togo.html" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
                                                 <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="w-5 h-auto"> Togo
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/accueil benin.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
+                                            <a href="accueil benin.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
                                                 <img src="https://flagcdn.com/w40/bj.png" alt="Benin" class="w-5 h-auto"> Benin
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/accueil niger.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
+                                            <a href="accueil niger.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
                                                 <img src="https://flagcdn.com/w40/ne.png" alt="Niger" class="w-5 h-auto"> Niger
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="/prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
-                                <li><a href="/recrutement.html" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
-                                <li><a href="/blog.html" class="text-gray-900 hover:text-green-600">Blog</a></li>
-                                <li><a href="/contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
+                                <li><a href="prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
+                                <li><a href="recrutement.html" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
+                                <li><a href="blog.html" class="text-gray-900 hover:text-green-600">Blog</a></li>
+                                <li><a href="contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
                             </ul>
                         </div>
                     </nav>
