@@ -1,0 +1,575 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        header('Location: connexion.php');
+        exit();
+    }
+    $user = $_SESSION['user'];
+    $role = $_SESSION['role'];
+
+    require_once '../bdd_pharmacol/config.php';
+    require_once '../bdd_pharmacol/function.php';
+
+
+    // Gestion des données
+
+    // Récupération des données Blog
+    $sql_blog = "SELECT * FROM blog";
+    $res_blog = $pdo->query($sql_blog);
+    $blogs = $res_blog->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupération des données Entreprise
+    $sql_entreprise = "SELECT * FROM entreprise";
+    $res_entreprise = $pdo->query($sql_entreprise);
+    $entreprises = $res_entreprise->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupération des données Newsletter
+    $sql_newsletter = "SELECT * FROM newsletter";
+    $res_newsletter = $pdo->query($sql_newsletter);
+    $newsletters = $res_newsletter->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupération des utilisateurs
+    $sql_utilisateurs = "SELECT * FROM utilisateur";
+    $res_utilisateurs = $pdo->query($sql_utilisateurs);
+    $utilisateurs = $res_utilisateurs->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['action']) && $_POST['action'] === 'update_user') {
+    $old_mail = $_POST['old_mail'];
+    $new_mail = $_POST['mail'];
+    $mot_de_passe = $_POST['mot_de_passe'];
+    $role = $_POST['role'];
+
+    if (!in_array($role, ['lecteur', 'redacteur', 'admin'])) {
+        echo "<p class='text-red-600'>Rôle invalide.</p>";
+    } else {
+        $sql = "UPDATE utilisateur SET mail = :new_mail, role = :role" . 
+               (!empty($mot_de_passe) ? ", mot_de_passe = :mot_de_passe" : "") . 
+               " WHERE mail = :old_mail";
+
+        $stmt = $pdo->prepare($sql);
+        $params = [
+            ':new_mail' => $new_mail,
+            ':role' => $role,
+            ':old_mail' => $old_mail
+        ];
+        if (!empty($mot_de_passe)) {
+            $params[':mot_de_passe'] = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+        }
+        $stmt->execute($params);
+    }
+}
+
+
+        if (isset($_POST['action']) && $_POST['action'] === 'delete_user') {
+            $mail = $_POST['mail'];
+            $stmt = $pdo->prepare("DELETE FROM utilisateur WHERE mail = :mail");
+            $stmt->execute([':mail' => $mail]);
+        }
+
+        if ($_POST['action'] === 'create_user') {
+            $mail = $_POST['mail'];
+            $password = $_POST['mot_de_passe'];
+            $role = $_POST['role'];
+
+            // Vérifie si le mail est déjà utilisé
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM utilisateur WHERE mail = :mail");
+            $stmt->execute(['mail' => $mail]);
+            $count = $stmt->fetchColumn();
+
+            if ($count > 0) {
+                echo "<script>alert('L\'adresse email est déjà utilisée.');</script>";
+            } else {
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $stmt = $pdo->prepare("INSERT INTO utilisateur (mail, mot_de_passe, role) VALUES (:mail, :password, :role)");
+                $stmt->execute([
+                    'mail' => $mail,
+                    'password' => $hash,
+                    'role' => $role
+                ]);
+                // Optionnel : redirection pour éviter double soumission
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit;
+            }
+        }
+
+        if (isset($_POST['action']) && $_POST['action'] === 'delete_newsletter') {
+            $mail = $_POST['id'];
+            $stmt = $pdo->prepare("DELETE FROM newsletter WHERE mail = :mail");
+            $stmt->execute([':mail' => $mail]);
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
+        }
+
+        $utilisateurs = $pdo->query("SELECT mail, role FROM utilisateur")->fetchAll(PDO::FETCH_ASSOC);
+    }
+?>
+
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Accueil</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+            body {
+                font-family: 'Lexend', sans-serif;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="flex">
+            <!-- Sidebar -->
+            <aside class="fixed top-0 left-0 h-screen w-[20rem] bg-white text-gray-700 p-4 z-50 flex flex-col border-r border-gray-200 shadow-r">
+                <div class="mb-2 p-4">
+                    <img src="../images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
+                </div>
+
+                <nav class="flex flex-col gap-1 min-w-[240px] p-2 text-base text-gray-700">
+                    
+                    <!-- Blog -->
+                    <button type="button" onclick="showSection('blog')" class="flex items-center w-full p-3 rounded-lg hover:bg-blue-50 hover:text-blue-900">
+                        <div class="mr-4">
+                            <!-- Icon -->
+                        </div>
+                        Blog
+                        <div class="ml-auto">
+                            <span class="bg-blue-500/20 text-blue-900 py-1 px-2 text-xs rounded-full">14</span>
+                        </div>
+                    </button>
+
+                    <!-- Newsletter -->
+                    <button type="button" onclick="showSection('newsletter')" class="flex items-center w-full p-3 rounded-lg hover:bg-blue-50 hover:text-blue-900">
+                        <div class="mr-4">
+                            <!-- Icon -->
+                        </div>
+                        Newsletter
+                    </button>
+
+                    <!-- Partenaires -->
+                    <button type="button" onclick="showSection('Entreprises')" class="flex items-center w-full p-3 rounded-lg hover:bg-blue-50 hover:text-blue-900">
+                        <div class="mr-4">
+                            <!-- Icon -->
+                        </div>
+                        Entreprises
+                    </button>
+
+                    <!-- Utilisateurs -->
+                    <?php if (isset($role) && $role === 'admin'): ?>
+                        <button type="button" onclick="showSection('utilisateurs')" class="flex items-center w-full p-3 rounded-lg hover:bg-blue-50 hover:text-blue-900">
+                        <div class="mr-4">
+                            <!-- Icon -->
+                        </div>
+                        Utilisateurs
+                    </button>
+                    <?php endif; ?>
+
+                    <!-- Paramètres -->
+                    <button type="button" onclick="showSection('settings')" class="flex items-center w-full p-3 rounded-lg hover:bg-blue-50 hover:text-blue-900">
+                        <div class="mr-4">
+                            <!-- Icon -->
+                        </div>
+                        Settings
+                    </button>
+
+                    <!-- Déconnexion -->
+                    <button type="button" onclick="window.location.href='logout.php'" class="logout-btn mt-auto self-start mx-2 mb-2">Déconnexion</button>
+                </nav>
+            </aside>
+
+
+            <!-- Contenu principal -->
+            <main class="ml-[20rem] w-full p-8 flex flex-col">
+
+                <!-- Section Newsletter -->
+                <section id="newsletter" class="section-content hidden">
+                    <table class="min-w-full table-auto">
+                        <thead class="bg-gray-800 text-gray-300">
+                            <tr>
+                                <th class="px-6 py-3 text-left">Email</th>
+                                <th class="px-6 py-3 text-left">Nom</th>
+                                <th class="px-6 py-3 text-left">Prénom</th>
+                                <th class="px-6 py-3 text-center">Suppression</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-200">
+                            <?php foreach ($newsletters as $newsletter): ?>
+                                <tr class="bg-white border-b border-gray-300">
+                                    <td class="px-6 py-3"><?= htmlspecialchars($newsletter['mail']) ?></td>
+                                    <td class="px-6 py-3"><?= htmlspecialchars($newsletter['nom']) ?></td>
+                                    <td class="px-6 py-3"><?= htmlspecialchars($newsletter['prenom']) ?></td>
+                                    <td class="px-6 py-3 text-center">
+                                        <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet abonné ?');">
+                                            <input type="hidden" name="action" value="delete_newsletter">
+                                            <input type="hidden" name="id" value="<?= htmlspecialchars($newsletter['mail']) ?>">
+                                            <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </section>
+                
+                <!-- Section Blog -->
+                <section id="blog" class="section-content hidden">
+                    <table class="min-w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-800 text-gray-300">
+                                <th class="px-4 py-2">ID</th>
+                                <th class="px-4 py-2">Titre</th>
+                                <th class="px-4 py-2">Contenu</th>
+                                <th class="px-4 py-2">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($blogs as $blog): ?>
+                            <tr class="bg-white border-b">
+                                <td class="px-4 py-2">
+                                    <img src="../<?= htmlspecialchars($blog['image']) ?>" alt="Image de l'article" class="w-16 h-16 object-cover">
+                                </td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($blog['titre']) ?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($blog['texte']) ?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($blog['date']) ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Section Blog -->
+                <section id="blog" class="section-content hidden">
+                    <!-- Contenu Newsletter -->
+                    <div class="flex items-center justify-center p-12">
+
+                        <div class="mx-auto w-full  bg-white shadow-lg rounded-lg">
+
+                            <form class="py-6 px-9" action="#" method="POST" enctype="multipart/form-data">
+                                <!-- Titre de l'article -->
+                                <div class="mb-5">
+                                    <label for="title" class="mb-3 block text-base font-medium text-[#07074D]">
+                                     Titre de l'article
+                                    </label>
+                                    <input
+                                    type="text"
+                                    name="title"
+                                    id="title"
+                                    placeholder="Entrez un titre"
+                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                    />
+                                </div>
+
+                                <!-- Contenu de l'article -->
+                                <div class="mb-5">
+                                    <label for="content" class="mb-3 block text-base font-medium text-[#07074D]">
+                                    Contenu de l'article
+                                    </label>
+                                    <textarea
+                                    name="content"
+                                    id="content"
+                                    rows="8"
+                                    placeholder="Rédigez votre article ici..."
+                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                    ></textarea>
+                                </div>
+
+                                <!-- Image de l'article -->
+                                <div class="mb-6 pt-4">
+                                    <label class="mb-5 block text-xl font-semibold text-[#07074D]">
+                                    Image pour l'article
+                                    </label>
+
+                                    <div class="mb-8">
+                                        <input type="file" name="image" id="image" class="sr-only" />
+                                        <label
+                                            for="image"
+                                            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-[#6A64F1]"
+                                        >
+                                            <div>
+                                                <span class="mb-2 block text-xl font-semibold text-[#07074D]">
+                                                    Déposez une image ici
+                                                </span>
+                                                <span class="mb-2 block text-base font-medium text-[#6B7280]">
+                                                ou
+                                                </span>
+                                                <span
+                                                    class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
+                                                >
+                                                    Parcourir
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Choix de destination -->
+                                <div class="mb-6">
+                                    <label class="mb-3 block text-base font-medium text-[#07074D]">
+                                    Où souhaitez-vous publier ?
+                                    </label>
+                                    <select
+                                        name="destination"
+                                        id="destination"
+                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                        >
+                                        <option value="draft">Enregistrer comme brouillon</option>
+                                        <option value="both">Site et newsletter</option>
+                                        <option value="site">Seulement sur le site</option>
+                                        <option value="newsletter">Seulement à la newsletter</option>
+                                    </select>
+                                </div>
+
+                                <!-- Bouton d'envoi -->
+                                <div>
+                                    <button
+                                    type="submit"
+                                    class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                                    >
+                                    Enregistrer l'article
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Utilisateurs -->
+<section id="utilisateurs" class="section-content">
+    <table class="min-w-full table-auto">
+        <thead class="bg-gray-800 text-gray-300">
+            <tr>
+                <th class="px-6 py-3 text-left">Email</th>
+                <th class="px-6 py-3 text-left">Nouveau mot de passe</th>
+                <th class="px-6 py-3 text-left">Rôle</th>
+                <th class="px-6 py-3 text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-gray-200">
+            <?php foreach ($utilisateurs as $utilisateur): ?>
+                <tr class="bg-white border-b border-gray-300">
+                    <form method="POST">
+                        <input type="hidden" name="action" value="update_user">
+                        <td class="px-6 py-3">
+                            <input type="hidden" name="old_mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>">
+                            <input type="email" name="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>" class="w-full px-2 py-1 border rounded" required>
+                        </td>
+                        <td class="px-6 py-3">
+                            <input type="password" name="mot_de_passe" placeholder="Nouveau mot de passe" class="w-full px-2 py-1 border rounded">
+                        </td>
+                        <td class="px-6 py-3">
+                            <select name="role" class="w-full px-2 py-1 border rounded">
+                                <option value="lecteur" <?= $utilisateur['role'] === 'lecteur' ? 'selected' : '' ?>>lecteur</option>
+                                <option value="redacteur" <?= $utilisateur['role'] === 'redacteur' ? 'selected' : '' ?>>rédacteur</option>
+                                <option value="admin" <?= $utilisateur['role'] === 'admin' ? 'selected' : '' ?>>admin</option>
+                            </select>
+                        </td>
+                        <td class="px-6 py-3 text-center space-x-2">
+                            <button type="submit" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Modifier</button>
+                    </form>
+                    <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');" class="inline-block">
+                        <input type="hidden" name="action" value="delete_user">
+                        <input type="hidden" name="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>">
+                        <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition">Supprimer</button>
+                    </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+
+            <!-- Ligne pour créer un nouvel utilisateur -->
+            <tr class="bg-gray-100 border-t border-gray-300">
+                <form method="POST">
+                    <input type="hidden" name="action" value="create_user">
+                    <td class="px-6 py-3">
+                        <input type="email" name="mail" placeholder="Nouvel email" class="w-full px-2 py-1 border rounded" required>
+                    </td>
+                    <td class="px-6 py-3">
+                        <input type="password" name="mot_de_passe" placeholder="Mot de passe" class="w-full px-2 py-1 border rounded" required>
+                    </td>
+                    <td class="px-6 py-3">
+                        <select name="role" class="w-full px-2 py-1 border rounded" required>
+                            <option value="lecteur">lecteur</option>
+                            <option value="redacteur">rédacteur</option>
+                            <option value="admin">admin</option>
+                        </select>
+                    </td>
+                    <td class="px-6 py-3 text-center">
+                        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Créer</button>
+                    </td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+                <!-- Section Entreprises -->
+                <section id="Entreprises" class="section-content hidden">
+                    <div class="max-w-[100rem] p-8">
+                        <h2 class="text-3xl font-bold mb-8 text-center">Implantation terrain</h2>
+
+                        <?php
+                        // Organiser entreprises par pays
+                        $grouped = [];
+                        foreach ($entreprises as $ent) {
+                            $pays = $ent['pays'] ?? 'Autres';
+                            $grouped[$pays][] = $ent;
+                        }
+
+                        // Exemple de données délégués et entreprises partenaires (à adapter selon ta source)
+                        $stats = [
+                            'Togo' => ['delegues' => 12],
+                            'Bénin' => ['delegues' => 10],
+                            'Niger' => ['delegues' => 7],
+                        ];
+
+                        // Fonction pour compter entreprises partenaires par pays
+                        function countEntreprises($grouped, $pays) {
+                            return isset($grouped[$pays]) ? count($grouped[$pays]) : 0;
+                        }
+                        ?>
+
+                        <!-- Grille 2 colonnes pour Togo et Bénin -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                            <?php foreach (['Togo', 'Bénin'] as $pays): ?>
+                            <div class="bg-white shadow-lg rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4">
+                                    <?php
+                                        // Drapeau emoji par pays
+                                        $flags = ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'];
+                                        echo $flags[$pays] ?? '';
+                                    ?>
+                                    <?= htmlspecialchars($pays) ?>
+                                </h3>
+                                <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
+                                <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
+
+                                <div class="overflow-y-auto max-h-60 mb-4">
+                                    <table class="w-full text-sm text-left border">
+                                        <thead class="bg-gray-100 sticky top-0 z-10">
+                                            <tr>
+                                                <th class="p-2">Latitude</th>
+                                                <th class="p-2">Longitude</th>
+                                                <th class="p-2">Nom</th>
+                                                <th class="p-2">
+                                                    <button onclick="openPopup()" id="popup<?= $pays ?>" class="text-blue-600 hover:underline text-xl font-bold">+</button>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($grouped[$pays])): ?>
+                                                <?php foreach ($grouped[$pays] as $ent): ?>
+                                                    <tr class="border-t">
+                                                        <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
+                                                        <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
+                                                        <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                                        <td class="p-2"></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="w-full h-64 bg-gray-200 flex items-center justify-center rounded">
+                                    <span class="text-gray-500">[Carte interactive <?= htmlspecialchars($pays) ?>]</span>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <!-- Bloc Niger sur toute la largeur -->
+                        <div class="bg-white shadow-lg rounded-xl p-6">
+                            <h3 class="text-xl font-bold mb-4">🇳🇪 Niger</h3>
+                            <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats['Niger']['delegues'] ?? '?' ?></strong></p>
+                            <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, 'Niger') ?></strong></p>
+
+                            <div class="overflow-y-auto max-h-48 mb-4">
+                                <table class="w-full text-sm text-left border">
+                                    <thead class="bg-gray-100 sticky top-0 z-10">
+                                        <tr>
+                                            <th class="p-2">Latitude</th>
+                                            <th class="p-2">Longitude</th>
+                                            <th class="p-2">Nom</th>
+                                            <th class="p-2">
+                                                <button onclick="openPopup()" id="popupNiger" class="text-blue-600 hover:underline text-xl font-bold">+</button>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($grouped['Niger'])): ?>
+                                            <?php foreach ($grouped['Niger'] as $ent): ?>
+                                                <tr class="border-t">
+                                                    <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
+                                                    <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
+                                                    <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                                    <td class="p-2"></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded">
+                                <span class="text-gray-500">[Carte interactive Niger]</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Settings (visible uniquement si admin) -->
+                <section id="logout" class="section-content hidden">
+                    <form action="logout.php" method="POST">
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Déconnexion
+                        </button>
+                    </form>
+                </section>
+
+
+                <!-- Popup -->
+                <div id="popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                    <div class="bg-white rounded-xl shadow-lg p-6 w-96 relative">
+
+                    <!-- Bouton de fermeture -->
+                    <button onclick="closePopup()" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl">&times;</button>
+
+                    <h2 class="text-lg font-semibold mb-4 text-center">Ajouter des informations</h2>
+
+                    <form id="popupForm" class="space-y-4">
+                        <div>
+                        <label for="nom" class="block font-medium">Nom</label>
+                        <input type="text" id="nom" name="nom" class="w-full border rounded px-3 py-2" required>
+                        </div>
+
+                        <div>
+                        <label for="longitude" class="block font-medium">Longitude</label>
+                        <input type="text" id="longitude" name="longitude" class="w-full border rounded px-3 py-2" required>
+                        </div>
+
+                        <div>
+                        <label for="latitude" class="block font-medium">Latitude</label>
+                        <input type="text" id="latitude" name="latitude" class="w-full border rounded px-3 py-2" required>
+                        </div>
+
+                        <div class="text-right">
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Valider</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script src="admin.js" defer></script>
+    </body>
+</html>
+
+

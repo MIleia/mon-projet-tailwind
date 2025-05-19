@@ -54,6 +54,10 @@
         $stmt = $pdo->query("SELECT * FROM entreprise");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+
+
 ?>
 
 

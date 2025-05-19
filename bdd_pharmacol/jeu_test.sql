@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS blog (
 -- Table utilisateur
 CREATE TABLE IF NOT EXISTS utilisateur (
     mail VARCHAR(100) PRIMARY KEY,
-    mot_de_passe VARCHAR(255) NOT NULL
+    mot_de_passe VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL
 );
 
 -- Table entreprise
@@ -40,10 +41,10 @@ CREATE TABLE IF NOT EXISTS entreprise (
 );
 
 -- Insertion de test : utilisateur
-INSERT INTO utilisateur (mail, mot_de_passe) VALUES 
-('test@mail.com', '123456'),
-('admin@pharmacol.com', 'adminpass'),
-('user@example.com', 'password123');
+INSERT INTO utilisateur (mail, mot_de_passe, role) VALUES 
+('test@mail.com', '$2y$10$VscUIy.v0K0HNofz3ttTrOHbMNLXd8kQFEFfEC8KrKOEOGyFcUSqu', 'user'),
+('admin@pharmacol.com', '$2y$10$VscUIy.v0K0HNofz3ttTrOHbMNLXd8kQFEFfEC8KrKOEOGyFcUSqu', 'admin'),
+('user@example.com', '$2y$10$VscUIy.v0K0HNofz3ttTrOHbMNLXd8kQFEFfEC8KrKOEOGyFcUSqu', 'user');
 
 -- Insertion de test : newsletter
 INSERT INTO newsletter (mail, nom, prenom) VALUES
@@ -53,9 +54,9 @@ INSERT INTO newsletter (mail, nom, prenom) VALUES
 
 -- Insertion de test : blog
 INSERT INTO blog (image, titre, texte, date) VALUES
-('image1.jpg', 'Lancement de Pharmacol Niger', 'Nous avons lancé notre nouvelle plateforme au Niger.', '2025-04-01'),
-('image2.jpg', 'Les enjeux pharmaceutiques en Afrique', 'Analyse des besoins de santé et de la distribution en Afrique de l’Ouest.', '2025-04-15'),
-('image3.jpg', 'Partenariat avec les pharmacies locales', 'Nous avons signé un partenariat avec plusieurs pharmacies rurales.', '2025-05-01');
+('images/blog/test.jpg', 'Lancement de Pharmacol Niger', 'Nous avons lancé notre nouvelle plateforme au Niger.', '2025-04-01'),
+('images/blog/test.jpg', 'Les enjeux pharmaceutiques en Afrique', 'Analyse des besoins de santé et de la distribution en Afrique de l’Ouest.', '2025-04-15'),
+('images/blog/test.jpg', 'Partenariat avec les pharmacies locales', 'Nous avons signé un partenariat avec plusieurs pharmacies rurales.', '2025-05-01');
 
 -- Insertion de test : entreprise
 INSERT INTO entreprise (longitude, latitude, nom, pays, ville) VALUES
