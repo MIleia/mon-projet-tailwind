@@ -544,6 +544,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -654,6 +658,14 @@ video {
 
 .top-full {
   top: 100%;
+}
+
+.bottom-6 {
+  bottom: 1.5rem;
+}
+
+.right-6 {
+  right: 1.5rem;
 }
 
 .z-0 {
@@ -1269,6 +1281,11 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#06788f\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 120 143 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-100 {
   --tw-bg-opacity: 1;
 }
@@ -1661,6 +1678,11 @@ video {
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#055c6e\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(5 92 110 / var(--tw-bg-opacity));
 }
 
 .hover\:text-green-600:hover {

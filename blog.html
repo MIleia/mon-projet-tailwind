@@ -323,6 +323,27 @@
                 <a href="https://www.neostart.tech/" target="_blank">Copyright © 2025 Neo Start Technology Tous droits réservés.</a>
             </div>
         </footer>
+
+        <!-- Bouton Newsletter -->
+        <button onclick="document.getElementById('newsletterModal').classList.remove('hidden')" 
+                class="fixed bottom-6 right-24 w-14 h-14 bg-green-600 text-white text-xl flex items-center justify-center rounded-full shadow-lg hover:bg-green-700 transition z-50" 
+                aria-label="S'abonner à la newsletter">
+            ✉️
+        </button>
+
+        <!-- Modal Newsletter -->
+        <div id="newsletterModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white rounded-lg p-6 w-96 shadow-lg relative">
+                <button onclick="document.getElementById('newsletterModal').classList.add('hidden')" class="absolute top-2 right-3 text-gray-500 hover:text-black text-xl">&times;</button>
+                <h2 class="text-xl font-bold mb-4 text-[#3C74A8]">Abonnez-vous à notre newsletter</h2>
+                <form action="file.php" method="POST" class="space-y-4">
+                    <input type="text" name="prenom" placeholder="Prénom" required class="w-full border border-gray-300 p-2 rounded">
+                    <input type="text" name="nom" placeholder="Nom" required class="w-full border border-gray-300 p-2 rounded">
+                    <input type="email" name="email" placeholder="Email" required class="w-full border border-gray-300 p-2 rounded">
+                    <button type="submit" class="bg-[#3C74A8] text-white px-4 py-2 rounded hover:bg-[#2c5a84] w-full">S'abonner</button>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
 
