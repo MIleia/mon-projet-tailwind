@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -350,97 +348,12 @@
                 </section>
 
                 <section id="logout" class="section-content hidden">
-                    <!-- Contenu Settings -->
+                    <form action="logout.php" method="POST">
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Déconnexion
+                        </button>
+                    </form>
 
-                    <div class="flex items-center justify-center p-12">
-                        <div class="mx-auto w-full  bg-white shadow-lg rounded-lg">
-                            <form class="py-6 px-9" action="#" method="POST" enctype="multipart/form-data">
-                                <!-- Titre de l'article -->
-                                <div class="mb-5">
-                                    <label for="title" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    Titre de l'article
-                                    </label>
-                                    <input
-                                    type="text"
-                                    name="title"
-                                    id="title"
-                                    placeholder="Entrez un titre"
-                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                    />
-                                </div>
-
-                                <!-- Contenu de l'article -->
-                                <div class="mb-5">
-                                    <label for="content" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    Contenu de l'article
-                                    </label>
-                                    <textarea
-                                    name="content"
-                                    id="content"
-                                    rows="8"
-                                    placeholder="Rédigez votre article ici..."
-                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                    ></textarea>
-                                </div>
-
-                                <!-- Image de l'article -->
-                                <div class="mb-6 pt-4">
-                                    <label class="mb-5 block text-xl font-semibold text-[#07074D]">
-                                    Image pour l'article
-                                    </label>
-
-                                    <div class="mb-8">
-                                    <input type="file" name="image" id="image" class="sr-only" />
-                                    <label
-                                        for="image"
-                                        class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-[#6A64F1]"
-                                    >
-                                        <div>
-                                        <span class="mb-2 block text-xl font-semibold text-[#07074D]">
-                                            Déposez une image ici
-                                        </span>
-                                        <span class="mb-2 block text-base font-medium text-[#6B7280]">
-                                            ou
-                                        </span>
-                                        <span
-                                            class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
-                                        >
-                                            Parcourir
-                                        </span>
-                                        </div>
-                                    </label>
-                                    </div>
-                                </div>
-
-                                <!-- Choix de destination -->
-                                <div class="mb-6">
-                                    <label class="mb-3 block text-base font-medium text-[#07074D]">
-                                    Où souhaitez-vous publier ?
-                                    </label>
-                                    <select
-                                    name="destination"
-                                    id="destination"
-                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                    >
-                                    <option value="draft">Enregistrer comme brouillon</option>
-                                    <option value="both">Site et newsletter</option>
-                                    <option value="site">Seulement sur le site</option>
-                                    <option value="newsletter">Seulement à la newsletter</option>
-                                    </select>
-                                </div>
-
-                                <!-- Bouton d'envoi -->
-                                <div>
-                                    <button
-                                    type="submit"
-                                    class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                                    >
-                                    Enregistrer l'article
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </section>
 
 
@@ -494,53 +407,6 @@
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-        <script defer>
-            function showSection(id) {
-                // Masquer toutes les sections qui ont la classe 'section-content'
-                document.querySelectorAll('.section-content').forEach(section => {
-                    section.classList.add('hidden');
-                });
-
-                // Afficher uniquement la section avec l'ID donné
-                const sectionToShow = document.getElementById(id);
-                if (sectionToShow) {
-                    sectionToShow.classList.remove('hidden');
-                }
-            }
-
-
-
-            function openPopup() {
-                document.getElementById('popup').classList.remove('hidden');
-                }
-
-                function closePopup() {
-                document.getElementById('popup').classList.add('hidden');
-                }
-
-                document.getElementById("popupForm").addEventListener("submit", function(e) {
-                e.preventDefault();
-                const nom = document.getElementById("nom").value;
-                const lon = document.getElementById("longitude").value;
-                const lat = document.getElementById("latitude").value;
-
-                console.log("Nom:", nom, "Longitude:", lon, "Latitude:", lat);
-
-                // Fermer la popup après validation
-                closePopup();
-            });
-        </script>
-
-
+        <script src="admin.js" defer></script>
     </body>
 </html>
