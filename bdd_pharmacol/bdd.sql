@@ -1,5 +1,10 @@
 CREATE DATABASE IF NOT EXISTS pharmacol_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE pharmacol_db;
+DROP TABLE IF EXISTS newsletter;
+DROP TABLE IF EXISTS blog;
+DROP TABLE IF EXISTS utilisateur;
+DROP TABLE IF EXISTS entreprise;
+
 
 -- Table newsletters
 CREATE TABLE IF NOT EXISTS newsletter (
