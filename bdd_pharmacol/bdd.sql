@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS blog (
     image VARCHAR(255),
     titre VARCHAR(255) NOT NULL,
     texte TEXT NOT NULL,
+    etat VARCHAR(50) NOT NULL,
     date DATE NOT NULL
 );
 
