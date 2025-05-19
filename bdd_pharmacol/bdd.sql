@@ -3,7 +3,7 @@ USE pharmacol_db;
 
 -- Table newsletters
 CREATE TABLE IF NOT EXISTS newsletter (
-    mail VARCHAR(255) PRIMARY KEY,
+    mail VARCHAR(100) PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL
 );
@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS blog (
     image VARCHAR(255),
     titre VARCHAR(255) NOT NULL,
     texte TEXT NOT NULL,
-    etat VARCHAR(50) NOT NULL,
     date DATE NOT NULL
 );
 
@@ -34,6 +33,6 @@ CREATE TABLE IF NOT EXISTS entreprise (
     ville VARCHAR(100)
 );
 
-
+INSERT INTO utilisateur (mail, mot_de_passe) VALUES ('test@mail.com', '123456');
 
 
