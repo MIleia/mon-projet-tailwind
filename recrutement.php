@@ -11,7 +11,7 @@ $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-    $stmt = $pdo->query("SELECT titre, descriptif, localisation FROM postes");
+    $stmt = $pdo->query("SELECT id, titre, descriptif, localisation FROM postes");
     $postes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "<div class='text-red-600 text-center p-4'>Erreur de connexion à la base de données : " . $e->getMessage() . "</div>";
@@ -141,23 +141,21 @@ try {
                 </div>
             </div>
         </header>
+        <div class="flex flex-col justify-center items-center">
 
 
-        <!-- Affichage des cartes -->
-        <div class="flex flex-col items-center gap-6 my-12">
             <?php foreach ($postes as $poste): ?>
-                <div class="w-[80%] bg-white shadow-md rounded-lg p-6 mb-6">
+                <a href="recrutement_formulaire.php?id=<?= $poste['id'] ?>" class="block w-[80%] bg-white shadow-md rounded-lg p-6 mb-6 hover:shadow-lg transition">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2"><?= htmlspecialchars($poste['titre']) ?></h3>
                     <p class="text-gray-700 mb-4"><?= nl2br(htmlspecialchars($poste['descriptif'])) ?></p>
                     <p class="text-sm text-gray-500">
                         <i class="fas fa-map-marker-alt mr-1 text-green-600"></i>
                         <?= htmlspecialchars($poste['localisation']) ?>
                     </p>
-                </div>
+                </a>
             <?php endforeach; ?>
+
         </div>
-
-
      
         <!-- Footer -->
         <footer class="bg-[#3C74A8E8] text-gray-100 relative">
@@ -181,7 +179,7 @@ try {
                         <li><a href="index.html" class="hover:underline">À propos</a></li>
                         <li><a href="prestation.html" class="hover:underline">Services</a></li>
                         <li><a href="blog.html" class="hover:underline">Blog</a></li>
-                        <li><a href="recrutement.html" class="hover:underline">Recrutement</a></li>
+                        <li><a href="recrutement.php" class="hover:underline">Recrutement</a></li>
                         <li><a href="contact.html" class="hover:underline">Contact</a></li>
                     </ul>
                 </div>

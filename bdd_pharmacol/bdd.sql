@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS newsletter;
 DROP TABLE IF EXISTS blog;
 DROP TABLE IF EXISTS utilisateur;
 DROP TABLE IF EXISTS entreprise;
+DROP TABLE IF EXISTS postes;
 
 
 -- Table newsletters
@@ -41,9 +42,10 @@ CREATE TABLE IF NOT EXISTS entreprise (
 
 -- Table postes
 CREATE TABLE IF NOT EXISTS postes (
-    titre VARCHAR(100) PRIMARY KEY,
-    descriptif VARCHAR(100) NOT NULL,
-    localisation VARCHAR(100) NOT NULL
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    descriptif TEXT NOT NULL,
+    localisation VARCHAR(255) NOT NULL
 );
 
 INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre1', 'ceci est un descriptif', 'localisation1');
