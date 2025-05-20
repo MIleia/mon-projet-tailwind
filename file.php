@@ -16,6 +16,7 @@
             echo "<script>window.location.href = 'blog.html';</script>";
         }
     }
+;
 ?>
 
 
