@@ -18,6 +18,10 @@
     $res_blog = $pdo->query($sql_blog);
     $blogs = $res_blog->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql_postes = "SELECT * FROM postes";
+    $res_postes = $pdo->query($sql_postes);
+    $postes = $res_postes->fetchAll(PDO::FETCH_ASSOC);
+
     // Récupération des données Entreprise
     $sql_entreprise = "SELECT * FROM entreprise";
     $res_entreprise = $pdo->query($sql_entreprise);
@@ -101,6 +105,36 @@
             exit();
         }
 
+        // Supprimer un article de blog
+        if (isset($_POST['action']) && $_POST['action'] === 'delete_blog') {
+            $id = $_POST['id'];
+            $stmt = $pdo->prepare("DELETE FROM blog WHERE id = :id");
+            $stmt->execute([':id' => $id]);
+            header("Location: home.php?section=blog");
+            exit();
+        }
+
+        // Modifier l'état d'un blog
+        if (isset($_POST['action']) && $_POST['action'] === 'update_blog_state') {
+            $id = $_POST['id'];
+            $etat = $_POST['etat'];
+            if (in_array($etat, ['brouillon', 'en ligne', 'newsletter', 'les deux'])) {
+                $stmt = $pdo->prepare("UPDATE blog SET etat = :etat WHERE id = :id");
+                $stmt->execute([':etat' => $etat, ':id' => $id]);
+                header("Location: home.php?section=blog");
+                exit();
+            }
+        }
+
+        if (isset($_POST['action']) && $_POST['action'] === 'delete_poste') {
+            $id = $_POST['id'];
+            $stmt = $pdo->prepare("DELETE FROM postes WHERE id = :id");
+            $stmt->execute([':id' => $id]);
+            header("Location: home.php?section=recrutement");
+            exit();
+        }
+
+
         $utilisateurs = $pdo->query("SELECT mail, role FROM utilisateur")->fetchAll(PDO::FETCH_ASSOC);
     }
 ?>
@@ -143,6 +177,14 @@
                         <div class="ml-auto">
                             <span class="bg-blue-500/20 text-blue-900 py-1 px-2 text-xs rounded-full">14</span>
                         </div>
+                    </button>
+
+                    <!-- Suivi Recrutement -->
+                    <button type="button" onclick="showSection('recrutement')" class="flex items-center w-full p-3 rounded-lg hover:bg-blue-50 hover:text-blue-900">
+                        <div class="mr-4">
+                            <!-- Icon -->
+                        </div>
+                        Suivi recrutement
                     </button>
 
                     <!-- Newsletter -->
@@ -219,14 +261,24 @@
                 </section>
                 
                 <!-- Section Blog -->
-                <section id="blog" class="section-content hidden">
+                <section id="blog" class="section-content hidden px-4 py-6">
+
+                    <!-- Bouton d'ajout -->
+                    <div class="mb-4">
+                        <a href="ajouter_blog.php" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                            + Ajouter un article
+                        </a>
+                    </div>
+
                     <table class="min-w-full table-auto">
                         <thead>
                             <tr class="bg-gray-800 text-gray-300">
-                                <th class="px-4 py-2">ID</th>
+                                <th class="px-4 py-2">Image</th>
                                 <th class="px-4 py-2">Titre</th>
                                 <th class="px-4 py-2">Contenu</th>
                                 <th class="px-4 py-2">Date</th>
+                                <th class="px-4 py-2">État</th>
+                                <th class="px-4 py-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -238,110 +290,39 @@
                                 <td class="px-4 py-2"><?= htmlspecialchars($blog['titre']) ?></td>
                                 <td class="px-4 py-2"><?= htmlspecialchars($blog['texte']) ?></td>
                                 <td class="px-4 py-2"><?= htmlspecialchars($blog['date']) ?></td>
+
+                                <!-- Menu déroulant pour changer l'état -->
+                                <td class="px-4 py-2">
+                                    <form method="POST" action="">
+                                        <input type="hidden" name="action" value="update_blog_state">
+                                        <input type="hidden" name="id" value="<?= $blog['id'] ?>">
+                                        <select name="etat" onchange="this.form.submit()" class="border border-gray-300 p-1 rounded">
+                                            <option value="brouillon" <?= $blog['etat'] == 'brouillon' ? 'selected' : '' ?>>Brouillon</option>
+                                            <option value="en ligne" <?= $blog['etat'] == 'en ligne' ? 'selected' : '' ?>>En ligne</option>
+                                            <option value="newsletter" <?= $blog['etat'] == 'newsletter' ? 'selected' : '' ?>>Newsletter</option>
+                                            <option value="les deux" <?= $blog['etat'] == 'les deux' ? 'selected' : '' ?>>Les deux</option>
+                                        </select>
+                                    </form>
+                                </td>
+
+                                <!-- Actions modifier / supprimer -->
+                                <td class="px-4 py-2 space-x-2 flex gap-2">
+                                    <a href="modifier_blog.php?id=<?= $blog['id'] ?>" class="text-blue-600 hover:underline">Modifier</a>
+
+                                    <form method="POST" action="" onsubmit="return confirm('Supprimer cet article ?')">
+                                        <input type="hidden" name="action" value="delete_blog">
+                                        <input type="hidden" name="id" value="<?= $blog['id'] ?>">
+                                        <button type="submit" class="text-red-600 hover:underline">Supprimer</button>
+                                    </form>
+                                </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                 </section>
 
-                <!-- Section Blog -->
-                <section id="blog" class="section-content hidden">
-                    <!-- Contenu Newsletter -->
-                    <div class="flex items-center justify-center p-12">
-
-                        <div class="mx-auto w-full  bg-white shadow-lg rounded-lg">
-
-                            <form class="py-6 px-9" action="#" method="POST" enctype="multipart/form-data">
-                                <!-- Titre de l'article -->
-                                <div class="mb-5">
-                                    <label for="title" class="mb-3 block text-base font-medium text-[#07074D]">
-                                     Titre de l'article
-                                    </label>
-                                    <input
-                                    type="text"
-                                    name="title"
-                                    id="title"
-                                    placeholder="Entrez un titre"
-                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                    />
-                                </div>
-
-                                <!-- Contenu de l'article -->
-                                <div class="mb-5">
-                                    <label for="content" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    Contenu de l'article
-                                    </label>
-                                    <textarea
-                                    name="content"
-                                    id="content"
-                                    rows="8"
-                                    placeholder="Rédigez votre article ici..."
-                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                    ></textarea>
-                                </div>
-
-                                <!-- Image de l'article -->
-                                <div class="mb-6 pt-4">
-                                    <label class="mb-5 block text-xl font-semibold text-[#07074D]">
-                                    Image pour l'article
-                                    </label>
-
-                                    <div class="mb-8">
-                                        <input type="file" name="image" id="image" class="sr-only" />
-                                        <label
-                                            for="image"
-                                            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-[#6A64F1]"
-                                        >
-                                            <div>
-                                                <span class="mb-2 block text-xl font-semibold text-[#07074D]">
-                                                    Déposez une image ici
-                                                </span>
-                                                <span class="mb-2 block text-base font-medium text-[#6B7280]">
-                                                ou
-                                                </span>
-                                                <span
-                                                    class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
-                                                >
-                                                    Parcourir
-                                                </span>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- Choix de destination -->
-                                <div class="mb-6">
-                                    <label class="mb-3 block text-base font-medium text-[#07074D]">
-                                    Où souhaitez-vous publier ?
-                                    </label>
-                                    <select
-                                        name="destination"
-                                        id="destination"
-                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                        >
-                                        <option value="draft">Enregistrer comme brouillon</option>
-                                        <option value="both">Site et newsletter</option>
-                                        <option value="site">Seulement sur le site</option>
-                                        <option value="newsletter">Seulement à la newsletter</option>
-                                    </select>
-                                </div>
-
-                                <!-- Bouton d'envoi -->
-                                <div>
-                                    <button
-                                    type="submit"
-                                    class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                                    >
-                                    Enregistrer l'article
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- Section Utilisateurs -->
-                <section id="utilisateurs" class="section-content">
+                <section id="utilisateurs" class="section-content hidden">
                     <table class="min-w-full table-auto">
                         <thead class="bg-gray-800 text-gray-300">
                             <tr>
@@ -409,159 +390,205 @@
                 </section>
 
                 <!-- Section Entreprises -->
-<section id="Entreprises" class="section-content hidden">
-    <div class="max-w-[100rem] p-8">
-        <h2 class="text-3xl font-bold mb-8 text-center">Implantation terrain</h2>
+                <section id="Entreprises" class="section-content hidden">
+                    <div class="max-w-[100rem] p-8">
+                        <h2 class="text-3xl font-bold mb-8 text-center">Implantation terrain</h2>
 
-        <?php
-        // Organiser entreprises par pays
-        $grouped = [];
-        foreach ($entreprises as $ent) {
-            $pays = $ent['pays'] ?? 'Autres';
-            $grouped[$pays][] = $ent;
-        }
+                        <?php
+                        // Organiser entreprises par pays
+                        $grouped = [];
+                        foreach ($entreprises as $ent) {
+                            $pays = $ent['pays'] ?? 'Autres';
+                            $grouped[$pays][] = $ent;
+                        }
 
-        $stats = [
-            'Togo' => ['delegues' => 12],
-            'Bénin' => ['delegues' => 10],
-            'Niger' => ['delegues' => 7],
-        ];
+                        $stats = [
+                            'Togo' => ['delegues' => 12],
+                            'Bénin' => ['delegues' => 10],
+                            'Niger' => ['delegues' => 7],
+                        ];
 
-        function countEntreprises($grouped, $pays) {
-            return isset($grouped[$pays]) ? count($grouped[$pays]) : 0;
-        }
+                        function countEntreprises($grouped, $pays) {
+                            return isset($grouped[$pays]) ? count($grouped[$pays]) : 0;
+                        }
 
-        // Pour générer un ID HTML sûr (sans espaces, caractères spéciaux)
-        function safeId($str) {
-            return preg_replace('/[^a-z0-9]+/i', '_', strtolower($str));
-        }
-        ?>
+                        // Pour générer un ID HTML sûr (sans espaces, caractères spéciaux)
+                        function safeId($str) {
+                            return preg_replace('/[^a-z0-9]+/i', '_', strtolower($str));
+                        }
+                        ?>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <?php foreach (['Togo', 'Bénin'] as $pays): 
-                $safeId = safeId($pays);
-            ?>
-            <div class="bg-white shadow-lg rounded-xl p-6">
-                <h3 class="text-xl font-bold mb-4">
-                    <?php
-                        $flags = ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'];
-                        echo $flags[$pays] ?? '';
-                    ?>
-                    <?= htmlspecialchars($pays) ?>
-                </h3>
-                <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
-                <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                            <?php foreach (['Togo', 'Bénin'] as $pays): 
+                                $safeId = safeId($pays);
+                            ?>
+                            <div class="bg-white shadow-lg rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4">
+                                    <?php
+                                        $flags = ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'];
+                                        echo $flags[$pays] ?? '';
+                                    ?>
+                                    <?= htmlspecialchars($pays) ?>
+                                </h3>
+                                <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
+                                <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
 
-                <div class="overflow-y-auto max-h-60 mb-4">
-                    <table class="w-full text-sm text-left border">
-                        <thead class="bg-gray-100 sticky top-0 z-10">
-                            <tr>
-                                <th class="p-2">Latitude</th>
-                                <th class="p-2">Longitude</th>
-                                <th class="p-2">Nom</th>
-                                <th class="p-2"></th>
+                                <div class="overflow-y-auto max-h-60 mb-4">
+                                    <table class="w-full text-sm text-left border">
+                                        <thead class="bg-gray-100 sticky top-0 z-10">
+                                            <tr>
+                                                <th class="p-2">Latitude</th>
+                                                <th class="p-2">Longitude</th>
+                                                <th class="p-2">Nom</th>
+                                                <th class="p-2"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($grouped[$pays])): ?>
+                                                <?php foreach ($grouped[$pays] as $ent): ?>
+                                                    <tr class="border-t">
+                                                        <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
+                                                        <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
+                                                        <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                                        <td class="p-2"></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div id="map-<?= $safeId ?>" class="w-full h-64 rounded"></div>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="bg-white shadow-lg rounded-xl p-6">
+                            <?php $pays = 'Niger'; $safeId = safeId($pays); ?>
+                            <h3 class="text-xl font-bold mb-4">🇳🇪 <?= htmlspecialchars($pays) ?></h3>
+                            <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
+                            <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
+
+                            <div class="overflow-y-auto max-h-48 mb-4">
+                                <table class="w-full text-sm text-left border">
+                                    <thead class="bg-gray-100 sticky top-0 z-10">
+                                        <tr>
+                                            <th class="p-2">Latitude</th>
+                                            <th class="p-2">Longitude</th>
+                                            <th class="p-2">Nom</th>
+                                            <th class="p-2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($grouped[$pays])): ?>
+                                            <?php foreach ($grouped[$pays] as $ent): ?>
+                                                <tr class="border-t">
+                                                    <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
+                                                    <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
+                                                    <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                                    <td class="p-2"></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="map-<?= $safeId ?>" class="w-full h-48 rounded"></div>
+                        </div>
+
+                        <!-- Bouton et modal ajout entreprise -->
+                        <div class="text-center mt-8">
+                            <button id="openAddCompanyBtn" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Ajouter une nouvelle entreprise</button>
+                        </div>
+
+                        <div id="addCompanyModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+                            <div class="bg-white rounded-lg p-6 max-w-md w-full relative">
+                                <button id="closeAddCompanyBtn" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900">&times;</button>
+                                <h3 class="text-xl font-bold mb-4">Ajouter une nouvelle entreprise</h3>
+                                <form id="addCompanyForm">
+                                    <div class="mb-4">
+                                        <label for="latitude" class="block font-semibold mb-1">Latitude :</label>
+                                        <input type="number" step="any" id="latitude" name="latitude" required class="w-full border rounded px-3 py-2" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="longitude" class="block font-semibold mb-1">Longitude :</label>
+                                        <input type="number" step="any" id="longitude" name="longitude" required class="w-full border rounded px-3 py-2" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="nom" class="block font-semibold mb-1">Nom :</label>
+                                        <input type="text" id="nom" name="nom" required class="w-full border rounded px-3 py-2" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="pays" class="block font-semibold mb-1">Pays :</label>
+                                        <select id="pays" name="pays" required class="w-full border rounded px-3 py-2">
+                                            <option value="">Sélectionner un pays</option>
+                                            <option value="Togo">Togo</option>
+                                            <option value="Bénin">Bénin</option>
+                                            <option value="Niger">Niger</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="ville" class="block font-semibold mb-1">Ville :</label>
+                                        <input type="text" id="ville" name="ville" required class="w-full border rounded px-3 py-2" />
+                                    </div>
+                                    <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Ajouter</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Section Recrutement -->
+                <section id="recrutement" class="section-content hidden px-4 py-6">
+
+                    <!-- Bouton d'ajout -->
+                    <div class="mb-4">
+                        <a href="ajouter_poste.php" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                            + Ajouter un poste
+                        </a>
+                    </div>
+
+                    <table class="min-w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-800 text-gray-300">
+                                <th class="px-4 py-2">Titre</th>
+                                <th class="px-4 py-2">Descriptif</th>
+                                <th class="px-4 py-2">Localisation</th>
+                                <th class="px-4 py-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($grouped[$pays])): ?>
-                                <?php foreach ($grouped[$pays] as $ent): ?>
-                                    <tr class="border-t">
-                                        <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
-                                        <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
-                                        <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
-                                        <td class="p-2"></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
-                            <?php endif; ?>
+                            <?php foreach ($postes as $poste): ?>
+                            <tr class="bg-white border-b">
+                                <td class="px-4 py-2"><?= htmlspecialchars($poste['titre']) ?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($poste['descriptif']) ?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($poste['localisation']) ?></td>
+
+                                <td class="px-4 py-2 space-x-2 flex gap-2">
+                                    <a href="modifier_poste.php?id=<?= $poste['id'] ?>" class="text-blue-600 hover:underline">Modifier</a>
+
+                                    <form method="POST" action="" onsubmit="return confirm('Supprimer ce poste ?')">
+                                        <input type="hidden" name="action" value="delete_poste">
+                                        <input type="hidden" name="id" value="<?= $poste['id'] ?>">
+                                        <button type="submit" class="text-red-600 hover:underline">Supprimer</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
-                </div>
+                </section>
 
-                <div id="map-<?= $safeId ?>" class="w-full h-64 rounded"></div>
-            </div>
-            <?php endforeach; ?>
+            </section>
+
+
         </div>
-
-        <div class="bg-white shadow-lg rounded-xl p-6">
-            <?php $pays = 'Niger'; $safeId = safeId($pays); ?>
-            <h3 class="text-xl font-bold mb-4">🇳🇪 <?= htmlspecialchars($pays) ?></h3>
-            <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
-            <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
-
-            <div class="overflow-y-auto max-h-48 mb-4">
-                <table class="w-full text-sm text-left border">
-                    <thead class="bg-gray-100 sticky top-0 z-10">
-                        <tr>
-                            <th class="p-2">Latitude</th>
-                            <th class="p-2">Longitude</th>
-                            <th class="p-2">Nom</th>
-                            <th class="p-2"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($grouped[$pays])): ?>
-                            <?php foreach ($grouped[$pays] as $ent): ?>
-                                <tr class="border-t">
-                                    <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
-                                    <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
-                                    <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
-                                    <td class="p-2"></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="map-<?= $safeId ?>" class="w-full h-48 rounded"></div>
-        </div>
-
-        <!-- Bouton et modal ajout entreprise -->
-        <div class="text-center mt-8">
-            <button id="openAddCompanyBtn" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Ajouter une nouvelle entreprise</button>
-        </div>
-
-        <div id="addCompanyModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-            <div class="bg-white rounded-lg p-6 max-w-md w-full relative">
-                <button id="closeAddCompanyBtn" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900">&times;</button>
-                <h3 class="text-xl font-bold mb-4">Ajouter une nouvelle entreprise</h3>
-                <form id="addCompanyForm">
-                    <div class="mb-4">
-                        <label for="latitude" class="block font-semibold mb-1">Latitude :</label>
-                        <input type="number" step="any" id="latitude" name="latitude" required class="w-full border rounded px-3 py-2" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="longitude" class="block font-semibold mb-1">Longitude :</label>
-                        <input type="number" step="any" id="longitude" name="longitude" required class="w-full border rounded px-3 py-2" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="nom" class="block font-semibold mb-1">Nom :</label>
-                        <input type="text" id="nom" name="nom" required class="w-full border rounded px-3 py-2" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="pays" class="block font-semibold mb-1">Pays :</label>
-                        <select id="pays" name="pays" required class="w-full border rounded px-3 py-2">
-                            <option value="">Sélectionner un pays</option>
-                            <option value="Togo">Togo</option>
-                            <option value="Bénin">Bénin</option>
-                            <option value="Niger">Niger</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="ville" class="block font-semibold mb-1">Ville :</label>
-                        <input type="text" id="ville" name="ville" required class="w-full border rounded px-3 py-2" />
-                    </div>
-                    <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Ajouter</button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-</section>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -647,16 +674,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-
-
-                <!-- Section Settings -->
-                <section id="logout" class="section-content hidden">
-                    <form action="logout.php" method="POST">
-                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                            Déconnexion
-                        </button>
-                    </form>
-                </section>
 
 
                 <!-- Popup -->
