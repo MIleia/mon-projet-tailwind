@@ -185,31 +185,65 @@
 
         <!-- CONTEXTE DU BÉNIN -->
         <section class="py-20 px-6 bg-gray-100">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 items-center">
-            <!-- Texte -->
-            <div class="col-span-2">
-            <h2 class="text-2xl font-bold text-[#06788f] mb-6">Pourquoi le Bénin est stratégique ?</h2>
-            <p class="text-base text-gray-800 mb-4 text-justify">Le Bénin est un pays dynamique d'Afrique de l'Ouest, frontalier du Togo, du Nigeria, du Niger et du Burkina Faso. Sa capitale économique, Cotonou, est un pôle logistique régional majeur. Le pays dispose d’un système de santé en amélioration continue, et présente un fort potentiel de croissance dans le secteur pharmaceutique.</p>
-            <p class="text-base text-gray-800 mb-4 text-justify">Avec une population de plus de 13 millions d’habitants et une volonté politique de renforcer l'accès aux soins, le Bénin constitue un marché prometteur pour les laboratoires souhaitant développer une présence durable et éthique.</p>
-            <ul class="list-disc list-inside text-base text-gray-700 space-y-2">
-                <li>Superficie : 114 763 km² – 12 départements sanitaires</li>
-                <li>Près de 1600 structures de santé réparties sur le territoire</li>
-                <li>Accès croissant aux médicaments essentiels grâce aux réformes</li>
-            </ul>
-            </div>
+            <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 items-center">
+                <!-- Texte -->
+                <div class="col-span-2">
+                <h2 class="text-2xl font-bold text-[#06788f] mb-6">Pourquoi le Bénin est stratégique ?</h2>
+                <p class="text-base text-gray-800 mb-4 text-justify">Le Bénin est un pays dynamique d'Afrique de l'Ouest, frontalier du Togo, du Nigeria, du Niger et du Burkina Faso. Sa capitale économique, Cotonou, est un pôle logistique régional majeur. Le pays dispose d’un système de santé en amélioration continue, et présente un fort potentiel de croissance dans le secteur pharmaceutique.</p>
+                <p class="text-base text-gray-800 mb-4 text-justify">Avec une population de plus de 13 millions d’habitants et une volonté politique de renforcer l'accès aux soins, le Bénin constitue un marché prometteur pour les laboratoires souhaitant développer une présence durable et éthique.</p>
+                <ul class="list-disc list-inside text-base text-gray-700 space-y-2">
+                    <li>Superficie : 114 763 km² – 12 départements sanitaires</li>
+                    <li>Près de 1600 structures de santé réparties sur le territoire</li>
+                    <li>Accès croissant aux médicaments essentiels grâce aux réformes</li>
+                </ul>
+                </div>
 
-            <!-- Carte du Bénin -->
-            <div class="bg-white border rounded-xl shadow-lg p-4" id="Carte Bénin">
-                <div id="map" class="rounded w-full h-96"></div>
-                <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Bénin</p>
-            </div>
+                <!-- Carte du Bénin -->
+                <div class="bg-white border rounded-xl shadow-lg p-4" id="Carte-Benin">
+                    <div id="map-benin" class="rounded w-full h-96"></div>
+                    <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Bénin</p>
+                </div>
 
-            <script>
-                var map = L.map('map').setView([9.0, 2.0], 6);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(map);
+                <script>
+                    var mapBenin = L.map('map-benin').setView([9.0, 2.0], 6);
 
-                // Marqueurs
-                L.marker([6.4969, 2.6289]).addTo(map).openPopup();
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 18,
+                    }).addTo(mapBenin);
+
+                    function loadMarkersBenin() {
+                        fetch('map.php?pays=Bénin')
+                            .then(response => {
+                                if (!response.ok) throw new Error("Erreur réseau");
+                                return response.json();
+                            })
+                            .then(data => {
+                                data.forEach(marker => {
+                                    const lat = parseFloat(marker.latitude);
+                                    const lng = parseFloat(marker.longitude);
+                                    const nom = marker.nom;
+                                    const ville = marker.ville;
+
+                                    if (!isNaN(lat) && !isNaN(lng)) {
+                                        L.marker([lat, lng])
+                                            .addTo(mapBenin)
+                                            .bindTooltip(`${nom}, ${ville}`, {
+                                                direction: 'top',
+                                                offset: [-15, -10],
+                                                permanent: true,
+                                                className: 'leaflet-tooltip-custom'
+                                            });
+                                    }
+                                });
+                            })
+                            .catch(error => {
+                                console.error("Erreur lors du chargement des marqueurs Bénin :", error);
+                            });
+                    }
+
+                    document.addEventListener("DOMContentLoaded", function () {
+                        loadMarkersBenin();
+                    });
                 </script>
             </div>
         </section>

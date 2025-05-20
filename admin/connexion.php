@@ -1,33 +1,33 @@
 <?php
-require_once '../bdd_pharmacol/config.php';
+    require_once '../bdd_pharmacol/config.php';
 
-$error = null;
-$debug = ''; // Pour afficher les valeurs test
+    $error = null;
+    $debug = ''; // Pour afficher les valeurs test
 
-// Traitement du formulaire
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
+    // Traitement du formulaire
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
 
-    $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE mail = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE mail = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
-        if (password_verify($password, $user['mot_de_passe'])) {
-            session_start();
+        if ($user) {
+            if (password_verify($password, $user['mot_de_passe'])) {
+                session_start();
 
-            $_SESSION['user'] = $_POST['email'];
-            $_SESSION['role'] = $user['role'];
-            header('Location: home.php');
-            exit();
+                $_SESSION['user'] = $_POST['email'];
+                $_SESSION['role'] = $user['role'];
+                header('Location: home.php#blog');
+                exit();
+            } else {
+                $error = "Mot de passe incorrect.";
+            }
         } else {
-            $error = "Mot de passe incorrect.";
+            $error = "Aucun utilisateur trouvé avec cet email.";
         }
-    } else {
-        $error = "Aucun utilisateur trouvé avec cet email.";
     }
-}
 ?>
 
 <!DOCTYPE html>

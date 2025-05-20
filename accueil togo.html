@@ -27,6 +27,8 @@
             padding-bottom: 0.75rem;
             }
         </style>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     </head>
 
     <button onclick="scrollToTop()" 
@@ -200,10 +202,52 @@
                 </div>
 
                 <!-- Carte du Togo -->
-                <div class="bg-white border rounded-xl shadow-lg p-4" id="Carte Togo">
-                    <img src="images/Page accueil togo/carte-togo.png" alt="Carte du Togo" class="rounded w-full mt-4  object-cover">
-                    <p class="mt-2 text-center text-sm text-gray-500 italic">Carte du Togo</p>
+                <div class="bg-white border rounded-xl shadow-lg p-4" id="Carte-Togo">
+                    <div id="map-togo" class="rounded w-full h-96"></div>
+                    <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Togo</p>
                 </div>
+
+                <script>
+                    var mapTogo = L.map('map-togo').setView([8.6, 1.0], 6);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 18,
+                    }).addTo(mapTogo);
+
+                    function loadMarkersTogo() {
+                        fetch('map.php?pays=Togo')
+                            .then(response => {
+                                if (!response.ok) throw new Error("Erreur réseau");
+                                return response.json();
+                            })
+                            .then(data => {
+                                data.forEach(marker => {
+                                    const lat = parseFloat(marker.latitude);
+                                    const lng = parseFloat(marker.longitude);
+                                    const nom = marker.nom;
+                                    const ville = marker.ville;
+
+                                    if (!isNaN(lat) && !isNaN(lng)) {
+                                        L.marker([lat, lng])
+                                            .addTo(mapTogo)
+                                            .bindTooltip(`${nom}, ${ville}`, {
+                                                direction: 'top',
+                                                offset: [-15, -10],
+                                                permanent: true,
+                                                className: 'leaflet-tooltip-custom'
+                                            });
+                                    }
+                                });
+                            })
+                            .catch(error => {
+                                console.error("Erreur lors du chargement des marqueurs Togo :", error);
+                            });
+                    }
+
+                    document.addEventListener("DOMContentLoaded", function () {
+                        loadMarkersTogo();
+                    });
+                </script>
             </div>
         </section>
 

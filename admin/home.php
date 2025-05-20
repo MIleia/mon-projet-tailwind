@@ -87,8 +87,7 @@
                     'password' => $hash,
                     'role' => $role
                 ]);
-                // Optionnel : redirection pour éviter double soumission
-                header("Location: " . $_SERVER['REQUEST_URI']);
+                header("Location: home.php#utilisateurs");
                 exit;
             }
         }
@@ -97,11 +96,56 @@
             $mail = $_POST['id'];
             $stmt = $pdo->prepare("DELETE FROM newsletter WHERE mail = :mail");
             $stmt->execute([':mail' => $mail]);
-            header("Location: " . $_SERVER['REQUEST_URI']);
+            header("Location: home.php#newsletter");
             exit();
         }
 
         $utilisateurs = $pdo->query("SELECT mail, role FROM utilisateur")->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function ajouterEntreprise(PDO $pdo, array $data): bool {
+    // Préparer la requête
+    $sql = "INSERT INTO entreprise (nom, ville, latitude, longitude, pays) VALUES (:nom, :ville, :latitude, :longitude, :pays)";
+    $stmt = $pdo->prepare($sql);
+
+    // Bind des paramètres (assurez-vous que les colonnes existent en BDD)
+    return $stmt->execute([
+        ':nom' => $data['nom'],
+        ':ville' => $data['ville'],
+        ':latitude' => $data['latitude'],
+        ':longitude' => $data['longitude'],
+        ':pays' => $data['pays'],
+    ]);
+}
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_entreprise') {
+        $nom = trim($_POST['nom'] ?? '');
+        $ville = trim($_POST['ville'] ?? '');
+        $latitude = trim($_POST['latitude'] ?? '');
+        $longitude = trim($_POST['longitude'] ?? '');
+        $pays = trim($_POST['pays'] ?? '');
+
+        if ($nom && $ville && $latitude && $longitude && $pays) {
+            $success = ajouterEntreprise($pdo, [
+                'nom' => $nom,
+                'ville' => $ville,
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+                'pays' => $pays,
+            ]);
+
+            if ($success) {
+                $sql_entreprise = "SELECT * FROM entreprise";
+                $res_entreprise = $pdo->query($sql_entreprise);
+                $entreprises = $res_entreprise->fetchAll(PDO::FETCH_ASSOC);
+                header('Location: home.php#Entreprises');
+                exit();
+            } else {
+                $error = "Erreur lors de l'ajout de l'entreprise.";
+            }
+        } else {
+            $error = "Merci de remplir tous les champs.";
+        }
     }
 ?>
 
@@ -409,85 +453,67 @@
                 </section>
 
                 <!-- Section Entreprises -->
-<section id="Entreprises" class="section-content hidden">
+                <section id="Entreprises" class="section-content hidden">
     <div class="max-w-[100rem] p-8">
         <h2 class="text-3xl font-bold mb-8 text-center">Implantation terrain</h2>
 
         <?php
-        // Organiser entreprises par pays
         $grouped = [];
         foreach ($entreprises as $ent) {
             $pays = $ent['pays'] ?? 'Autres';
             $grouped[$pays][] = $ent;
         }
 
-        $stats = [
-            'Togo' => ['delegues' => 12],
-            'Bénin' => ['delegues' => 10],
-            'Niger' => ['delegues' => 7],
-        ];
-
         function countEntreprises($grouped, $pays) {
             return isset($grouped[$pays]) ? count($grouped[$pays]) : 0;
         }
 
-        // Pour générer un ID HTML sûr (sans espaces, caractères spéciaux)
         function safeId($str) {
             return preg_replace('/[^a-z0-9]+/i', '_', strtolower($str));
         }
         ?>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <?php foreach (['Togo', 'Bénin'] as $pays): 
-                $safeId = safeId($pays);
-            ?>
-            <div class="bg-white shadow-lg rounded-xl p-6">
-                <h3 class="text-xl font-bold mb-4">
-                    <?php
-                        $flags = ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'];
-                        echo $flags[$pays] ?? '';
-                    ?>
-                    <?= htmlspecialchars($pays) ?>
-                </h3>
-                <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
-                <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
+            <?php foreach (['Togo', 'Bénin'] as $pays): $safeId = safeId($pays); ?>
+                <div class="bg-white shadow-lg rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4">
+                        <?= ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'][$pays] ?? '' ?> <?= htmlspecialchars($pays) ?>
+                    </h3>
+                    <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
 
-                <div class="overflow-y-auto max-h-60 mb-4">
-                    <table class="w-full text-sm text-left border">
-                        <thead class="bg-gray-100 sticky top-0 z-10">
-                            <tr>
-                                <th class="p-2">Latitude</th>
-                                <th class="p-2">Longitude</th>
-                                <th class="p-2">Nom</th>
-                                <th class="p-2"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (!empty($grouped[$pays])): ?>
-                                <?php foreach ($grouped[$pays] as $ent): ?>
-                                    <tr class="border-t">
-                                        <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
-                                        <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
-                                        <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
-                                        <td class="p-2"></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                    <div class="overflow-y-auto max-h-60 mb-4">
+                        <table class="w-full text-sm text-left border">
+                            <thead class="bg-gray-100 sticky top-0 z-10">
+                                <tr>
+                                    <th class="p-2">Latitude</th>
+                                    <th class="p-2">Longitude</th>
+                                    <th class="p-2">Nom</th>
+                                    <th class="p-2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($grouped[$pays])): ?>
+                                    <?php foreach ($grouped[$pays] as $ent): ?>
+                                        <tr class="border-t">
+                                            <td class="p-2"><?= htmlspecialchars($ent['latitude']) ?></td>
+                                            <td class="p-2"><?= htmlspecialchars($ent['longitude']) ?></td>
+                                            <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                            <td class="p-2"></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <div id="map-<?= $safeId ?>" class="w-full h-64 rounded"></div>
-            </div>
             <?php endforeach; ?>
         </div>
 
         <div class="bg-white shadow-lg rounded-xl p-6">
             <?php $pays = 'Niger'; $safeId = safeId($pays); ?>
             <h3 class="text-xl font-bold mb-4">🇳🇪 <?= htmlspecialchars($pays) ?></h3>
-            <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
             <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
 
             <div class="overflow-y-auto max-h-48 mb-4">
@@ -504,8 +530,8 @@
                         <?php if (!empty($grouped[$pays])): ?>
                             <?php foreach ($grouped[$pays] as $ent): ?>
                                 <tr class="border-t">
-                                    <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
-                                    <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
+                                    <td class="p-2"><?= htmlspecialchars($ent['latitude']) ?></td>
+                                    <td class="p-2"><?= htmlspecialchars($ent['longitude']) ?></td>
                                     <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
                                     <td class="p-2"></td>
                                 </tr>
@@ -516,137 +542,67 @@
                     </tbody>
                 </table>
             </div>
-
-            <div id="map-<?= $safeId ?>" class="w-full h-48 rounded"></div>
         </div>
 
-        <!-- Bouton et modal ajout entreprise -->
-        <div class="text-center mt-8">
-            <button id="openAddCompanyBtn" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Ajouter une nouvelle entreprise</button>
-        </div>
+        <div class="w-full h-[500px] mt-8 rounded shadow" id="map-global"></div>
 
-        <div id="addCompanyModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-            <div class="bg-white rounded-lg p-6 max-w-md w-full relative">
-                <button id="closeAddCompanyBtn" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900">&times;</button>
-                <h3 class="text-xl font-bold mb-4">Ajouter une nouvelle entreprise</h3>
-                <form id="addCompanyForm">
-                    <div class="mb-4">
-                        <label for="latitude" class="block font-semibold mb-1">Latitude :</label>
-                        <input type="number" step="any" id="latitude" name="latitude" required class="w-full border rounded px-3 py-2" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="longitude" class="block font-semibold mb-1">Longitude :</label>
-                        <input type="number" step="any" id="longitude" name="longitude" required class="w-full border rounded px-3 py-2" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="nom" class="block font-semibold mb-1">Nom :</label>
-                        <input type="text" id="nom" name="nom" required class="w-full border rounded px-3 py-2" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="pays" class="block font-semibold mb-1">Pays :</label>
-                        <select id="pays" name="pays" required class="w-full border rounded px-3 py-2">
-                            <option value="">Sélectionner un pays</option>
-                            <option value="Togo">Togo</option>
-                            <option value="Bénin">Bénin</option>
-                            <option value="Niger">Niger</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="ville" class="block font-semibold mb-1">Ville :</label>
-                        <input type="text" id="ville" name="ville" required class="w-full border rounded px-3 py-2" />
-                    </div>
-                    <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Ajouter</button>
-                </form>
-            </div>
-        </div>
+        <div class="bg-white shadow-lg rounded-xl p-6 mt-8">
+            <h3 class="text-xl font-bold mb-4">➕ Ajouter une nouvelle entreprise</h3>
 
+            <?php if (!empty($error)): ?>
+                <div class="mb-4 p-3 bg-red-100 text-red-700 rounded"><?= htmlspecialchars($error) ?></div>
+            <?php endif; ?>
+
+            <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>#Entreprises">
+                <input type="hidden" name="action" value="add_entreprise">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <input type="text" name="nom" placeholder="Nom de l'entreprise" class="px-4 py-2 border rounded" required>
+                    <input type="text" name="ville" placeholder="Ville" class="px-4 py-2 border rounded" required>
+                    <input type="text" name="latitude" placeholder="Latitude" class="px-4 py-2 border rounded" required>
+                    <input type="text" name="longitude" placeholder="Longitude" class="px-4 py-2 border rounded" required>
+                    <select name="pays" class="px-4 py-2 border rounded" required>
+                        <option value="">-- Pays --</option>
+                        <option value="Togo">Togo</option>
+                        <option value="Bénin">Bénin</option>
+                        <option value="Niger">Niger</option>
+                    </select>
+                </div>
+                <div class="text-right mt-4">
+                    <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+                        Ajouter l'entreprise
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const map = L.map('map-global').setView([16.0, 8.0], 5);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '&copy; OpenStreetMap'
+            }).addTo(map);
+
+            const markers = [];
+
+            <?php foreach (['Togo', 'Bénin', 'Niger'] as $pays):
+                $ents = $grouped[$pays] ?? [];
+                foreach ($ents as $ent):
+                    $lat = $ent['latitude'];
+                    $lng = $ent['longitude'];
+                    $nom = addslashes($ent['nom']);
+                    $ville = addslashes($ent['ville'] ?? '');
+                    if ($lat && $lng): ?>
+                        markers.push(L.marker([<?= $lat ?>, <?= $lng ?>])
+                            .addTo(map)
+                            .bindPopup("<strong><?= $nom ?></strong><br><?= $ville ?> (<?= $pays ?>)")
+                        );
+            <?php endif; endforeach; endforeach; ?>
+        });
+    </script>
 </section>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    <?php foreach (['Togo', 'Bénin', 'Niger'] as $pays):
-        $safeId = preg_replace('/[^a-z0-9]+/i', '_', strtolower($pays));
-        $ents = $grouped[$pays] ?? [];
-        // Préparer les markers JS [lat, lng, nom, ville]
-        $markersJS = [];
-        foreach ($ents as $e) {
-            $lat = $e['latitude'] ?? null;
-            $lng = $e['longitude'] ?? null;
-            $nom = addslashes($e['nom'] ?? '');
-            $ville = addslashes($e['ville'] ?? $pays); // utiliser ville si dispo sinon pays
-            if ($lat && $lng) {
-                $markersJS[] = "[$lat, $lng, '$nom', '$ville']";
-            }
-        }
-    ?>
-    (function(){
-        const map = L.map('map-<?= $safeId ?>');
-        const markersData = [<?= implode(',', $markersJS) ?>];
-        
-        if (markersData.length === 0) {
-            // Centrer sur pays avec zoom modéré par défaut
-            const centerByPays = {
-                'Togo': [8.6195, 0.8248],
-                'Bénin': [9.3077, 2.3158],
-                'Niger': [17.6078, 8.0817]
-            };
-            map.setView(centerByPays['<?= $pays ?>'] || [6, 1], 6);
-        } else if (markersData.length === 1) {
-            map.setView([markersData[0][0], markersData[0][1]], 12);
-        } else {
-            // Calcul bounds
-            const latlngs = markersData.map(m => [m[0], m[1]]);
-            const bounds = L.latLngBounds(latlngs);
-            map.fitBounds(bounds.pad(0.5));
-        }
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-        }).addTo(map);
-
-        markersData.forEach(m => {
-            const marker = L.marker([m[0], m[1]]).addTo(map);
-            marker.bindTooltip(m[3], {direction: 'top', offset: [0, -10]});
-        });
-    })();
-    <?php endforeach; ?>
-
-    // Gestion du modal ajout entreprise
-    const modal = document.getElementById('addCompanyModal');
-    const openBtn = document.getElementById('openAddCompanyBtn');
-    const closeBtn = document.getElementById('closeAddCompanyBtn');
-    const form = document.getElementById('addCompanyForm');
-
-    openBtn.addEventListener('click', () => {
-        modal.classList.remove('hidden');
-    });
-    closeBtn.addEventListener('click', () => {
-        modal.classList.add('hidden');
-    });
-
-    modal.addEventListener('click', e => {
-        if (e.target === modal) modal.classList.add('hidden');
-    });
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        // Exemple: afficher dans console (à adapter pour envoi en backend)
-        console.log("Ajouter entreprise:", {
-            latitude: formData.get('latitude'),
-            longitude: formData.get('longitude'),
-            nom: formData.get('nom'),
-            pays: formData.get('pays'),
-            ville: formData.get('ville'),
-        });
-        alert("Formulaire soumis (à gérer côté serveur)");
-        modal.classList.add('hidden');
-        form.reset();
-    });
-});
-</script>
-
 
 
                 <!-- Section Settings -->

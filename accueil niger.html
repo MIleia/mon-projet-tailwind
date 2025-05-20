@@ -213,10 +213,46 @@
                         <div id="map-niger" class="rounded w-full h-96"></div>
                         <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Niger</p>
                     </div>
+
                     <script>
                         var mapNiger = L.map('map-niger').setView([16.0, 8.0], 5);
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(mapNiger);
-                        L.marker([13.5128, 2.1126]).addTo(mapNiger).openPopup();
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 18,
+                        }).addTo(mapNiger);
+
+                        function loadMarkers() {
+                            fetch('map.php?pays=Niger')
+                                .then(response => {
+                                    if (!response.ok) throw new Error("Erreur réseau");
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    data.forEach(marker => {
+                                        const lat = parseFloat(marker.latitude);
+                                        const lng = parseFloat(marker.longitude);
+                                        const nom = marker.nom;
+                                        const ville = marker.ville;
+
+                                        if (!isNaN(lat) && !isNaN(lng)) {
+                                            L.marker([lat, lng])
+                                                .addTo(mapNiger)
+                                                .bindTooltip(`${nom}, ${ville}`, {
+                                                    direction: 'top',
+                                                    offset: [-15, -10],
+                                                    permanent: true,
+                                                    className: 'leaflet-tooltip-custom'
+                                                });
+                                        }
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error("Erreur lors du chargement des marqueurs :", error);
+                                });
+                        }
+                        document.addEventListener("DOMContentLoaded", function () {
+                            loadMarkers();
+                        });
                     </script>
                 </div>
             </div>
