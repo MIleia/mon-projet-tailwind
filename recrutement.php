@@ -1,3 +1,24 @@
+<?php
+// Connexion à la base de données
+$host = 'localhost';
+$db   = 'pharmacol_db'; // <-- Change avec le vrai nom de ta base
+$user = 'root';
+$pass = ''; // ou 'root' si tu as défini un mot de passe
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+    $stmt = $pdo->query("SELECT id, titre, descriptif, localisation FROM postes");
+    $postes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "<div class='text-red-600 text-center p-4'>Erreur de connexion à la base de données : " . $e->getMessage() . "</div>";
+    $postes = [];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -107,7 +128,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
-                                <li><a href="recrutement.html" class="text-[#437305] hover:text-green-600 font-bold">Recrutement</a></li>
+                                <li><a href="recrutement.php" class="text-[#437305] hover:text-green-600 font-bold">Recrutement</a></li>
                                 <li><a href="blog.html" class="text-gray-900 hover:text-green-600">Blog</a></li>
                                 <li><a href="contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
                             </ul>
@@ -120,56 +141,21 @@
                 </div>
             </div>
         </header>
+        <div class="flex flex-col justify-center items-center">
 
 
-        <!-- Section boutton -->
-        <div class="flex flex-row justify-center">
-            <div class="mt-20 grid grid-cols-4 py-12 gap-5">
-                <a href="" class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-5 hover:bg-[#437305] hover:cursor-pointer hover:text-white transition-all duration-500 w-[300px] h-[280px]">
-                    <img src="images/hexagon.png" alt="img" class="w-24 h-24">
-                    <div class="font-bold text-2xl">Promotion médicale Parapharmaceutique</div>
-                    <div class="font-normal text-base">Phasellus neque nibh, cursus<br>ullamcorper at.</div>
+            <?php foreach ($postes as $poste): ?>
+                <a href="recrutement_formulaire.php?id=<?= $poste['id'] ?>" class="block w-[80%] bg-white shadow-md rounded-lg p-6 mb-6 hover:shadow-lg transition">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2"><?= htmlspecialchars($poste['titre']) ?></h3>
+                    <p class="text-gray-700 mb-4"><?= nl2br(htmlspecialchars($poste['descriptif'])) ?></p>
+                    <p class="text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt mr-1 text-green-600"></i>
+                        <?= htmlspecialchars($poste['localisation']) ?>
+                    </p>
                 </a>
-                <a href="" class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-5 hover:bg-[#437305] hover:cursor-pointer hover:text-white transition-all duration-500 w-[300px] h-[280px]">
-                    <img src="images/hexagon.png" alt="img" class="w-24 h-24">
-                    <div class="font-bold text-2xl">Promotion médicale Parapharmaceutique</div>
-                    <div class="font-normal text-base">Phasellus neque nibh, cursus<br>ullamcorper at.</div>
-                </a>
-                <a href="" class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-5 hover:bg-[#437305] hover:cursor-pointer hover:text-white transition-all duration-500 w-[300px] h-[280px]">
-                    <img src="images/hexagon.png" alt="img" class="w-24 h-24">
-                    <div class="font-bold text-2xl">Promotion médicale Parapharmaceutique</div>
-                    <div class="font-normal text-base">Phasellus neque nibh, cursus<br>ullamcorper at.</div>
-                </a>
-                <a href="" class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-5 hover:bg-[#437305] hover:cursor-pointer hover:text-white transition-all duration-500 w-[300px] h-[280px]">
-                    <img src="images/hexagon.png" alt="img" class="w-24 h-24">
-                    <div class="font-bold text-2xl">Promotion médicale Parapharmaceutique</div>
-                    <div class="font-normal text-base">Phasellus neque nibh, cursus<br>ullamcorper at.</div>
-                </a>
-                <a href="" class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-5 hover:bg-[#437305] hover:cursor-pointer hover:text-white transition-all duration-500 w-[300px] h-[280px]">
-                    <img src="images/hexagon.png" alt="img" class="w-24 h-24">
-                    <div class="font-bold text-2xl">Promotion médicale Parapharmaceutique</div>
-                    <div class="font-normal text-base">Phasellus neque nibh, cursus<br>ullamcorper at.</div>
-                </a>
-                <a href="" class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-5 hover:bg-[#437305] hover:cursor-pointer hover:text-white transition-all duration-500 w-[300px] h-[280px]">
-                    <img src="images/hexagon.png" alt="img" class="w-24 h-24">
-                    <div class="font-bold text-2xl">Promotion médicale Parapharmaceutique</div>
-                    <div class="font-normal text-base">Phasellus neque nibh, cursus<br>ullamcorper at.</div>
-                </a>
-                <a href="" class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-5 hover:bg-[#437305] hover:cursor-pointer hover:text-white transition-all duration-500 w-[300px] h-[280px]">
-                    <img src="images/hexagon.png" alt="img" class="w-24 h-24">
-                    <div class="font-bold text-2xl">Promotion médicale Parapharmaceutique</div>
-                    <div class="font-normal text-base">Phasellus neque nibh, cursus<br>ullamcorper at.</div>
-                </a>
-                <a href="" class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-5 hover:bg-[#437305] hover:cursor-pointer hover:text-white transition-all duration-500 w-[300px] h-[280px]">
-                    <img src="images/hexagon.png" alt="img" class="w-24 h-24">
-                    <div class="font-bold text-2xl">Promotion médicale Parapharmaceutique</div>
-                    <div class="font-normal text-base">Phasellus neque nibh, cursus<br>ullamcorper at.</div>
-                </a>
+            <?php endforeach; ?>
 
-            </div>
         </div>
-
-
      
         <!-- Footer -->
         <footer class="bg-[#3C74A8E8] text-gray-100 relative">
@@ -193,7 +179,7 @@
                         <li><a href="index.html" class="hover:underline">À propos</a></li>
                         <li><a href="prestation.html" class="hover:underline">Services</a></li>
                         <li><a href="blog.html" class="hover:underline">Blog</a></li>
-                        <li><a href="recrutement.html" class="hover:underline">Recrutement</a></li>
+                        <li><a href="recrutement.php" class="hover:underline">Recrutement</a></li>
                         <li><a href="contact.html" class="hover:underline">Contact</a></li>
                     </ul>
                 </div>

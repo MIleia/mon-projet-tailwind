@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS newsletter;
 DROP TABLE IF EXISTS blog;
 DROP TABLE IF EXISTS utilisateur;
 DROP TABLE IF EXISTS entreprise;
+DROP TABLE IF EXISTS postes;
 
 
 -- Table newsletters
@@ -25,7 +26,7 @@ CREATE TABLE IF NOT EXISTS blog (
 -- Table utilisateur
 CREATE TABLE IF NOT EXISTS utilisateur (
     mail VARCHAR(100) PRIMARY KEY,
-    mot_de_passe VARCHAR(255) NOT NULL
+    mot_de_passe VARCHAR(255) NOT NULL,
     role VARCHAR(50) NOT NULL
 );
 
@@ -38,6 +39,17 @@ CREATE TABLE IF NOT EXISTS entreprise (
     pays VARCHAR(100),
     ville VARCHAR(100)
 );
+
+-- Table postes
+CREATE TABLE IF NOT EXISTS postes (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    descriptif TEXT NOT NULL,
+    localisation VARCHAR(255) NOT NULL
+);
+
+INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre1', 'ceci est un descriptif', 'localisation1');
+INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre2', 'ceci est un descriptif', 'localisation2');
 
 INSERT INTO utilisateur (mail, mot_de_passe) VALUES ('test@mail.com', '123456');
 
