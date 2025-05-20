@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS blog (
 -- Table utilisateur
 CREATE TABLE IF NOT EXISTS utilisateur (
     mail VARCHAR(100) PRIMARY KEY,
-    mot_de_passe VARCHAR(255) NOT NULL
+    mot_de_passe VARCHAR(255) NOT NULL,
     role VARCHAR(50) NOT NULL
 );
 
@@ -38,6 +38,16 @@ CREATE TABLE IF NOT EXISTS entreprise (
     pays VARCHAR(100),
     ville VARCHAR(100)
 );
+
+-- Table postes
+CREATE TABLE IF NOT EXISTS postes (
+    titre VARCHAR(100) PRIMARY KEY,
+    descriptif VARCHAR(100) NOT NULL,
+    localisation VARCHAR(100) NOT NULL
+);
+
+INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre1', 'ceci est un descriptif', 'localisation1');
+INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre2', 'ceci est un descriptif', 'localisation2');
 
 INSERT INTO utilisateur (mail, mot_de_passe) VALUES ('test@mail.com', '123456');
 

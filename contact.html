@@ -157,26 +157,33 @@
 
             </div>
 
-            <div class="w-[816px]">
+            <form action="https://formspree.io/f/xzzrwanv" method="POST" class="w-[816px]">
 
                 <h4 class="text-green-700 text-lg font-medium mb-2 uppercase tracking-wide">🧬 Nous contacter</h4>
-
                 <h2 class="text-[40px] font-bold text-black mb-10">N'hésitez pas à nous écrire à tout moment</h2>
 
                 <div class="flex gap-4 mb-4">
-                    <input type="text" placeholder="Votre nom" class=" bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
-                    <input type="email" placeholder="Votre adresse mail" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
+                    <input type="text" name="nom" placeholder="Votre nom"
+                        class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none p-4 w-[325px]" required />
+                    <input type="email" name="email" placeholder="Votre adresse mail"
+                        class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none p-4 w-[325px]" required />
                 </div>
 
                 <div class="flex gap-4 mb-4">
-                    <input type="text" placeholder="Téléphone" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
-                    <input type="text" placeholder="Sujet" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none  p-4 w-[325px]" />
+                    <input type="text" name="telephone" placeholder="Téléphone"
+                        class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none p-4 w-[325px]" />
+                    <input type="text" name="sujet" placeholder="Sujet"
+                        class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none p-4 w-[325px]" />
                 </div>
 
-                <textarea placeholder="Laisser un message" class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none resize-none w-[666px] h-80 p-4 mb-4"></textarea>
+                <textarea name="message" placeholder="Laisser un message"
+                    class="bg-[#F3F3F3] placeholder-[#6A6A6A] font-medium text-[16px] outline-none resize-none w-[666px] h-80 p-4 mb-4"
+                    required></textarea>
 
-                <button class="bg-[#437305] text-white text-xl font-semibold px-8 py-3 w-[150px]">Envoyer</button>
-            </div>
+                <button type="submit"
+                    class="bg-[#437305] text-white text-xl font-semibold px-8 py-3 w-[150px]">Envoyer</button>
+            </form>
+
 
         </div>
 
