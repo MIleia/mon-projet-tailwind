@@ -259,3 +259,17 @@ function searchCards(){
             hideSuggestions();
         }
     });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+    fetch('articles.php')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('blog-articles').innerHTML = html;
+        })
+        .catch(error => {
+            document.getElementById('blog-articles').innerHTML = '<p class="text-red-500">Erreur lors du chargement des articles.</p>';
+            console.error('Erreur AJAX:', error);
+        });
+});

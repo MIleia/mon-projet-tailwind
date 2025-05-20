@@ -120,6 +120,8 @@
                 font-family: 'Lexend', sans-serif;
             }
         </style>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     </head>
 
     <body>
@@ -339,193 +341,315 @@
                 </section>
 
                 <!-- Section Utilisateurs -->
-<section id="utilisateurs" class="section-content">
-    <table class="min-w-full table-auto">
-        <thead class="bg-gray-800 text-gray-300">
-            <tr>
-                <th class="px-6 py-3 text-left">Email</th>
-                <th class="px-6 py-3 text-left">Nouveau mot de passe</th>
-                <th class="px-6 py-3 text-left">Rôle</th>
-                <th class="px-6 py-3 text-center">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="bg-gray-200">
-            <?php foreach ($utilisateurs as $utilisateur): ?>
-                <tr class="bg-white border-b border-gray-300">
-                    <form method="POST">
-                        <input type="hidden" name="action" value="update_user">
-                        <td class="px-6 py-3">
-                            <input type="hidden" name="old_mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>">
-                            <input type="email" name="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>" class="w-full px-2 py-1 border rounded" required>
-                        </td>
-                        <td class="px-6 py-3">
-                            <input type="password" name="mot_de_passe" placeholder="Nouveau mot de passe" class="w-full px-2 py-1 border rounded">
-                        </td>
-                        <td class="px-6 py-3">
-                            <select name="role" class="w-full px-2 py-1 border rounded">
-                                <option value="lecteur" <?= $utilisateur['role'] === 'lecteur' ? 'selected' : '' ?>>lecteur</option>
-                                <option value="redacteur" <?= $utilisateur['role'] === 'redacteur' ? 'selected' : '' ?>>rédacteur</option>
-                                <option value="admin" <?= $utilisateur['role'] === 'admin' ? 'selected' : '' ?>>admin</option>
-                            </select>
-                        </td>
-                        <td class="px-6 py-3 text-center space-x-2">
-                            <button type="submit" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Modifier</button>
-                    </form>
-                    <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');" class="inline-block">
-                        <input type="hidden" name="action" value="delete_user">
-                        <input type="hidden" name="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>">
-                        <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition">Supprimer</button>
-                    </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-
-            <!-- Ligne pour créer un nouvel utilisateur -->
-            <tr class="bg-gray-100 border-t border-gray-300">
-                <form method="POST">
-                    <input type="hidden" name="action" value="create_user">
-                    <td class="px-6 py-3">
-                        <input type="email" name="mail" placeholder="Nouvel email" class="w-full px-2 py-1 border rounded" required>
-                    </td>
-                    <td class="px-6 py-3">
-                        <input type="password" name="mot_de_passe" placeholder="Mot de passe" class="w-full px-2 py-1 border rounded" required>
-                    </td>
-                    <td class="px-6 py-3">
-                        <select name="role" class="w-full px-2 py-1 border rounded" required>
-                            <option value="lecteur">lecteur</option>
-                            <option value="redacteur">rédacteur</option>
-                            <option value="admin">admin</option>
-                        </select>
-                    </td>
-                    <td class="px-6 py-3 text-center">
-                        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Créer</button>
-                    </td>
-                </form>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-                <!-- Section Entreprises -->
-                <section id="Entreprises" class="section-content hidden">
-                    <div class="max-w-[100rem] p-8">
-                        <h2 class="text-3xl font-bold mb-8 text-center">Implantation terrain</h2>
-
-                        <?php
-                        // Organiser entreprises par pays
-                        $grouped = [];
-                        foreach ($entreprises as $ent) {
-                            $pays = $ent['pays'] ?? 'Autres';
-                            $grouped[$pays][] = $ent;
-                        }
-
-                        // Exemple de données délégués et entreprises partenaires (à adapter selon ta source)
-                        $stats = [
-                            'Togo' => ['delegues' => 12],
-                            'Bénin' => ['delegues' => 10],
-                            'Niger' => ['delegues' => 7],
-                        ];
-
-                        // Fonction pour compter entreprises partenaires par pays
-                        function countEntreprises($grouped, $pays) {
-                            return isset($grouped[$pays]) ? count($grouped[$pays]) : 0;
-                        }
-                        ?>
-
-                        <!-- Grille 2 colonnes pour Togo et Bénin -->
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                            <?php foreach (['Togo', 'Bénin'] as $pays): ?>
-                            <div class="bg-white shadow-lg rounded-xl p-6">
-                                <h3 class="text-xl font-bold mb-4">
-                                    <?php
-                                        // Drapeau emoji par pays
-                                        $flags = ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'];
-                                        echo $flags[$pays] ?? '';
-                                    ?>
-                                    <?= htmlspecialchars($pays) ?>
-                                </h3>
-                                <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
-                                <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
-
-                                <div class="overflow-y-auto max-h-60 mb-4">
-                                    <table class="w-full text-sm text-left border">
-                                        <thead class="bg-gray-100 sticky top-0 z-10">
-                                            <tr>
-                                                <th class="p-2">Latitude</th>
-                                                <th class="p-2">Longitude</th>
-                                                <th class="p-2">Nom</th>
-                                                <th class="p-2">
-                                                    <button onclick="openPopup()" id="popup<?= $pays ?>" class="text-blue-600 hover:underline text-xl font-bold">+</button>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if (!empty($grouped[$pays])): ?>
-                                                <?php foreach ($grouped[$pays] as $ent): ?>
-                                                    <tr class="border-t">
-                                                        <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
-                                                        <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
-                                                        <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
-                                                        <td class="p-2"></td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            <?php else: ?>
-                                                <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
-                                            <?php endif; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="w-full h-64 bg-gray-200 flex items-center justify-center rounded">
-                                    <span class="text-gray-500">[Carte interactive <?= htmlspecialchars($pays) ?>]</span>
-                                </div>
-                            </div>
+                <section id="utilisateurs" class="section-content">
+                    <table class="min-w-full table-auto">
+                        <thead class="bg-gray-800 text-gray-300">
+                            <tr>
+                                <th class="px-6 py-3 text-left">Email</th>
+                                <th class="px-6 py-3 text-left">Nouveau mot de passe</th>
+                                <th class="px-6 py-3 text-left">Rôle</th>
+                                <th class="px-6 py-3 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-200">
+                            <?php foreach ($utilisateurs as $utilisateur): ?>
+                                <tr class="bg-white border-b border-gray-300">
+                                    <form method="POST">
+                                        <input type="hidden" name="action" value="update_user">
+                                        <td class="px-6 py-3">
+                                            <input type="hidden" name="old_mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>">
+                                            <input type="email" name="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>" class="w-full px-2 py-1 border rounded" required>
+                                        </td>
+                                        <td class="px-6 py-3">
+                                            <input type="password" name="mot_de_passe" placeholder="Nouveau mot de passe" class="w-full px-2 py-1 border rounded">
+                                        </td>
+                                        <td class="px-6 py-3">
+                                            <select name="role" class="w-full px-2 py-1 border rounded">
+                                                <option value="lecteur" <?= $utilisateur['role'] === 'lecteur' ? 'selected' : '' ?>>lecteur</option>
+                                                <option value="redacteur" <?= $utilisateur['role'] === 'redacteur' ? 'selected' : '' ?>>rédacteur</option>
+                                                <option value="admin" <?= $utilisateur['role'] === 'admin' ? 'selected' : '' ?>>admin</option>
+                                            </select>
+                                        </td>
+                                        <td class="px-6 py-3 text-center space-x-2">
+                                            <button type="submit" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Modifier</button>
+                                    </form>
+                                    <form method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');" class="inline-block">
+                                        <input type="hidden" name="action" value="delete_user">
+                                        <input type="hidden" name="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>">
+                                        <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition">Supprimer</button>
+                                    </form>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
-                        </div>
 
-                        <!-- Bloc Niger sur toute la largeur -->
-                        <div class="bg-white shadow-lg rounded-xl p-6">
-                            <h3 class="text-xl font-bold mb-4">🇳🇪 Niger</h3>
-                            <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats['Niger']['delegues'] ?? '?' ?></strong></p>
-                            <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, 'Niger') ?></strong></p>
-
-                            <div class="overflow-y-auto max-h-48 mb-4">
-                                <table class="w-full text-sm text-left border">
-                                    <thead class="bg-gray-100 sticky top-0 z-10">
-                                        <tr>
-                                            <th class="p-2">Latitude</th>
-                                            <th class="p-2">Longitude</th>
-                                            <th class="p-2">Nom</th>
-                                            <th class="p-2">
-                                                <button onclick="openPopup()" id="popupNiger" class="text-blue-600 hover:underline text-xl font-bold">+</button>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php if (!empty($grouped['Niger'])): ?>
-                                            <?php foreach ($grouped['Niger'] as $ent): ?>
-                                                <tr class="border-t">
-                                                    <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
-                                                    <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
-                                                    <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
-                                                    <td class="p-2"></td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded">
-                                <span class="text-gray-500">[Carte interactive Niger]</span>
-                            </div>
-                        </div>
-                    </div>
+                            <!-- Ligne pour créer un nouvel utilisateur -->
+                            <tr class="bg-gray-100 border-t border-gray-300">
+                                <form method="POST">
+                                    <input type="hidden" name="action" value="create_user">
+                                    <td class="px-6 py-3">
+                                        <input type="email" name="mail" placeholder="Nouvel email" class="w-full px-2 py-1 border rounded" required>
+                                    </td>
+                                    <td class="px-6 py-3">
+                                        <input type="password" name="mot_de_passe" placeholder="Mot de passe" class="w-full px-2 py-1 border rounded" required>
+                                    </td>
+                                    <td class="px-6 py-3">
+                                        <select name="role" class="w-full px-2 py-1 border rounded" required>
+                                            <option value="lecteur">lecteur</option>
+                                            <option value="redacteur">rédacteur</option>
+                                            <option value="admin">admin</option>
+                                        </select>
+                                    </td>
+                                    <td class="px-6 py-3 text-center">
+                                        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Créer</button>
+                                    </td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
 
-                <!-- Section Settings (visible uniquement si admin) -->
+                <!-- Section Entreprises -->
+<section id="Entreprises" class="section-content hidden">
+    <div class="max-w-[100rem] p-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">Implantation terrain</h2>
+
+        <?php
+        // Organiser entreprises par pays
+        $grouped = [];
+        foreach ($entreprises as $ent) {
+            $pays = $ent['pays'] ?? 'Autres';
+            $grouped[$pays][] = $ent;
+        }
+
+        $stats = [
+            'Togo' => ['delegues' => 12],
+            'Bénin' => ['delegues' => 10],
+            'Niger' => ['delegues' => 7],
+        ];
+
+        function countEntreprises($grouped, $pays) {
+            return isset($grouped[$pays]) ? count($grouped[$pays]) : 0;
+        }
+
+        // Pour générer un ID HTML sûr (sans espaces, caractères spéciaux)
+        function safeId($str) {
+            return preg_replace('/[^a-z0-9]+/i', '_', strtolower($str));
+        }
+        ?>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <?php foreach (['Togo', 'Bénin'] as $pays): 
+                $safeId = safeId($pays);
+            ?>
+            <div class="bg-white shadow-lg rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-4">
+                    <?php
+                        $flags = ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'];
+                        echo $flags[$pays] ?? '';
+                    ?>
+                    <?= htmlspecialchars($pays) ?>
+                </h3>
+                <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
+                <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
+
+                <div class="overflow-y-auto max-h-60 mb-4">
+                    <table class="w-full text-sm text-left border">
+                        <thead class="bg-gray-100 sticky top-0 z-10">
+                            <tr>
+                                <th class="p-2">Latitude</th>
+                                <th class="p-2">Longitude</th>
+                                <th class="p-2">Nom</th>
+                                <th class="p-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($grouped[$pays])): ?>
+                                <?php foreach ($grouped[$pays] as $ent): ?>
+                                    <tr class="border-t">
+                                        <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
+                                        <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
+                                        <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                        <td class="p-2"></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="map-<?= $safeId ?>" class="w-full h-64 rounded"></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-xl p-6">
+            <?php $pays = 'Niger'; $safeId = safeId($pays); ?>
+            <h3 class="text-xl font-bold mb-4">🇳🇪 <?= htmlspecialchars($pays) ?></h3>
+            <p class="mb-2">👥 Délégués sur le terrain : <strong><?= $stats[$pays]['delegues'] ?? '?' ?></strong></p>
+            <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
+
+            <div class="overflow-y-auto max-h-48 mb-4">
+                <table class="w-full text-sm text-left border">
+                    <thead class="bg-gray-100 sticky top-0 z-10">
+                        <tr>
+                            <th class="p-2">Latitude</th>
+                            <th class="p-2">Longitude</th>
+                            <th class="p-2">Nom</th>
+                            <th class="p-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($grouped[$pays])): ?>
+                            <?php foreach ($grouped[$pays] as $ent): ?>
+                                <tr class="border-t">
+                                    <td class="p-2"><?= htmlspecialchars($ent['latitude'] ?? '') ?></td>
+                                    <td class="p-2"><?= htmlspecialchars($ent['longitude'] ?? '') ?></td>
+                                    <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                    <td class="p-2"></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="map-<?= $safeId ?>" class="w-full h-48 rounded"></div>
+        </div>
+
+        <!-- Bouton et modal ajout entreprise -->
+        <div class="text-center mt-8">
+            <button id="openAddCompanyBtn" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Ajouter une nouvelle entreprise</button>
+        </div>
+
+        <div id="addCompanyModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full relative">
+                <button id="closeAddCompanyBtn" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900">&times;</button>
+                <h3 class="text-xl font-bold mb-4">Ajouter une nouvelle entreprise</h3>
+                <form id="addCompanyForm">
+                    <div class="mb-4">
+                        <label for="latitude" class="block font-semibold mb-1">Latitude :</label>
+                        <input type="number" step="any" id="latitude" name="latitude" required class="w-full border rounded px-3 py-2" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="longitude" class="block font-semibold mb-1">Longitude :</label>
+                        <input type="number" step="any" id="longitude" name="longitude" required class="w-full border rounded px-3 py-2" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="nom" class="block font-semibold mb-1">Nom :</label>
+                        <input type="text" id="nom" name="nom" required class="w-full border rounded px-3 py-2" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="pays" class="block font-semibold mb-1">Pays :</label>
+                        <select id="pays" name="pays" required class="w-full border rounded px-3 py-2">
+                            <option value="">Sélectionner un pays</option>
+                            <option value="Togo">Togo</option>
+                            <option value="Bénin">Bénin</option>
+                            <option value="Niger">Niger</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="ville" class="block font-semibold mb-1">Ville :</label>
+                        <input type="text" id="ville" name="ville" required class="w-full border rounded px-3 py-2" />
+                    </div>
+                    <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Ajouter</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    <?php foreach (['Togo', 'Bénin', 'Niger'] as $pays):
+        $safeId = preg_replace('/[^a-z0-9]+/i', '_', strtolower($pays));
+        $ents = $grouped[$pays] ?? [];
+        // Préparer les markers JS [lat, lng, nom, ville]
+        $markersJS = [];
+        foreach ($ents as $e) {
+            $lat = $e['latitude'] ?? null;
+            $lng = $e['longitude'] ?? null;
+            $nom = addslashes($e['nom'] ?? '');
+            $ville = addslashes($e['ville'] ?? $pays); // utiliser ville si dispo sinon pays
+            if ($lat && $lng) {
+                $markersJS[] = "[$lat, $lng, '$nom', '$ville']";
+            }
+        }
+    ?>
+    (function(){
+        const map = L.map('map-<?= $safeId ?>');
+        const markersData = [<?= implode(',', $markersJS) ?>];
+        
+        if (markersData.length === 0) {
+            // Centrer sur pays avec zoom modéré par défaut
+            const centerByPays = {
+                'Togo': [8.6195, 0.8248],
+                'Bénin': [9.3077, 2.3158],
+                'Niger': [17.6078, 8.0817]
+            };
+            map.setView(centerByPays['<?= $pays ?>'] || [6, 1], 6);
+        } else if (markersData.length === 1) {
+            map.setView([markersData[0][0], markersData[0][1]], 12);
+        } else {
+            // Calcul bounds
+            const latlngs = markersData.map(m => [m[0], m[1]]);
+            const bounds = L.latLngBounds(latlngs);
+            map.fitBounds(bounds.pad(0.5));
+        }
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+        }).addTo(map);
+
+        markersData.forEach(m => {
+            const marker = L.marker([m[0], m[1]]).addTo(map);
+            marker.bindTooltip(m[3], {direction: 'top', offset: [0, -10]});
+        });
+    })();
+    <?php endforeach; ?>
+
+    // Gestion du modal ajout entreprise
+    const modal = document.getElementById('addCompanyModal');
+    const openBtn = document.getElementById('openAddCompanyBtn');
+    const closeBtn = document.getElementById('closeAddCompanyBtn');
+    const form = document.getElementById('addCompanyForm');
+
+    openBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
+    closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', e => {
+        if (e.target === modal) modal.classList.add('hidden');
+    });
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        // Exemple: afficher dans console (à adapter pour envoi en backend)
+        console.log("Ajouter entreprise:", {
+            latitude: formData.get('latitude'),
+            longitude: formData.get('longitude'),
+            nom: formData.get('nom'),
+            pays: formData.get('pays'),
+            ville: formData.get('ville'),
+        });
+        alert("Formulaire soumis (à gérer côté serveur)");
+        modal.classList.add('hidden');
+        form.reset();
+    });
+});
+</script>
+
+
+
+                <!-- Section Settings -->
                 <section id="logout" class="section-content hidden">
                     <form action="logout.php" method="POST">
                         <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
