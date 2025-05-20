@@ -128,7 +128,7 @@ try {
                                     </ul>
                                 </li>
                                 <li><a href="prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
-                                <li><a href="recrutement.html" class="text-[#437305] hover:text-green-600 font-bold">Recrutement</a></li>
+                                <li><a href="recrutement.php" class="text-[#437305] hover:text-green-600 font-bold">Recrutement</a></li>
                                 <li><a href="blog.html" class="text-gray-900 hover:text-green-600">Blog</a></li>
                                 <li><a href="contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
                             </ul>
