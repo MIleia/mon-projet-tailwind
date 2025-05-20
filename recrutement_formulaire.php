@@ -39,26 +39,33 @@ if (isset($_GET['id'])) {
         <h1 class="text-2xl font-bold mb-4 text-[#3C74A8]">Postuler à : <?= htmlspecialchars($titre) ?></h1>
         <p class="text-gray-700 mb-6"><?= nl2br(htmlspecialchars($descriptif)) ?></p>
 
-        <form action="envoyer_candidature.php" method="POST" enctype="multipart/form-data" class="space-y-4">
-            <input type="hidden" name="poste_id" value="<?= htmlspecialchars($_GET['id']) ?>">
+        <form action="https://formspree.io/f/xzzrwanv" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <!-- Objet personnalisé du mail -->
+            <input type="hidden" name="_subject" value="Nouvelle candidature reçue via le site Pharmacol">
+            
+            <!-- Titre du poste dans le message -->
+            <input type="hidden" name="Poste" value="<?= htmlspecialchars($titre) ?>">
+
             <div>
                 <label class="block mb-1">Nom :</label>
-                <input type="text" name="nom" class="w-full border border-gray-300 p-2 rounded" required>
+                <input type="text" name="Nom" class="w-full border border-gray-300 p-2 rounded" required>
             </div>
             <div>
                 <label class="block mb-1">Email :</label>
-                <input type="email" name="email" class="w-full border border-gray-300 p-2 rounded" required>
+                <input type="email" name="Email" class="w-full border border-gray-300 p-2 rounded" required>
             </div>
             <div>
                 <label class="block mb-1">Message :</label>
-                <textarea name="message" rows="4" class="w-full border border-gray-300 p-2 rounded"></textarea>
+                <textarea name="Message" rows="4" class="w-full border border-gray-300 p-2 rounded"></textarea>
             </div>
             <div>
-                <label class="block mb-1">CV (PDF uniquement) :</label>
-                <input type="file" name="cv" accept="application/pdf" required>
+                <label class="block mb-1">Lien vers votre CV (Google Drive, Dropbox, etc.) :</label>
+                <input type="url" name="cv_link" class="w-full border border-gray-300 p-2 rounded" placeholder="https://..." required>
             </div>
-            <button type="submit" class="bg-[#3C74A8] text-white px-6 py-2 rounded hover:bg-[#2b5e8c]">Envoyer</button>
+
+            <button type="submit" class="bg-green-700 text-white px-6 py-2 rounded hover:bg-[#2b5e8c]">Envoyer</button>
         </form>
+
     </div>
 </body>
 </html>
