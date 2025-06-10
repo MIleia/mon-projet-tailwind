@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pharmacol - Niger</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="main.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+                body {
+                font-family: 'Lexend', sans-serif;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            body { font-family: 'Inter', sans-serif; }
+            .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+            .accordion-content.open {
+            padding-bottom: 0.75rem;
+            }
+        </style>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    </head>
+
+    <button onclick="scrollToTop()" 
+        class="fixed bottom-6 right-6 w-12 h-12 bg-[#06788f] text-white text-xl flex items-center justify-center rounded-full shadow-lg hover:bg-[#055c6e] transition z-50" aria-label="Remonter en haut">↑
+    </button>
+
+    <body class="bg-white text-gray-800" id="Niger">
+        <header>
+            <!-- Bandeau top -->
+            <div class="bg-gray-100 text-sm border-b border-gray-300 py-2">
+                <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-between text-gray-700">
+                    <div class="flex gap-4">
+                        <span><i class="fas fa-map-marker-alt text-green-700"></i> 184 rue agnan quartier djidjolé</span>
+                        <span><i class="fas fa-envelope text-green-700"></i> contact@agence-pharmacol.com</span>
+                    </div>
+                    <div>
+                        <span><i class="fas fa-clock text-green-700"></i> Lun-Ven: 7h30-12h 14h30-18h / Fermé les weekends et jours fériés</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header principal -->
+            <div class="bg-[#3C74A8] border-b py-4">
+                <div class="max-w-screen-xl mx-auto flex justify-between items-center px-6">
+                    <div class="w-1/4"></div>
+                    <div class="flex items-center space-x-4 text-white ml-4">
+                        <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full">
+                            <i class="fas fa-phone text-[#3C74A8] text-lg font-bold"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs">Appeler à tout moment</p>
+                            <strong class="text-sm font-bold">(+228) 22 50 75 10</strong>
+                        </div>
+                        <div class="w-px h-6 bg-white"></div>
+                        <div class="relative flex items-center w-60 md:w-72">
+                            <button onclick="toggleSearch()" class="absolute left-3">
+                                <i class="fas fa-search text-[#3C74A8]"></i>
+                            </button>
+                            <input id="searchInput" type="text" placeholder="Rechercher une section..." class="w-full pl-10 pr-4 py-2 rounded-full text-black text-sm focus:outline-none focus:ring-2 focus:ring-green-500" oninput="updateSuggestions()" onkeydown="if(event.key === 'Enter') performSearch()">
+                            <ul id="suggestions" class="absolute left-0 top-full w-full mt-1 bg-white text-black border border-gray-300 rounded shadow hidden z-50 text-sm max-h-60 overflow-y-auto"></ul>
+                        </div>
+                    </div>
+                    <div class="flex space-x-5 text-white w-1/4 justify-end mr-4">
+                        <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.linkedin.com/company/agence-pharmacol/"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bandeau Prestations & navbar -->
+            <div class="relative z-0 qhero-prestations bg-cover bg-center h-[500px]" style="background-image: url('images/Page accueil togo/header.png');">
+                <div class="bg-white bg-opacity-75 backdrop-blur-md w-[70%] mx-auto relative z-30">
+                    <nav class="relative z-20">
+                        <div class="qcontainer flex justify-center items-center px-4 py-3">
+                            <ul class="qnav-links flex items-center space-x-8">
+                                <li class="qlogo-nav">
+                                    <a href="index.html" class="flex items-center space-x-2">
+                                        <div class="qlogo">
+                                            <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="qdropdown relative group">
+                                    <a href="#" class="text-[#437305] hover:text-green-600 flex items-center space-x-2">
+                                        <span>Nos Implentations</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
+                                        <li>
+                                            <a href="accueil togo.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
+                                                <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="w-5 h-auto"> Togo
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="accueil benin.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
+                                                <img src="https://flagcdn.com/w40/bj.png" alt="Benin" class="w-5 h-auto"> Benin
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="accueil niger.html" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
+                                                <img src="https://flagcdn.com/w40/ne.png" alt="Niger" class="w-5 h-auto"> Niger
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
+                                <li><a href="recrutement.php" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
+                                <li><a href="blog.html" class="text-gray-900 hover:text-green-600">Blog</a></li>
+                                <li><a href="contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="absolute inset-0 flex items-center justify-start text-white px-6">
+                    <div class="w-1/2 max-w-xl text-center ml-12">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4">PHARMACOL NIGER</h1>
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-4">Vous accompagne</h2><br>
+                        <a href="#contact" class="inline-block bg-[#437305] hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg shadow">Évaluer la faisabilité de votre projet</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenu de la page -->
+        <!-- HERO SECTION -->
+        <section class="bg-gradient-to-r from-[#3C74A8] to-[#14b8a6] text-white pt-20 pb-12 px-6 relative overflow-hidden">
+            <div class="absolute inset-0 bg-opacity-10 bg-white rounded-full blur-3xl w-[400px] h-[400px] top-[-100px] left-[-100px]"></div>
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-3">Bienvenue chez Pharmacol Niger</h2>
+                <p class="text-lg md:text-xl mb-6">
+                Ancrée au cœur du Sahel, notre agence soutient les laboratoires pharmaceutiques dans leur croissance en Afrique de l’Ouest, avec une approche résolument humaine et adaptée aux réalités locales.
+                </p>
+                <a href="#À propos de Pharmacol Niger" class="inline-block bg-white text-[#06788f] font-semibold px-8 py-3 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
+                Découvrez notre action
+                </a>
+            </div>
+        </section>
+
+        <!-- CHIFFRES CLÉS -->
+        <section class="py-20 px-6 bg-gray-50" id="Chiffres Niger">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div class="transform hover:scale-105 transition">
+                <p class="text-6xl font-extrabold text-[#14b8a6]">3</p>
+                <p class="mt-3 text-gray-700">Pays couverts : Togo, Bénin, Niger</p>
+                </div>
+                <div class="transform hover:scale-105 transition">
+                <p class="text-6xl font-extrabold text-[#14b8a6]">9</p>
+                <p class="mt-3 text-gray-700">Partenariats pharmaceutiques au Niger</p>
+                </div>
+                <div class="transform hover:scale-105 transition">
+                <p class="text-6xl font-extrabold text-[#14b8a6]">38</p>
+                <p class="mt-3 text-gray-700">Professionnels terrain mobilisés</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÉSENTATION -->
+        <section class="py-20 px-6 bg-white" id="À propos de Pharmacol Niger">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/3 mb-8 md:mb-0 md:pr-6">
+                <img src="images/Page accueil niger/directeur-niger.jpg" alt="Directeur / équipe Pharmacol Niger" class="w-full rounded-lg shadow-lg">
+                </div>
+                <div class="md:w-2/3">
+                <h2 class="text-2xl font-bold text-[#06788f] mb-6">Pharmacol Niger, une implantation stratégique</h2>
+                <p class="text-base mb-4 text-justify leading-relaxed">
+                    Présente à Niamey depuis 2010, Pharmacol Niger développe une approche terrain solide au service des laboratoires. Notre engagement repose sur une parfaite connaissance du tissu sanitaire nigérien, des circuits logistiques et des exigences réglementaires.
+                </p>
+                <p class="text-base mb-4 text-justify leading-relaxed">
+                    Grâce à une équipe pluridisciplinaire, nous accompagnons la mise en marché de vos produits dans un environnement en mutation, avec une attention particulière portée à l’éthique, à la qualité de service, et au respect des spécificités locales.
+                </p>
+                <p class="text-base text-justify leading-relaxed">
+                    Pharmacol Niger se positionne comme votre passerelle de confiance vers un marché à fort potentiel, dans une dynamique de santé publique durable.
+                </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEXTE NIGER -->
+        <section class="py-20 px-6 bg-gray-100">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-5 gap-10 items-start">
+                <div class="md:col-span-3">
+                    <h2 class="text-2xl font-bold text-[#06788f] mb-6">Le contexte sanitaire au Niger</h2>
+                    <p class="text-base text-gray-800 mb-6 text-justify">
+                        Le Niger, vaste pays sahélien de 1,27 million de km², est un territoire en pleine transformation sanitaire. Avec une population jeune et croissante de plus de 25 millions d’habitants, les besoins en santé sont immenses et les opportunités de collaboration pharmaceutique y sont réelles.
+                    </p>
+                    <p class="text-base text-gray-800 mb-6 text-justify">
+                        Le système de santé nigérien s’appuie sur plusieurs niveaux de soins répartis entre zones rurales et urbaines. Malgré les défis logistiques, l’État nigérien et les partenaires privés multiplient les efforts pour améliorer la couverture médicale sur l’ensemble du territoire.
+                    </p>
+                    <ul class="list-disc list-inside text-base text-gray-700 space-y-2">
+                        <li>1 267 000 km² pour 8 régions sanitaires</li>
+                        <li>Plus de 1800 structures de santé recensées</li>
+                        <li>Environ 150 pharmacies et points de distribution actifs</li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-2">
+                    <div class="bg-white border rounded-xl shadow-lg p-4" id="Carte Niger">
+                        <div id="map-niger" class="rounded w-full h-96"></div>
+                        <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Niger</p>
+                    </div>
+                    <script>
+                        var mapNiger = L.map('map-niger').setView([16.0, 8.0], 5);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(mapNiger);
+                        L.marker([13.5128, 2.1126]).addTo(mapNiger).openPopup();
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODE OPÉRATOIRE -->
+        <section class="py-20 px-6 bg-white">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-[#06788f] mb-12">Notre méthode au Niger</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Implémentation ciblée</h3>
+                    <ul class="text-left list-disc list-inside text-gray-700">
+                    <li>Cartographie sanitaire</li>
+                    <li>Accords avec les autorités locales</li>
+                    <li>Formation des relais terrain</li>
+                    </ul>
+                </div>
+                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Croissance accompagnée</h3>
+                    <ul class="text-left list-disc list-inside text-gray-700">
+                    <li>Promotion médicale proactive</li>
+                    <li>Visibilité institutionnelle</li>
+                    <li>Campagnes santé publique</li>
+                    </ul>
+                </div>
+                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Suivi transparent</h3>
+                    <ul class="text-left list-disc list-inside text-gray-700">
+                    <li>Reporting mensuel</li>
+                    <li>Audits qualité réguliers</li>
+                    <li>Tableaux de bord partagés</li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- POURQUOI CHOISIR PHARMACOL NIGER -->
+        <section class="py-20 px-6 bg-[#3C74A8] text-white text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-4">Pourquoi choisir Pharmacol Niger ?</h2>
+                <p class="text-base mb-6 leading-relaxed">
+                Une implantation stratégique à Niamey, une équipe expérimentée sur le terrain, et une vision durable de la représentation pharmaceutique dans un pays en forte croissance sanitaire.
+                </p>
+                <a href="#contact" class="inline-block mt-4 bg-white text-[#3C74A8] font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition">
+                Démarrons un partenariat
+                </a>
+            </div>
+        </section>
+
+        <!-- RECRUTEMENT -->
+        <section class="py-20 px-6 bg-white" id="recrutement">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl font-extrabold text-[#06788f] mb-4">Rejoignez l’équipe Pharmacol Bénin</h2>
+                <p class="text-lg text-gray-700 mb-12">
+                Passion, Excellence, Impact.<br class="hidden md:inline" />
+                Si ces mots vous parlent, nous serions ravis de vous rencontrer.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-12 text-left">
+                    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Délégué médical – Zone Nord</h3>
+                        <p class="text-gray-700 mb-4 text-sm">Poste basé à Parakou – Candidatures ouvertes</p>
+                        <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Postuler maintenant</a>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Responsable Réglementaire</h3>
+                        <p class="text-gray-700 mb-4 text-sm">Cotonou – Expérience requise</p>
+                        <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Voir les missions</a>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Assistant(e) administratif(ve)</h3>
+                        <p class="text-gray-700 mb-4 text-sm">Stage de 6 mois – Cotonou</p>
+                        <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Envoyer une candidature</a>
+                    </div>
+                </div>
+                <a href="/recrutement.html" class="inline-block px-6 py-3 bg-[#3C74A8E8] text-white font-semibold rounded-full shadow-md hover:bg-[#3C74A8] transition">Voir toutes nos offres</a>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="py-20 px-6 bg-gray-100" id="contact">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-[#3C74A8] mb-4">Contactez-nous</h2>
+                <p class="text-lg mb-6">Intéressé par notre accompagnement ? Échangeons sur la faisabilité de votre projet au Togo.</p>
+                <a href="mailto:contact@agence-pharmacol.com" class="inline-block bg-[#14b8a6] text-white px-10 py-4 rounded-full hover:bg-[#0f827d] transition">contact@agence-pharmacol.com</a>
+            </div>
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="bg-[#3C74A8E8] text-gray-100 relative">
+            <div class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4 relative">
+                    <div class="absolute top-2 left-[120px] -translate-x-1/2 w-44 h-16 bg-white rounded-full blur-md z-0"></div>
+                    <img src="./images/Page contact/logo-350100.png" class="h-12 mb-4 mx-auto md:ml-10 relative z-10" />
+                    <h2 class="text font-semibold relative z-10">Un réseau de délégués médicaux sur le Togo, le Bénin et le Niger</h2>
+                    <div class="flex items-center">
+                        <input type="text" placeholder="Email"
+                            class="w-full px-3 py-2 bg-white text-black border border-gray-600 rounded-md" />
+                        <button class="bg-[#437305] px-4 py-2 ml-2 border border-[#437305] rounded-md">
+                            <i class="fas fa-arrow-up transform rotate-45 text-white"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="md:ml-8">
+                    <h2 class="mb-4 font-semibold text-lg">Liens rapides</h2>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:underline">À propos</a></li>
+                        <li><a href="prestation.html" class="hover:underline">Services</a></li>
+                        <li><a href="blog.html" class="hover:underline">Blog</a></li>
+                        <li><a href="recrutement.php" class="hover:underline">Recrutement</a></li>
+                        <li><a href="contact.html" class="hover:underline">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="mb-4 font-semibold text-lg">Contact</h2>
+                    <ul class="space-y-2">
+                        <li>184 rue Agnan quartier djidjolé</li>
+                        <li>derrière EPP Aflao gakli</li>
+                        <li><i class="fas fa-phone-alt text-[#437305]"></i><a href="tel:+22890123456" target="_blank">+228 90 12 34 56</a></li>
+                        <li><i class="fas fa-envelope text-[#437305]"></i><a href="mailto:contact@pharmacol.com" target="_blank">contact@pharmacol.com</a></li>
+                        <li class="flex gap-5 mt-2">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="md:ml-8">
+                    <h2 class="mb-4 font-semibold text-lg">Heures d’ouvertures</h2>
+                    <ul class="space-y-1">
+                        <li>Lundi : 7h30 - 18h</li>
+                        <li>Mardi : 7h30 - 18h</li>
+                        <li>Mercredi : 7h30 - 18h</li>
+                        <li>Jeudi : 7h30 - 18h</li>
+                        <li>Vendredi : 7h30 - 18h</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-[#3C74A8] text-center py-4 text-sm">
+                <a href="https://www.neostart.tech/" target="_blank">Copyright © 2025 Neo Start Technology Tous droits réservés.</a>
+            </div>
+        </footer>
+    </body>
+</html>
+
+
