@@ -263,13 +263,31 @@ function searchCards(){
 
 
     document.addEventListener('DOMContentLoaded', () => {
-    fetch('articles.php')
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('blog-articles').innerHTML = html;
-        })
-        .catch(error => {
-            document.getElementById('blog-articles').innerHTML = '<p class="text-red-500">Erreur lors du chargement des articles.</p>';
-            console.error('Erreur AJAX:', error);
-        });
+    // Pour la page d'accueil (index.html)
+    const blogHome = document.getElementById('blog-home');
+    if (blogHome) {
+        fetch('articles.php?last=1')
+            .then(response => response.text())
+            .then(html => {
+                blogHome.innerHTML = html;
+            })
+            .catch(error => {
+                blogHome.innerHTML = '<p class="text-red-500">Erreur lors du chargement de l\'article.</p>';
+                console.error('Erreur AJAX:', error);
+            });
+    }
+
+    // Pour la page blog.html
+    const blogArticles = document.getElementById('blog-articles');
+    if (blogArticles) {
+        fetch('articles.php')
+            .then(response => response.text())
+            .then(html => {
+                blogArticles.innerHTML = html;
+            })
+            .catch(error => {
+                blogArticles.innerHTML = '<p class="text-red-500">Erreur lors du chargement des articles.</p>';
+                console.error('Erreur AJAX:', error);
+            });
+    }
 });
