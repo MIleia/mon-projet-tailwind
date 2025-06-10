@@ -5,7 +5,7 @@ function getArticlesHTML() {
     global $pdo;
 
     try {
-        $stmt = $pdo->query("SELECT * FROM blog ORDER BY date DESC");
+        $stmt = $pdo->query("SELECT * FROM blog WHERE etat IN ('en ligne', 'les 2') ORDER BY date DESC");
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $html = '';

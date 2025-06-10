@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS newsletter;
 DROP TABLE IF EXISTS blog;
 DROP TABLE IF EXISTS utilisateur;
 DROP TABLE IF EXISTS entreprise;
+DROP TABLE IF EXISTS postes;
 
 
 -- Table newsletters
@@ -20,7 +21,8 @@ CREATE TABLE IF NOT EXISTS blog (
     image VARCHAR(255),
     titre VARCHAR(255) NOT NULL,
     texte TEXT NOT NULL,
-    date DATE NOT NULL
+    date DATE NOT NULL,
+    etat ENUM('brouillon', 'en ligne', 'newsletter', 'les 2') DEFAULT 'brouillon'
 );
 
 -- Table utilisateur
@@ -40,6 +42,19 @@ CREATE TABLE IF NOT EXISTS entreprise (
     ville VARCHAR(100)
 );
 
+-- Table postes
+CREATE TABLE IF NOT EXISTS postes (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    descriptif TEXT NOT NULL,
+    localisation VARCHAR(255) NOT NULL
+);
+
+
+-- Insertion de test : postes
+INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre1', 'ceci est un descriptif', 'localisation1');
+INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre2', 'ceci est un descriptif', 'localisation2');
+
 -- Insertion de test : utilisateur
 INSERT INTO utilisateur (mail, mot_de_passe, role) VALUES 
 ('test@mail.com', '$2y$10$VscUIy.v0K0HNofz3ttTrOHbMNLXd8kQFEFfEC8KrKOEOGyFcUSqu', 'user'),
@@ -53,10 +68,11 @@ INSERT INTO newsletter (mail, nom, prenom) VALUES
 ('carla@example.com', 'Bernard', 'Carla');
 
 -- Insertion de test : blog
-INSERT INTO blog (image, titre, texte, date) VALUES
-('images/blog/test.jpg', 'Lancement de Pharmacol Niger', 'Nous avons lancé notre nouvelle plateforme au Niger.', '2025-04-01'),
-('images/blog/test.jpg', 'Les enjeux pharmaceutiques en Afrique', 'Analyse des besoins de santé et de la distribution en Afrique de l’Ouest.', '2025-04-15'),
-('images/blog/test.jpg', 'Partenariat avec les pharmacies locales', 'Nous avons signé un partenariat avec plusieurs pharmacies rurales.', '2025-05-01');
+INSERT INTO blog (image, titre, texte, date, etat) VALUES
+('images/blog/test.jpg', 'Lancement de Pharmacol Niger', 'Nous avons lancé notre nouvelle plateforme au Niger.', '2025-04-01', 'en ligne'),
+('images/blog/test.jpg', 'Les enjeux pharmaceutiques en Afrique', 'Analyse des besoins de santé et de la distribution en Afrique de l’Ouest.', '2025-04-15', 'newsletter'),
+('images/blog/test.jpg', 'Partenariat avec les pharmacies locales', 'Nous avons signé un partenariat avec plusieurs pharmacies rurales.', '2025-05-01', 'les 2');
+
 
 -- Insertion de test : entreprise
 INSERT INTO entreprise (longitude, latitude, nom, pays, ville) VALUES

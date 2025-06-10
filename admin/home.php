@@ -138,19 +138,17 @@
     }
 
     function ajouterEntreprise(PDO $pdo, array $data): bool {
-    // Préparer la requête
-    $sql = "INSERT INTO entreprise (nom, ville, latitude, longitude, pays) VALUES (:nom, :ville, :latitude, :longitude, :pays)";
-    $stmt = $pdo->prepare($sql);
+        $sql = "INSERT INTO entreprise (nom, ville, latitude, longitude, pays) VALUES (:nom, :ville, :latitude, :longitude, :pays)";
+        $stmt = $pdo->prepare($sql);
 
-    // Bind des paramètres (assurez-vous que les colonnes existent en BDD)
-    return $stmt->execute([
-        ':nom' => $data['nom'],
-        ':ville' => $data['ville'],
-        ':latitude' => $data['latitude'],
-        ':longitude' => $data['longitude'],
-        ':pays' => $data['pays'],
-    ]);
-}
+        return $stmt->execute([
+            ':nom' => $data['nom'],
+            ':ville' => $data['ville'],
+            ':latitude' => $data['latitude'],
+            ':longitude' => $data['longitude'],
+            ':pays' => $data['pays'],
+        ]);
+    }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add_entreprise') {
         $nom = trim($_POST['nom'] ?? '');
@@ -256,14 +254,6 @@
                         Utilisateurs
                     </button>
                     <?php endif; ?>
-
-                    <!-- Paramètres -->
-                    <button type="button" onclick="showSection('settings')" class="flex items-center w-full p-3 rounded-lg hover:bg-blue-50 hover:text-blue-900">
-                        <div class="mr-4">
-                            <!-- Icon -->
-                        </div>
-                        Settings
-                    </button>
 
                     <!-- Déconnexion -->
                     <button type="button" onclick="window.location.href='logout.php'" class="logout-btn mt-auto self-start mx-2 mb-2">Déconnexion</button>
@@ -435,129 +425,162 @@
 
                 <!-- Section Entreprises -->
                 <section id="Entreprises" class="section-content hidden">
-    <div class="max-w-[100rem] p-8">
-        <h2 class="text-3xl font-bold mb-8 text-center">Implantation terrain</h2>
+                    <div class="max-w-[100rem] p-8">
+                        <h2 class="text-3xl font-bold mb-8 text-center">Implantation terrain</h2>
 
-        <?php
-        $grouped = [];
-        foreach ($entreprises as $ent) {
-            $pays = $ent['pays'] ?? 'Autres';
-            $grouped[$pays][] = $ent;
-        }
+                        <?php
+                        $grouped = [];
+                        foreach ($entreprises as $ent) {
+                            $pays = $ent['pays'] ?? 'Autres';
+                            $grouped[$pays][] = $ent;
+                        }
 
                         function countEntreprises($grouped, $pays) {
                             return isset($grouped[$pays]) ? count($grouped[$pays]) : 0;
                         }
 
-        function safeId($str) {
-            return preg_replace('/[^a-z0-9]+/i', '_', strtolower($str));
-        }
-        ?>
+                        function safeId($str) {
+                            return preg_replace('/[^a-z0-9]+/i', '_', strtolower($str));
+                        }
+                        ?>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <?php foreach (['Togo', 'Bénin'] as $pays): $safeId = safeId($pays); ?>
-                <div class="bg-white shadow-lg rounded-xl p-6">
-                    <h3 class="text-xl font-bold mb-4">
-                        <?= ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'][$pays] ?? '' ?> <?= htmlspecialchars($pays) ?>
-                    </h3>
-                    <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                            <?php foreach (['Togo', 'Bénin'] as $pays): $safeId = safeId($pays); ?>
+                                <div class="bg-white shadow-lg rounded-xl p-6">
+                                    <h3 class="text-xl font-bold mb-4">
+                                        <?= ['Togo' => '🇹🇬', 'Bénin' => '🇧🇯'][$pays] ?? '' ?> <?= htmlspecialchars($pays) ?>
+                                    </h3>
+                                    <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
 
-                    <div class="overflow-y-auto max-h-60 mb-4">
-                        <table class="w-full text-sm text-left border">
-                            <thead class="bg-gray-100 sticky top-0 z-10">
-                                <tr>
-                                    <th class="p-2">Latitude</th>
-                                    <th class="p-2">Longitude</th>
-                                    <th class="p-2">Nom</th>
-                                    <th class="p-2"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!empty($grouped[$pays])): ?>
-                                    <?php foreach ($grouped[$pays] as $ent): ?>
-                                        <tr class="border-t">
-                                            <td class="p-2"><?= htmlspecialchars($ent['latitude']) ?></td>
-                                            <td class="p-2"><?= htmlspecialchars($ent['longitude']) ?></td>
-                                            <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
-                                            <td class="p-2"></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-
-        <div class="bg-white shadow-lg rounded-xl p-6">
-            <?php $pays = 'Niger'; $safeId = safeId($pays); ?>
-            <h3 class="text-xl font-bold mb-4">🇳🇪 <?= htmlspecialchars($pays) ?></h3>
-            <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
-
-            <div class="overflow-y-auto max-h-48 mb-4">
-                <table class="w-full text-sm text-left border">
-                    <thead class="bg-gray-100 sticky top-0 z-10">
-                        <tr>
-                            <th class="p-2">Latitude</th>
-                            <th class="p-2">Longitude</th>
-                            <th class="p-2">Nom</th>
-                            <th class="p-2"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($grouped[$pays])): ?>
-                            <?php foreach ($grouped[$pays] as $ent): ?>
-                                <tr class="border-t">
-                                    <td class="p-2"><?= htmlspecialchars($ent['latitude']) ?></td>
-                                    <td class="p-2"><?= htmlspecialchars($ent['longitude']) ?></td>
-                                    <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
-                                    <td class="p-2"></td>
-                                </tr>
+                                    <div class="overflow-y-auto max-h-60 mb-4">
+                                        <table class="w-full text-sm text-left border">
+                                            <thead class="bg-gray-100 sticky top-0 z-10">
+                                                <tr>
+                                                    <th class="p-2">Latitude</th>
+                                                    <th class="p-2">Longitude</th>
+                                                    <th class="p-2">Nom</th>
+                                                    <th class="p-2"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($grouped[$pays])): ?>
+                                                    <?php foreach ($grouped[$pays] as $ent): ?>
+                                                        <tr class="border-t">
+                                                            <td class="p-2"><?= htmlspecialchars($ent['latitude']) ?></td>
+                                                            <td class="p-2"><?= htmlspecialchars($ent['longitude']) ?></td>
+                                                            <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                                            <td class="p-2"></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php else: ?>
+                                                    <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                                                <?php endif; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                        </div>
 
-        <div class="w-full h-[500px] mt-8 rounded shadow" id="map-global"></div>
+                        <div class="bg-white shadow-lg rounded-xl p-6">
+                            <?php $pays = 'Niger'; $safeId = safeId($pays); ?>
+                            <h3 class="text-xl font-bold mb-4">🇳🇪 <?= htmlspecialchars($pays) ?></h3>
+                            <p class="mb-4">🏢 Entreprises partenaires : <strong><?= countEntreprises($grouped, $pays) ?></strong></p>
 
-        <div class="bg-white shadow-lg rounded-xl p-6 mt-8">
-            <h3 class="text-xl font-bold mb-4">➕ Ajouter une nouvelle entreprise</h3>
+                            <div class="overflow-y-auto max-h-48 mb-4">
+                                <table class="w-full text-sm text-left border">
+                                    <thead class="bg-gray-100 sticky top-0 z-10">
+                                        <tr>
+                                            <th class="p-2">Latitude</th>
+                                            <th class="p-2">Longitude</th>
+                                            <th class="p-2">Nom</th>
+                                            <th class="p-2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($grouped[$pays])): ?>
+                                            <?php foreach ($grouped[$pays] as $ent): ?>
+                                                <tr class="border-t">
+                                                    <td class="p-2"><?= htmlspecialchars($ent['latitude']) ?></td>
+                                                    <td class="p-2"><?= htmlspecialchars($ent['longitude']) ?></td>
+                                                    <td class="p-2"><?= htmlspecialchars($ent['nom']) ?></td>
+                                                    <td class="p-2"></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr><td colspan="4" class="p-2 text-center text-gray-500">Aucune entreprise enregistrée</td></tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-            <?php if (!empty($error)): ?>
-                <div class="mb-4 p-3 bg-red-100 text-red-700 rounded"><?= htmlspecialchars($error) ?></div>
-            <?php endif; ?>
+                        <div class="w-full h-[500px] mt-8 rounded shadow" id="map-global"></div>
 
-            <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>#Entreprises">
-                <input type="hidden" name="action" value="add_entreprise">
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                    <input type="text" name="nom" placeholder="Nom de l'entreprise" class="px-4 py-2 border rounded" required>
-                    <input type="text" name="ville" placeholder="Ville" class="px-4 py-2 border rounded" required>
-                    <input type="text" name="latitude" placeholder="Latitude" class="px-4 py-2 border rounded" required>
-                    <input type="text" name="longitude" placeholder="Longitude" class="px-4 py-2 border rounded" required>
-                    <select name="pays" class="px-4 py-2 border rounded" required>
-                        <option value="">-- Pays --</option>
-                        <option value="Togo">Togo</option>
-                        <option value="Bénin">Bénin</option>
-                        <option value="Niger">Niger</option>
-                    </select>
-                </div>
-                <div class="text-right mt-4">
-                    <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
-                        Ajouter l'entreprise
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+                        <div class="bg-white shadow-lg rounded-xl p-6 mt-8">
+                            <h3 class="text-xl font-bold mb-4">➕ Ajouter une nouvelle entreprise</h3>
 
+                            <?php if (!empty($error)): ?>
+                                <div class="mb-4 p-3 bg-red-100 text-red-700 rounded"><?= htmlspecialchars($error) ?></div>
+                            <?php endif; ?>
+
+                            <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>#Entreprises">
+                                <input type="hidden" name="action" value="add_entreprise">
+                                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                                    <input type="text" name="nom" placeholder="Nom de l'entreprise" class="px-4 py-2 border rounded" required>
+                                    <input type="text" name="ville" placeholder="Ville" class="px-4 py-2 border rounded" required>
+                                    <input type="text" name="latitude" placeholder="Latitude" class="px-4 py-2 border rounded" required>
+                                    <input type="text" name="longitude" placeholder="Longitude" class="px-4 py-2 border rounded" required>
+                                    <select name="pays" class="px-4 py-2 border rounded" required>
+                                        <option value="">-- Pays --</option>
+                                        <option value="Togo">Togo</option>
+                                        <option value="Bénin">Bénin</option>
+                                        <option value="Niger">Niger</option>
+                                    </select>
+                                </div>
+                                <div class="text-right mt-4">
+                                    <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+                                        Ajouter l'entreprise
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const map = L.map('map-global').setView([9.0, 2.0], 7);
+
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 18,
+                                attribution: '&copy; OpenStreetMap'
+                            }).addTo(map);
+
+                            const markers = [];
+
+                            <?php
+                            foreach (['Togo', 'Bénin', 'Niger'] as $pays):
+                                $ents = $grouped[$pays] ?? [];
+                                foreach ($ents as $ent):
+                                    $lat = $ent['latitude'];
+                                    $lng = $ent['longitude'];
+                                    $nom = htmlspecialchars($ent['nom'], ENT_QUOTES);
+                                    $ville = htmlspecialchars($ent['ville'] ?? '', ENT_QUOTES);
+                                    if ($lat && $lng):
+                            ?>
+                            {
+                                const marker = L.marker([<?= $lat ?>, <?= $lng ?>]).addTo(map);
+                                marker.bindPopup("<strong><?= $nom ?></strong><br><?= $ville ?> (<?= $pays ?>)");
+                                marker.bindTooltip("<?= $nom ?>, <?= $ville ?>", { permanent: true, direction: "top", offset: [-15, -10] });
+                                markers.push(marker);
+                            }
+                            <?php
+                                    endif;
+                                endforeach;
+                            endforeach;
+                            ?>
+                        });
+                    </script>
                 </section>
 
                 <!-- Section Recrutement -->

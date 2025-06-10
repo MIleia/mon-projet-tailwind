@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS blog (
     image VARCHAR(255),
     titre VARCHAR(255) NOT NULL,
     texte TEXT NOT NULL,
-    date DATE NOT NULL
+    date DATE NOT NULL,
+    etat ENUM('brouillon', 'en ligne', 'newsletter', 'les 2') DEFAULT 'brouillon'
 );
 
 -- Table utilisateur
