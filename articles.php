@@ -119,7 +119,6 @@
         }
     }
 
-<<<<<<< HEAD
 function getLastArticleHTML() {
     global $pdo;
 
@@ -185,7 +184,4 @@ if (isset($_GET['last'])) {
 } else {
     echo getArticlesHTML();
 }
-=======
-    echo getArticlesHTML();
->>>>>>> c26282cab575359c7acdf621b787c376fc10a618
 ?>
