@@ -263,6 +263,7 @@ function searchCards(){
 
 
     document.addEventListener('DOMContentLoaded', () => {
+<<<<<<< HEAD
     // Pour la page d'accueil (index.html)
     const blogHome = document.getElementById('blog-home');
     if (blogHome) {
@@ -290,4 +291,78 @@ function searchCards(){
                 console.error('Erreur AJAX:', error);
             });
     }
+=======
+    fetch('articles.php')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('blog-articles').innerHTML = html;
+        })
+        .catch(error => {
+            document.getElementById('blog-articles').innerHTML = '<p class="text-red-500">Erreur lors du chargement des articles.</p>';
+            console.error('Erreur AJAX:', error);
+        });
+});
+
+// Lire la suite / Lire moins pour les articles du blog
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.addEventListener("click", function(e) {
+        if (e.target.classList.contains("btn-lire-suite") || e.target.closest(".btn-lire-suite")) {
+            e.preventDefault();
+            const btn = e.target.closest(".btn-lire-suite");
+            const container = btn.closest("article");
+            const extrait = container.querySelector(".texte-extrait");
+            const complet = container.querySelector(".texte-complet");
+            const btnText = btn.querySelector("span");
+
+            // Ferme tous les autres articles ouverts
+            document.querySelectorAll(".btn-lire-suite").forEach(otherBtn => {
+                if (otherBtn !== btn) {
+                    const otherArticle = otherBtn.closest("article");
+                    const otherExtrait = otherArticle.querySelector(".texte-extrait");
+                    const otherComplet = otherArticle.querySelector(".texte-complet");
+                    if (otherExtrait) {
+                        otherExtrait.classList.remove("hidden");
+                        otherExtrait.classList.add("fade-bottom");
+                    }
+                    if (otherComplet) {
+                        otherComplet.classList.add("hidden");
+                    }
+                    otherBtn.querySelector("span").textContent = "Lire la suite";
+                }
+            });
+
+            // Toggle l'article cliqué
+            if (complet.classList.contains("hidden")) {
+                complet.classList.remove("hidden");
+                if (extrait) {
+                    extrait.classList.add("hidden");
+                    extrait.classList.remove("fade-bottom");
+                }
+                btnText.textContent = "Lire moins";
+            } else {
+                complet.classList.add("hidden");
+                if (extrait) {
+                    extrait.classList.remove("hidden");
+                    extrait.classList.add("fade-bottom");
+                }
+                btnText.textContent = "Lire la suite";
+            }
+        }
+    });
+});
+
+window.addEventListener('load', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in-up');
+                entry.target.classList.remove('opacity-0');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-slide-up').forEach(el => {
+        observer.observe(el);
+    });
+>>>>>>> c26282cab575359c7acdf621b787c376fc10a618
 });

@@ -71,8 +71,28 @@ INSERT INTO newsletter (mail, nom, prenom) VALUES
 INSERT INTO blog (image, titre, texte, date, etat) VALUES
 ('images/blog/test.jpg', 'Lancement de Pharmacol Niger', 'Nous avons lancé notre nouvelle plateforme au Niger.', '2025-04-01', 'en ligne'),
 ('images/blog/test.jpg', 'Les enjeux pharmaceutiques en Afrique', 'Analyse des besoins de santé et de la distribution en Afrique de l’Ouest.', '2025-04-15', 'newsletter'),
-('images/blog/test.jpg', 'Partenariat avec les pharmacies locales', 'Nous avons signé un partenariat avec plusieurs pharmacies rurales.', '2025-05-01', 'les 2');
-
+('images/blog/test.jpg', 'Partenariat avec les pharmacies locales', 'Nous avons signé un partenariat avec plusieurs pharmacies rurales.', '2025-05-01', 'les 2'),
+('images/blog/test.jpg',
+    'Un article de blog très long pour test',
+    'Ce texte est volontairement très long afin de tester le comportement du bouton "Lire la suite" et de l affichage du blog. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Suspendisse potenti. Etiam euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Curabitur euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Phasellus euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Mauris euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Sed euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Vivamus euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Aliquam euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Proin euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Nam euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Duis euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Morbi euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Aenean euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Fusce euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisi nec erat. 
+Fin du texte de test très long.',
+    '2025-06-10',
+    'en ligne'
+);
 
 -- Insertion de test : entreprise
 INSERT INTO entreprise (longitude, latitude, nom, pays, ville) VALUES
