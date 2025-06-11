@@ -24,22 +24,31 @@
         <header>
             <!-- Bandeau top -->
             <div class="bg-gray-100 text-sm border-b border-gray-300 py-2">
-                <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-between text-gray-700">
-                    <div class="flex gap-4">
+                <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row flex-wrap sm:justify-between text-gray-700 gap-2 sm:gap-0">
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center">
                         <span><i class="fas fa-map-marker-alt text-green-700"></i> 184 rue agnan quartier djidjolé</span>
                         <span><i class="fas fa-envelope text-green-700"></i> contact@agence-pharmacol.com</span>
                     </div>
-                    <div>
-                        <span><i class="fas fa-clock text-green-700"></i> Lun-Ven: 7h30-12h 14h30-18h / Fermé les weekends et jours fériés</span>
+                    <div class="flex flex-col sm:flex-row items-center justify-center">
+                        <span>
+                            <i class="fas fa-clock text-green-700"></i>
+                            Lun-Ven: 7h30-12h 14h30-18h
+                            <span class="hidden sm:inline"> / </span>
+                        </span>
+                        <span class="sm:ml-1">
+                            Fermé les weekends et jours fériés
+                        </span>
                     </div>
                 </div>
             </div>
 
             <!-- Header principal -->
             <div class="bg-[#3C74A8] border-b py-4">
-                <div class="max-w-screen-xl mx-auto flex justify-between items-center px-6">
-                    <div class="w-1/4"></div>
-                    <div class="flex items-center space-x-4 text-white ml-4">
+                <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center px-6 gap-4">
+                    <!-- Espace gauche vide sur desktop -->
+                    <div class="hidden md:block w-1/4"></div>
+                    <!-- Bloc central : téléphone + recherche -->
+                    <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 space-x-0 md:space-x-4 text-white w-full md:w-auto">
                         <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full">
                             <i class="fas fa-phone text-[#3C74A8] text-lg font-bold"></i>
                         </div>
@@ -47,16 +56,17 @@
                             <p class="text-xs">Appeler à tout moment</p>
                             <strong class="text-sm font-bold">(+228) 22 50 75 10</strong>
                         </div>
-                        <div class="w-px h-6 bg-white"></div>
-                        <div class="relative flex items-center w-60 md:w-72">
+                        <div class="hidden md:block w-px h-6 bg-white"></div>
+                        <div class="relative flex items-center w-full md:w-60 lg:w-72">
                             <button onclick="toggleSearch()" class="absolute left-3">
                                 <i class="fas fa-search text-[#3C74A8]"></i>
                             </button>
-                            <input id="searchInput" type="text" placeholder="Rechercher une section..." class="w-full pl-10 pr-4 py-2 rounded-full text-black text-sm focus:outline-none focus:ring-2 focus:ring-green-500" oninput="updateSuggestions()" onkeydown="if(event.key === 'Enter') performSearch()">
+                            <input id="searchInput" type="text" placeholder="Rechercher..." class="w-full pl-10 pr-4 py-2 rounded-full text-black text-sm focus:outline-none focus:ring-2 focus:ring-green-500" oninput="updateSuggestions()" onkeydown="if(event.key === 'Enter') performSearch()">
                             <ul id="suggestions" class="absolute left-0 top-full w-full mt-1 bg-white text-black border border-gray-300 rounded shadow hidden z-50 text-sm max-h-60 overflow-y-auto"></ul>
                         </div>
                     </div>
-                    <div class="flex space-x-5 text-white w-1/4 justify-end mr-4">
+                    <!-- Réseaux sociaux : en dessous sur mobile, à droite sur desktop -->
+                    <div class="flex space-x-5 text-white w-full md:w-1/4 justify-center md:justify-end mt-4 md:mt-0">
                         <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
@@ -66,26 +76,30 @@
                 </div>
             </div>
 
-            <!-- Bandeau Prestations & navbar -->
+            <!-- Bandeau Prestations & navbar responsive -->
             <div class="relative z-0 qhero-prestations bg-cover bg-center h-[1000px]" style="background-image: url('images/Page index/side-view-researcher-biotechnology-laboratory-with-plant-test-tube.jpg');">
                 <div class="absolute inset-0 bg-black/40 z-0"></div>
-                <div class="bg-white bg-opacity-100 backdrop-blur-md w-[70%] mx-auto relative z-30">
+                <div class="bg-white bg-opacity-100 backdrop-blur-md w-full md:w-[70%] mx-auto relative z-30">
                     <nav class="relative z-20">
-                        <div class="qcontainer flex justify-center items-center px-4 py-3">
-                            <ul class="qnav-links flex items-center space-x-8">
-                                <li class="qlogo-nav">
-                                    <a href="index.html" class="flex items-center space-x-2">
-                                        <div class="qlogo">
-                                            <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-16">
-                                        </div>
-                                    </a>
-                                </li>
+                        <div class="qcontainer flex justify-around items-center px-4 py-3">
+                            <!-- Logo -->
+                            <a href="index.html" class="flex items-center space-x-2">
+                                <div class="qlogo">
+                                    <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-12 md:h-16">
+                                </div>
+                            </a>
+                            <!-- Hamburger bouton mobile -->
+                            <button id="menu-toggle" class="md:hidden text-[#3C74A8] text-3xl focus:outline-none">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <!-- Menu principal -->
+                            <ul id="main-menu" class="qnav-links flex-col md:flex-row flex md:items-center md:space-x-8 absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow md:shadow-none z-40 transition-all duration-300 ease-in-out hidden md:flex">
                                 <li class="qdropdown relative group">
-                                    <a href="#" class="text-gray-900 hover:text-green-600 flex items-center space-x-2">
+                                    <a href="#" class="text-gray-900 hover:text-green-600 flex items-center space-x-2 px-4 py-3 md:p-0">
                                         <span>Nos Implentations</span>
                                         <i class="fas fa-chevron-down"></i>
                                     </a>
-                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
+                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block md:mt-2 z-50">
                                         <li>
                                             <a href="accueil togo.html" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
                                                 <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="w-5 h-auto"> Togo
@@ -103,14 +117,54 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="prestation.html" class="text-gray-900 hover:text-green-600">Prestations</a></li>
-                                <li><a href="recrutement.php" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
-                                <li><a href="blog.html" class="text-gray-900 hover:text-green-600">Blog</a></li>
-                                <li><a href="contact.html" class="text-gray-900 hover:text-green-600">Contact</a></li>
+                                <li><a href="prestation.html" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Prestations</a></li>
+                                <li><a href="recrutement.php" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Recrutement</a></li>
+                                <li><a href="blog.html" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Blog</a></li>
+                                <li><a href="contact.html" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Contact</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
+                <script>
+                    // Menu burger responsive
+                    const menuToggle = document.getElementById('menu-toggle');
+                    const mainMenu = document.getElementById('main-menu');
+                    menuToggle.addEventListener('click', () => {
+                        mainMenu.classList.toggle('hidden');
+                    });
+
+                    // Dropdown mobile (ouvre/ferme au clic, referme si déjà ouvert)
+                    document.querySelectorAll('.qdropdown > a').forEach(drop => {
+                        drop.addEventListener('click', function(e) {
+                            if(window.innerWidth < 768) {
+                                e.preventDefault();
+                                const submenu = this.nextElementSibling;
+                                // Ferme si déjà ouvert, sinon ouvre et ferme les autres
+                                if (!submenu.classList.contains('hidden')) {
+                                    submenu.classList.add('hidden');
+                                } else {
+                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                        menu.classList.add('hidden');
+                                    });
+                                    submenu.classList.remove('hidden');
+                                }
+                            }
+                        });
+                    });
+
+                    // Fermer le sous-menu si on clique ailleurs sur mobile
+                    document.addEventListener('click', function(e) {
+                        if(window.innerWidth < 768) {
+                            const isDropdown = e.target.closest('.qdropdown');
+                            const isMenuToggle = e.target.closest('#menu-toggle');
+                            if(!isDropdown && !isMenuToggle) {
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    menu.classList.add('hidden');
+                                });
+                            }
+                        }
+                    });
+                </script>
 
                 <div class="absolute inset-0 flex flex-col gap-20 items-center justify-center text-white">
                     <h1 class="text-4xl md:text-5xl font-bold text-center">PHARMACOL, un réseau de <br> délégués médicaux sur le Togo, <br> le Bénin , le Niger</h1>
@@ -163,7 +217,7 @@
                 <div class="text-base font-medium text-[#6A6A6A]">
                     Notre expertise au service de votre succès au Togo, Bénin et Niger
                 </div>
-                <div class="text-sm sm:text-base text-justify sm:text-center text-[#6A6A6A]">
+                <div class=" px-2 text-sm sm:text-base text-justify sm:text-center text-[#6A6A6A]">
                     Créée en 1996, par Abel ACOLATSE, PHARMACOL est spécialisée dans la représentation pharmaceutique et la promotion médicale. Présente en Afrique de l'ouest : Togo, Bénin, Niger. Son siège est basé à Lomé au Togo.
                     <br><br>
                     PHARMACOL, votre levier de croissance : Obtention d'autorisation de mise sur le marché, Mise en place, Commercialisation, Développement de votre présence locale au Togo, au Bénin et au Niger.
@@ -345,36 +399,34 @@
         
             <!-- Contenu centré -->
             <div class="relative z-10 flex items-center justify-center h-full">
-                <div class="grid grid-cols-4 gap-10">
-            
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
                     <!-- Élément 1 -->
                     <div class="flex flex-col items-center justify-center text-white gap-2">
-                        <img src="images/Page index/10.png" class="w-16 h-16 mb-[10%]" alt="Icone 1">
+                        <img src="images/Page index/10.png" class="w-16 h-16 mb-4" alt="Icone 1">
                         <div class="text-3xl font-bold">3</div>
                         <div class="text-sm text-center">Pays</div>
                     </div>
             
                     <!-- Élément 2 -->
                     <div class="flex flex-col items-center justify-center text-white gap-2">
-                        <img src="images/Page index/11.png" class="w-16 h-16 mb-[10%]" alt="Icone 2">
+                        <img src="images/Page index/11.png" class="w-16 h-16 mb-4" alt="Icone 2">
                         <div class="text-3xl font-bold">64</div>
                         <div class="text-sm text-center">Délégués terrains</div>
                     </div>
             
                     <!-- Élément 3 -->
                     <div class="flex flex-col items-center justify-center text-white gap-2">
-                        <img src="images/Page index/12.png" class="w-16 h-16 mb-[10%]" alt="Icone 3">
+                        <img src="images/Page index/12.png" class="w-16 h-16 mb-4" alt="Icone 3">
                         <div class="text-3xl font-bold">14</div>
                         <div class="text-sm text-center">Laboratoires partenaires</div>
                     </div>
             
                     <!-- Élément 4 -->
                     <div class="flex flex-col items-center justify-center text-white gap-2">
-                        <img src="images/Page index/13.png" class="w-16 h-16 mb-[10%]" alt="Icone 4">
+                        <img src="images/Page index/13.png" class="w-16 h-16 mb-4" alt="Icone 4">
                         <div class="text-3xl font-bold">+25</div>
                         <div class="text-sm text-center">Années d’expérience</div>
                     </div>
-            
                 </div>
             </div>
         
