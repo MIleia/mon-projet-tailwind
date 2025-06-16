@@ -13,31 +13,52 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
             body { font-family: 'Lexend', 'Inter', sans-serif; }
-            .accordion-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease, padding 0.3s ease;
-            }
-            .accordion-content.open {
-                padding-bottom: 0.75rem;
-            }
+            .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
             @keyframes fade-in-up {
                 0% { opacity: 0; transform: translateY(20px);}
                 100% { opacity: 1; transform: translateY(0);}
             }
-            .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
-            .animate-slide-up { opacity: 0; transform: translateY(30px); transition: all 0.5s ease-out; }
-            .fade-bottom {
-                -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-                mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            .dernier-article-badge {
+                position: absolute;
+                top: -0.5rem;
+                right: 1rem;
+                left: auto;
+                background: #437305;
+                color: #fff;
+                padding: 0.4rem 1rem;
+                border-radius: 9999px;
+                font-size: 0.95rem;
+                font-weight: 600;
+                z-index: 10;
+                box-shadow: 0 2px 8px 0 rgba(67,115,5,0.12);
+                letter-spacing: 0.5px;
+            }
+            .blog-card {
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .blog-card:hover {
+                transform: translateY(-6px) scale(1.02);
+                box-shadow: 0 8px 32px 0 rgba(60,116,168,0.13);
+            }
+            .blog-img {
+                transition: filter 0.3s;
+            }
+            .blog-card:hover .blog-img {
+                filter: brightness(0.93);
+            }
+            .btn-lire-suite {
+                transition: color 0.2s;
+            }
+            .btn-lire-suite:hover {
+                color: #3C74A8;
             }
         </style>
     </head>
-    <body class="bg-white text-gray-800">
+    <body class="bg-[#f7fafc] text-gray-800">
         <button id="scrollToTopBtn" onclick="scrollToTop()" 
             class="fixed bottom-6 right-6 w-12 h-12 bg-[#06788f] text-white text-xl flex items-center justify-center rounded-full shadow-lg hover:bg-[#055c6e] transition z-50 hidden" aria-label="Remonter en haut">↑
         </button>
-
+        
         <!-- HEADER -->
         <header>
             <!-- Bandeau top -->
@@ -184,80 +205,63 @@
 
         <!-- Contenu de la page -->
         <section class="max-w-6xl mx-auto px-4 py-10 space-y-16" id="Articles">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-[#3C74A8] mb-12 text-center tracking-tight">Dernières nouvelles</h1>
-            @if($articles->count())
-                @php $first = $articles->first(); @endphp
-                <div class="flex flex-col items-center mb-16">
-                    <article class="relative w-full md:w-4/5 bg-white p-8 rounded-3xl shadow-2xl border-2 border-blue-100 transition hover:scale-[1.02] hover:shadow-2xl animate-slide-up overflow-hidden group">
-                        <span class="absolute top-4 right-4 bg-gradient-to-r from-[#3C74A8] to-[#437305] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10">Nouveau</span>
-                        <img src="{{ asset($first->image) }}" alt="Illustration de l'article" class="w-full h-80 object-cover rounded-2xl mb-6 shadow-md border border-blue-50">
-                        <div>
-                            <h2 class="text-3xl font-extrabold text-[#3C74A8] mb-3 group-hover:text-[#437305] transition">{{ $first->titre }}</h2>
-                            <p class="text-base text-gray-500 mb-5">Publié le {{ \Carbon\Carbon::parse($first->date)->format('j F Y') }}</p>
-                            <div class="relative min-h-[6rem]">
-                                @php
-                                    $texte_brut = strip_tags($first->texte);
-                                    $is_long = mb_strlen($texte_brut) > 350;
-                                    $texte_court = $is_long ? mb_substr($texte_brut, 0, 350) . '...' : $texte_brut;
-                                    $texte_restant = $is_long ? mb_substr($texte_brut, 350) : '';
-                                @endphp
-                                <span class="texte-extrait block text-gray-800 leading-relaxed max-h-36 overflow-hidden pr-2 transition-all duration-300 fade-bottom" style="display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical;">
-                                    {{ $texte_court }}
-                                </span>
-                                @if($is_long)
-                                    <span class="texte-complet hidden block text-gray-800 leading-relaxed transition-all duration-300">
-                                        {!! nl2br(e($texte_restant)) !!}
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        @if($is_long)
-                            <div class="mt-6 text-right">
-                                <button type="button" class="btn-lire-suite inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-green-100 text-[#3C74A8] hover:bg-[#437305] hover:text-white px-6 py-2 rounded-xl text-base font-semibold shadow transition-all duration-300">
-                                    <i class="fas fa-book-open"></i> <span>Lire la suite</span>
-                                </button>
-                            </div>
-                        @endif
-                    </article>
-                </div>
-                @if($articles->count() > 1)
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        @foreach($articles->skip(1) as $article)
-                            @php
-                                $texte_brut = strip_tags($article->texte);
-                                $is_long = mb_strlen($texte_brut) > 220;
-                                $texte_court = $is_long ? mb_substr($texte_brut, 0, 220) . '...' : $texte_brut;
-                            @endphp
-                            <article class="group bg-white p-6 rounded-2xl shadow-xl border border-blue-100 transition hover:scale-105 hover:shadow-2xl animate-slide-up flex flex-col justify-between relative overflow-hidden">
-                                <img src="{{ asset($article->image) }}" alt="Illustration de l'article" class="w-full h-52 object-cover rounded-xl mb-4 border border-blue-50">
-                                <div>
-                                    <h2 class="text-xl font-bold text-[#3C74A8] mb-2 group-hover:text-[#437305] transition">{{ $article->titre }}</h2>
-                                    <p class="text-sm text-gray-500 mb-3">Publié le {{ \Carbon\Carbon::parse($article->date)->format('j F Y') }}</p>
-                                    <div class="relative min-h-[4rem]">
-                                        <span class="texte-extrait block text-gray-800 leading-relaxed max-h-20 overflow-hidden pr-2 transition-all duration-300 fade-bottom" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
-                                            {{ $texte_court }}
-                                        </span>
-                                        @if($is_long)
-                                            <span class="texte-complet hidden block text-gray-800 leading-relaxed transition-all duration-300">
-                                                {!! nl2br(e(mb_substr($texte_brut, 220))) !!}
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                @if($is_long)
-                                    <div class="mt-4 text-right">
-                                        <button type="button" class="btn-lire-suite inline-flex items-center gap-2 bg-blue-100 text-[#3C74A8] hover:bg-[#437305] hover:text-white px-4 py-2 rounded-lg text-sm font-semibold shadow transition-all duration-300">
-                                            <i class="fas fa-book-open"></i> <span>Lire la suite</span>
-                                        </button>
-                                    </div>
-                                @endif
-                            </article>
-                        @endforeach
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#3C74A8] mb-12 text-center tracking-tight drop-shadow-lg">Dernières nouvelles</h1>
+            
+            @php
+                $dernier = $articles->first();
+                $autres = $articles->slice(1)->values();
+            @endphp
+
+            @if($dernier)
+            <!-- Dernier article en grand -->
+            <article class="relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row animate-fade-in-up mb-12 blog-card border border-[#e0e7ef]">
+                @if($dernier->image)
+                    <div class="md:w-1/2 w-full h-72 md:h-auto">
+                        <img src="{{ asset($dernier->image) }}" alt="Image de l'article" class="w-full h-full object-cover blog-img">
                     </div>
                 @endif
-            @else
-                <p class="text-gray-500">Aucun article trouvé.</p>
+                <div class="flex-1 p-8 flex flex-col justify-center relative">
+                    <span class="dernier-article-badge">Dernier article</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-3 text-[#3C74A8] leading-tight">{{ $dernier->titre }}</h2>
+                    <div class="mb-4 text-base text-gray-700 leading-relaxed">
+                        {{ \Illuminate\Support\Str::limit(strip_tags($dernier->texte), 300) }}
+                    </div>
+                    <button class="btn-lire-suite text-[#437305] hover:underline flex items-center gap-1 font-semibold">
+                        <span>Lire la suite</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="texte-complet hidden mt-4 text-gray-700 leading-relaxed">
+                        {!! $dernier->texte !!}
+                    </div>
+                </div>
+            </article>
             @endif
+
+            <!-- Les autres articles, 2 par ligne, sans bug d'affichage -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                @foreach($autres as $i => $article)
+                    <article class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col animate-fade-in-up blog-card border border-[#e0e7ef]">
+                        @if($article->image)
+                            <img src="{{ asset($article->image) }}" alt="Image de l'article" class="w-full h-56 object-cover blog-img">
+                        @endif
+                        <div class="p-6 flex flex-col flex-1">
+                            <h2 class="text-2xl font-bold mb-2 text-[#3C74A8] leading-tight">{{ $article->titre }}</h2>
+                            <div class="flex-1">
+                                <div class="texte-extrait text-gray-700 leading-relaxed">
+                                    {{ \Illuminate\Support\Str::limit(strip_tags($article->texte), 180) }}
+                                </div>
+                                <div class="texte-complet hidden text-gray-700 leading-relaxed">
+                                    {!! $article->texte !!}
+                                </div>
+                            </div>
+                            <button class="btn-lire-suite mt-4 text-[#437305] hover:underline flex items-center gap-1 font-semibold">
+                                <span>Lire la suite</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
         </section>
 
         <script>
@@ -269,13 +273,13 @@
                     const extrait = container.querySelector(".texte-extrait");
                     const complet = container.querySelector(".texte-complet");
 
-                    if (complet.classList.contains("hidden")) {
+                    if (complet && complet.classList.contains("hidden")) {
                         complet.classList.remove("hidden");
-                        extrait.classList.add("hidden");
+                        if (extrait) extrait.classList.add("hidden");
                         btn.querySelector("span").textContent = "Lire moins";
-                    } else {
+                    } else if (complet) {
                         complet.classList.add("hidden");
-                        extrait.classList.remove("hidden");
+                        if (extrait) extrait.classList.remove("hidden");
                         btn.querySelector("span").textContent = "Lire la suite";
                     }
                 });
@@ -283,7 +287,70 @@
         });
         </script>
 
-        <!-- FOOTER (adapte les liens avec route() comme vu précédemment) -->
-        <!-- ... footer identique aux autres pages ... -->
+        <!-- Footer -->
+        <footer class="bg-[#3C74A8E8] text-gray-100 relative">
+            <div class="max-w-7xl mx-auto py-8 md:py-12 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Bloc logo et newsletter -->
+                <div class="space-y-4 relative flex flex-col items-center md:items-start">
+                    <div class="absolute top-2 left-1/2 md:left-[120px] -translate-x-1/2 w-32 md:w-44 h-12 md:h-16 bg-white rounded-full blur-md z-0"></div>
+                    <img src="{{ asset('images/Page contact/logo-350100.png') }}" class="h-10 md:h-12 mb-4 mx-auto md:ml-10 relative z-10" />
+                    <h2 class="text font-semibold relative z-10 text-center md:text-left text-base md:text-lg">Un réseau de délégués médicaux sur le Togo, le Bénin et le Niger</h2>
+                    <div class="flex w-full max-w-xs">
+                        <input type="text" placeholder="Email"
+                            class="w-full px-3 py-2 bg-white text-black border border-gray-600 rounded-l-md focus:outline-none" />
+                        <button class="bg-[#437305] px-4 py-2 border border-[#437305] rounded-r-md">
+                            <i class="fas fa-arrow-up transform rotate-45 text-white"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Liens rapides -->
+                <div class="md:ml-8 flex flex-col items-center md:items-start">
+                    <h2 class="mb-4 font-semibold text-lg">Liens rapides</h2>
+                    <ul class="space-y-2 text-center md:text-left">
+                        <li><a href="{{ route('accueil') }}" class="hover:underline">À propos</a></li>
+                        <li><a href="{{ route('prestation') }}" class="hover:underline">Services</a></li>
+                        <li><a href="{{ route('blog') }}" class="hover:underline">Blog</a></li>
+                        <li><a href="{{ route('recrutement') }}" class="hover:underline">Recrutement</a></li>
+                        <li><a href="{{ route('contact') }}" class="hover:underline">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div class="flex flex-col items-center md:items-start">
+                    <h2 class="mb-4 font-semibold text-lg">Contact</h2>
+                    <ul class="space-y-2 text-center md:text-left">
+                        <li>184 rue Agnan quartier djidjolé</li>
+                        <li>derrière EPP Aflao gakli</li>
+                        <li>
+                            <i class="fas fa-phone-alt text-[#437305]"></i>
+                            <a href="tel:+22890123456" target="_blank" class="ml-1">+228 90 12 34 56</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope text-[#437305]"></i>
+                            <a href="mailto:contact@pharmacol.com" target="_blank" class="ml-1">contact@pharmacol.com</a>
+                        </li>
+                        <li class="flex gap-5 mt-2 justify-center md:justify-start">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Horaires -->
+                <div class="md:ml-8 flex flex-col items-center md:items-start">
+                    <h2 class="mb-4 font-semibold text-lg">Heures d’ouvertures</h2>
+                    <ul class="space-y-1 text-center md:text-left">
+                        <li>Lundi : 7h30 - 18h</li>
+                        <li>Mardi : 7h30 - 18h</li>
+                        <li>Mercredi : 7h30 - 18h</li>
+                        <li>Jeudi : 7h30 - 18h</li>
+                        <li>Vendredi : 7h30 - 18h</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-[#3C74A8] text-center py-4 text-xs md:text-sm">
+                <a href="https://www.neostart.tech/" target="_blank">Copyright © 2025 Neo Start Technology Tous droits réservés.</a>
+            </div>
+        </footer>
     </body>
 </html>

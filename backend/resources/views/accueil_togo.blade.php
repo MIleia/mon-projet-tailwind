@@ -213,7 +213,7 @@
                 }).addTo(mapTogo);
 
                 function loadMarkersTogo() {
-                    fetch('map.php?pays=Togo')
+                    fetch('/api/entreprises?togo=1')
                         .then(response => {
                             if (!response.ok) throw new Error("Erreur réseau");
                             return response.json();
@@ -228,7 +228,7 @@
                                 if (!isNaN(lat) && !isNaN(lng)) {
                                     L.marker([lat, lng])
                                         .addTo(mapTogo)
-                                        .bindTooltip(`${nom}, ${ville}`, {
+                                        .bindTooltip(`<div class="font-bold">${nom}</div><div class="text-xs">${ville}</div>`, {
                                             direction: 'top',
                                             offset: [-15, -10],
                                             permanent: true,
@@ -314,7 +314,7 @@
                 </div>
             </div>
             <div class="text-center mt-10">
-                <a href="/recrutement.html" class="inline-block bg-[#437305] text-white px-8 py-3 rounded-full hover:bg-[#365a04] transition">Postulez maintenant</a>
+                <a href="{{ route('recrutement') }}" class="inline-block bg-[#437305] text-white px-8 py-3 rounded-full hover:bg-[#365a04] transition">Postulez maintenant</a>
             </div>
         </div>
     </section>

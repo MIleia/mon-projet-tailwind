@@ -11,6 +11,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PosteController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\EntrepriseController;
+use App\Models\Entreprise;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,4 +62,17 @@ Route::middleware(['web'])->group(function () {
     Route::get('/admin/entreprise/{id}/edit', [EntrepriseController::class, 'edit'])->name('admin.entreprise.edit');
     Route::put('/admin/entreprise/{id}', [EntrepriseController::class, 'update'])->name('admin.entreprise.update');
     Route::delete('/admin/entreprise/{id}', [EntrepriseController::class, 'destroy'])->name('admin.entreprise.destroy');
+});
+
+Route::get('/api/entreprises', function (\Illuminate\Http\Request $request) {
+    if ($request->has('togo')) {
+        return Entreprise::where('pays', 'togo')->get();
+    }
+    if ($request->has('benin')) {
+        return Entreprise::where('pays', 'benin')->get();
+    }
+    if ($request->has('niger')) {
+        return Entreprise::where('pays', 'niger')->get();
+    }
+    return Entreprise::all();
 });

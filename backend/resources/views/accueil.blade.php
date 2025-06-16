@@ -468,9 +468,9 @@
                 </div>
                 <!-- Ligne 8 : 3 boutons côte à côte -->
                 <div class="flex flex-col sm:flex-row gap-2 md:gap-4 mt-4">
-                    <a href="accueil togo.html" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Togo</a>
-                    <a href="accueil benin.html" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Bénin</a>
-                    <a href="accueil niger.html" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Niger</a>
+                    <a href="{{ route('togo') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Togo</a>
+                    <a href="{{ route('benin') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Bénin</a>
+                    <a href="{{ route('niger') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Niger</a>
                 </div>
             </div>
         </section>
@@ -489,7 +489,7 @@
                 </div>
                 <!-- Bouton -->
                 <div class="self-start">
-                    <a href="#" class="bg-white text-[#31689B] px-4 py-2 md:px-6 md:py-3 font-semibold shadow-md hover:bg-gray-100 transition rounded">
+                    <a href="{{ route('recrutement') }}" class="bg-white text-[#31689B] px-4 py-2 md:px-6 md:py-3 font-semibold shadow-md hover:bg-gray-100 transition rounded">
                         Nous joindre
                     </a>
                 </div>

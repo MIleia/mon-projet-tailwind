@@ -218,8 +218,8 @@
                         maxZoom: 18,
                     }).addTo(mapNiger);
 
-                    function loadMarkers() {
-                        fetch('map.php?pays=Niger')
+                    function loadMarkersNiger() {
+                        fetch('/api/entreprises?niger=1')
                             .then(response => {
                                 if (!response.ok) throw new Error("Erreur réseau");
                                 return response.json();
@@ -234,7 +234,7 @@
                                     if (!isNaN(lat) && !isNaN(lng)) {
                                         L.marker([lat, lng])
                                             .addTo(mapNiger)
-                                            .bindTooltip(`${nom}, ${ville}`, {
+                                            .bindTooltip(`<div class="font-bold">${nom}</div><div class="text-xs">${ville}</div>`, {
                                                 direction: 'top',
                                                 offset: [-15, -10],
                                                 permanent: true,
@@ -244,11 +244,12 @@
                                 });
                             })
                             .catch(error => {
-                                console.error("Erreur lors du chargement des marqueurs :", error);
+                                console.error("Erreur lors du chargement des marqueurs Niger :", error);
                             });
                     }
+
                     document.addEventListener("DOMContentLoaded", function () {
-                        loadMarkers();
+                        loadMarkersNiger();
                     });
                 </script>
             </div>
@@ -327,7 +328,7 @@
                     <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Envoyer une candidature</a>
                 </div>
             </div>
-            <a href="/recrutement.html" class="inline-block px-6 py-3 bg-[#3C74A8E8] text-white font-semibold rounded-full shadow-md hover:bg-[#3C74A8] transition">Voir toutes nos offres</a>
+            <a href="{{ route('recrutement') }}" class="inline-block px-6 py-3 bg-[#3C74A8E8] text-white font-semibold rounded-full shadow-md hover:bg-[#3C74A8] transition">Voir toutes nos offres</a>
         </div>
     </section>
 

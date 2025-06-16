@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 hideSuggestions();
             }
         });
-
+        
     // Lier la recherche
     const searchInput = document.getElementById("searchInput");
     if (searchInput) {

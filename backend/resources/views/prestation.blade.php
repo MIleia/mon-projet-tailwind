@@ -234,157 +234,347 @@
 
     <section class="bg-gray-50 px-2 sm:px-4 py-10 sm:py-20">
         <div class="max-w-screen-xl mx-auto md:col-span-2 p-4 sm:p-10 md:p-20" id="content-area">
-            <script>showContent('promotion')</script>
+            <!-- Le contenu dynamique s'affichera ici -->
         </div>
     </section>
+    <script>
+        // Contenus HTML pour chaque service (textes enrichis et icônes)
+        const servicesContent = {
+            promotion: `
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-[#3f73a3] mb-4 flex items-center gap-2">
+                        <i class="fas fa-bullhorn text-[#437305]"></i>
+                        Promotion médicale
+                    </h2>
+                    <p class="mb-2 text-gray-700 text-lg">
+                        Notre service de <strong>promotion médicale</strong> s’appuie sur une équipe de délégués médicaux hautement qualifiés, formés aux dernières innovations thérapeutiques et aux techniques de communication scientifique. Nous développons des stratégies personnalisées pour valoriser vos produits auprès des professionnels de santé, en tenant compte des spécificités locales et des exigences réglementaires.
+                    </p>
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                        <li>
+                            <i class="fas fa-user-md text-[#3f73a3] mr-2"></i>
+                            <strong>Visites médicales ciblées :</strong> Présentation de vos produits auprès des médecins, pharmaciens et établissements de santé, avec un argumentaire scientifique rigoureux et adapté à chaque interlocuteur.
+                        </li>
+                        <li>
+                            <i class="fas fa-chalkboard-teacher text-[#3f73a3] mr-2"></i>
+                            <strong>Organisation de réunions scientifiques :</strong> Mise en place de conférences, ateliers et webinaires animés par des experts, favorisant l’échange et la formation continue des professionnels de santé.
+                        </li>
+                        <li>
+                            <i class="fas fa-file-medical-alt text-[#3f73a3] mr-2"></i>
+                            <strong>Distribution de documentation :</strong> Élaboration et diffusion de supports pédagogiques, fiches produits et études cliniques pour renforcer la notoriété et la crédibilité de vos solutions thérapeutiques.
+                        </li>
+                    </ul>
+                    <div class="mt-6 bg-blue-50 border-l-4 border-[#3f73a3] p-4 rounded">
+                        <i class="fas fa-info-circle text-[#3f73a3] mr-2"></i>
+                        <span class="text-gray-700">Notre approche repose sur l’éthique, la transparence et le respect des bonnes pratiques de promotion du médicament.</span>
+                    </div>
+                </div>
+            `,
+            encadrement: `
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-[#3f73a3] mb-4 flex items-center gap-2">
+                        <i class="fas fa-users-cog text-[#437305]"></i>
+                        Encadrement force de vente
+                    </h2>
+                    <p class="mb-2 text-gray-700 text-lg">
+                        L’<strong>encadrement de la force de vente</strong> est un levier essentiel pour garantir la performance commerciale et la cohésion de vos équipes sur le terrain. Nous proposons un accompagnement sur-mesure, de la formation initiale au suivi opérationnel, afin de maximiser l’impact de vos actions commerciales.
+                    </p>
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                        <li>
+                            <i class="fas fa-chalkboard text-[#3f73a3] mr-2"></i>
+                            <strong>Coaching personnalisé :</strong> Sessions individuelles ou collectives pour développer les compétences en négociation, gestion de portefeuille clients et argumentation scientifique.
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line text-[#3f73a3] mr-2"></i>
+                            <strong>Suivi des performances :</strong> Mise en place d’indicateurs de suivi, reporting régulier et analyse des résultats pour ajuster les stratégies en temps réel.
+                        </li>
+                        <li>
+                            <i class="fas fa-graduation-cap text-[#3f73a3] mr-2"></i>
+                            <strong>Formation continue :</strong> Programmes de formation adaptés aux évolutions du marché, aux nouvelles réglementations et aux innovations produits.
+                        </li>
+                    </ul>
+                    <div class="mt-6 bg-green-50 border-l-4 border-[#437305] p-4 rounded">
+                        <i class="fas fa-hands-helping text-[#437305] mr-2"></i>
+                        <span class="text-gray-700">Nous croyons en la valorisation des talents et en la création d’un esprit d’équipe fort pour atteindre vos objectifs commerciaux.</span>
+                    </div>
+                </div>
+            `,
+            representation: `
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-[#3f73a3] mb-4 flex items-center gap-2">
+                        <i class="fas fa-handshake text-[#437305]"></i>
+                        Représentation pharmaceutique
+                    </h2>
+                    <p class="mb-2 text-gray-700 text-lg">
+                        Notre service de <strong>représentation pharmaceutique</strong> vous permet de bénéficier d’un relais local fiable et expérimenté pour défendre vos intérêts auprès des autorités sanitaires, des partenaires institutionnels et des acteurs du secteur de la santé.
+                    </p>
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                        <li>
+                            <i class="fas fa-file-signature text-[#3f73a3] mr-2"></i>
+                            <strong>Gestion administrative :</strong> Prise en charge des démarches administratives, dépôt de dossiers et suivi des autorisations nécessaires à la commercialisation de vos produits.
+                        </li>
+                        <li>
+                            <i class="fas fa-balance-scale text-[#3f73a3] mr-2"></i>
+                            <strong>Suivi réglementaire :</strong> Veille active sur les évolutions législatives et réglementaires, conseil sur la conformité et anticipation des changements de cadre.
+                        </li>
+                        <li>
+                            <i class="fas fa-network-wired text-[#3f73a3] mr-2"></i>
+                            <strong>Développement de partenariats :</strong> Mise en relation avec des distributeurs, établissements de santé et réseaux professionnels pour renforcer votre présence sur le marché.
+                        </li>
+                    </ul>
+                    <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                        <i class="fas fa-user-shield text-yellow-600 mr-2"></i>
+                        <span class="text-gray-700">Nous sommes votre interlocuteur privilégié pour garantir la conformité et la visibilité de vos produits sur le territoire.</span>
+                    </div>
+                </div>
+            `,
+            autorisation: `
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-[#3f73a3] mb-4 flex items-center gap-2">
+                        <i class="fas fa-certificate text-[#437305]"></i>
+                        Autorisation sur le marché
+                    </h2>
+                    <p class="mb-2 text-gray-700 text-lg">
+                        L’<strong>obtention de l’autorisation de mise sur le marché (AMM)</strong> est une étape cruciale pour la commercialisation de vos produits pharmaceutiques. Notre équipe vous accompagne à chaque phase du processus, de la constitution du dossier à la validation finale par les autorités compétentes.
+                    </p>
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                        <li>
+                            <i class="fas fa-folder-open text-[#3f73a3] mr-2"></i>
+                            <strong>Dossier d’enregistrement :</strong> Rédaction, compilation et vérification des documents scientifiques, techniques et administratifs requis.
+                        </li>
+                        <li>
+                            <i class="fas fa-tasks text-[#3f73a3] mr-2"></i>
+                            <strong>Suivi des procédures :</strong> Interface avec les agences de régulation, gestion des échanges et réponses aux demandes de compléments.
+                        </li>
+                        <li>
+                            <i class="fas fa-search text-[#3f73a3] mr-2"></i>
+                            <strong>Veille réglementaire :</strong> Surveillance continue des évolutions réglementaires pour anticiper les exigences et garantir la conformité de vos produits.
+                        </li>
+                    </ul>
+                    <div class="mt-6 bg-red-50 border-l-4 border-red-400 p-4 rounded">
+                        <i class="fas fa-exclamation-circle text-red-600 mr-2"></i>
+                        <span class="text-gray-700">Notre expertise vous assure un dépôt de dossier optimisé et un suivi rigoureux jusqu’à l’obtention de l’AMM.</span>
+                    </div>
+                </div>
+            `,
+            marketing: `
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-[#3f73a3] mb-4 flex items-center gap-2">
+                        <i class="fas fa-bullseye text-[#437305]"></i>
+                        Marketing & Communication
+                    </h2>
+                    <p class="mb-2 text-gray-700 text-lg">
+                        Nous concevons et déployons des <strong>stratégies marketing innovantes</strong> et des campagnes de communication sur-mesure pour valoriser vos produits et renforcer votre image de marque dans le secteur de la santé.
+                    </p>
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                        <li>
+                            <i class="fas fa-broadcast-tower text-[#3f73a3] mr-2"></i>
+                            <strong>Campagnes promotionnelles :</strong> Création de plans médias, gestion des relations presse et animation des réseaux sociaux pour accroître votre visibilité.
+                        </li>
+                        <li>
+                            <i class="fas fa-paint-brush text-[#3f73a3] mr-2"></i>
+                            <strong>Supports de communication :</strong> Conception de brochures, affiches, vidéos et contenus digitaux adaptés à vos cibles et à vos objectifs.
+                        </li>
+                        <li>
+                            <i class="fas fa-calendar-check text-[#3f73a3] mr-2"></i>
+                            <strong>Événements professionnels :</strong> Organisation de salons, congrès, ateliers et rencontres B2B pour favoriser les échanges et développer votre réseau.
+                        </li>
+                    </ul>
+                    <div class="mt-6 bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded">
+                        <i class="fas fa-lightbulb text-indigo-600 mr-2"></i>
+                        <span class="text-gray-700">Notre équipe créative et expérimentée vous accompagne pour faire rayonner vos innovations.</span>
+                    </div>
+                </div>
+            `,
+            consulting: `
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-[#3f73a3] mb-4 flex items-center gap-2">
+                        <i class="fas fa-user-tie text-[#437305]"></i>
+                        Consulting
+                    </h2>
+                    <p class="mb-2 text-gray-700 text-lg">
+                        Notre pôle <strong>consulting</strong> met à votre disposition une expertise pluridisciplinaire pour accompagner le développement de vos activités, optimiser vos processus et relever les défis du secteur pharmaceutique.
+                    </p>
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                        <li>
+                            <i class="fas fa-search-dollar text-[#3f73a3] mr-2"></i>
+                            <strong>Audit organisationnel :</strong> Analyse approfondie de vos structures, identification des axes d’amélioration et recommandations personnalisées.
+                        </li>
+                        <li>
+                            <i class="fas fa-lightbulb text-[#3f73a3] mr-2"></i>
+                            <strong>Stratégie de développement :</strong> Élaboration de plans d’action pour conquérir de nouveaux marchés, diversifier votre offre et renforcer votre compétitivité.
+                        </li>
+                        <li>
+                            <i class="fas fa-hands-holding text-[#3f73a3] mr-2"></i>
+                            <strong>Accompagnement personnalisé :</strong> Suivi régulier, conseils sur la gestion du changement et formation des équipes pour garantir la réussite de vos projets.
+                        </li>
+                    </ul>
+                    <div class="mt-6 bg-gray-100 border-l-4 border-[#3f73a3] p-4 rounded">
+                        <i class="fas fa-star text-[#3f73a3] mr-2"></i>
+                        <span class="text-gray-700">Faites confiance à notre savoir-faire pour transformer vos ambitions en succès durables.</span>
+                    </div>
+                </div>
+            `
+        };
+
+        // Fonction pour afficher le contenu selon le service choisi
+        function showContent(key) {
+            const area = document.getElementById('content-area');
+            area.innerHTML = servicesContent[key] || '';
+            // Optionnel : mettre à jour le style du bouton actif
+            document.querySelectorAll('.service-btn').forEach(btn => {
+                btn.classList.remove('bg-[#3f73a3]', 'text-white');
+                btn.classList.add('bg-white', 'text-[#3f73a3]');
+                if (btn.getAttribute('data-key') === key) {
+                    btn.classList.remove('bg-white', 'text-[#3f73a3]');
+                    btn.classList.add('bg-[#3f73a3]', 'text-white');
+                }
+            });
+        }
+
+        // Afficher le contenu par défaut au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            showContent('promotion');
+        });
+    </script>
     
-    <section class="bg-gray-50 px-2 sm:px-4 pb-10 sm:pb-20">
-        <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 items-start">
-            <div class="flex flex-col justify-between space-y-6 self-start h-auto">
-                <div class="bg-gradient-to-br from-[#3C74A8F5] to-[#437305] text-white rounded-2xl shadow-2xl p-6 sm:p-8 flex flex-col items-center justify-center text-center">
-                    <svg class="w-12 h-12 sm:w-14 sm:h-14 mb-4 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+    <section class="bg-gradient-to-br from-[#f8fafc] to-[#e6f2ff] px-2 sm:px-4 pb-16 sm:pb-24">
+        <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start">
+            <!-- Bloc aide rapide -->
+            <div class="flex flex-col justify-between space-y-8 self-start h-auto">
+                <div class="bg-gradient-to-br from-[#3C74A8F5] to-[#437305] text-white rounded-3xl shadow-2xl p-8 flex flex-col items-center justify-center text-center border-2 border-[#e6f2ff]">
+                    <svg class="w-14 h-14 mb-5 text-white drop-shadow-lg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" />
                     </svg>
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-2">Besoin d'une aide rapide ?</h2>
-                    <p class="mb-6 text-base sm:text-lg">Obtenez une solution rapide et gratuite du corps médical.</p>
-                    <a href="/contact.html" class="inline-block bg-white text-[#3f73a3] font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow hover:bg-blue-100 transition">Contact</a>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold mb-2 tracking-tight">Besoin d'une aide rapide ?</h2>
+                    <p class="mb-6 text-base sm:text-lg opacity-90">Notre équipe médicale vous répond gratuitement et en toute confidentialité.</p>
+                    <a href="{{ route('contact') }}" class="inline-block bg-white text-[#3f73a3] font-bold px-6 py-3 rounded-full shadow hover:bg-blue-100 transition-all duration-200">Contactez-nous</a>
                 </div>
             </div>
 
-            <div class="md:col-span-2 flex flex-col space-y-8 sm:space-y-10">
+            <!-- Bloc central : valeurs, avantages, pourquoi nous choisir -->
+            <div class="md:col-span-2 flex flex-col space-y-10 sm:space-y-14">
                 <!-- Bloc Intro -->
-                <div class="space-y-2 sm:space-y-4">
-                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#3f73a3] text-center sm:text-left">Tests génétiques spécialisés</h2>
-                    <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
-                    Le système public de santé togolais comprend : 3 CHU, 6 CHR, 101 hôpitaux (dont 4 spécialisés), 1047 Unités de Soins Périphériques, 54 infirmeries et 59 autres structures sanitaires.
+                <div class="space-y-3 sm:space-y-6">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#3f73a3] text-center sm:text-left flex items-center gap-3">
+                        <svg class="w-8 h-8 text-[#437305]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
+                        </svg>
+                        Pourquoi choisir notre expertise ?
+                    </h2>
+                    <p class="text-gray-700 text-base sm:text-lg leading-relaxed">
+                        Notre engagement : offrir à chaque patient et partenaire un accompagnement humain, une expertise de pointe et une réactivité sans faille. Nous croyons que la santé est un droit fondamental et que chaque projet mérite une attention personnalisée, du conseil à la réalisation.
                     </p>
                 </div>
 
+                <!-- Valeurs -->
                 <div class="space-y-2 sm:space-y-4">
-                    <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-[#437305]">Nos valeurs</h3>
-                    <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
-                    Réactivité, adaptabilité, rigueur et transparence sont au cœur de notre engagement.
-                    </p>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-[#437305] flex items-center gap-2">
+                        <i class="fas fa-heartbeat text-[#3f73a3]"></i>
+                        Nos valeurs
+                    </h3>
+                    <ul class="flex flex-wrap gap-4 sm:gap-6">
+                        <li class="flex items-center bg-white rounded-lg shadow px-4 py-2 text-[#3f73a3] font-semibold text-sm sm:text-base">
+                            <i class="fas fa-bolt text-[#437305] mr-2"></i> Réactivité
+                        </li>
+                        <li class="flex items-center bg-white rounded-lg shadow px-4 py-2 text-[#3f73a3] font-semibold text-sm sm:text-base">
+                            <i class="fas fa-sync-alt text-[#437305] mr-2"></i> Adaptabilité
+                        </li>
+                        <li class="flex items-center bg-white rounded-lg shadow px-4 py-2 text-[#3f73a3] font-semibold text-sm sm:text-base">
+                            <i class="fas fa-balance-scale text-[#437305] mr-2"></i> Rigueur
+                        </li>
+                        <li class="flex items-center bg-white rounded-lg shadow px-4 py-2 text-[#3f73a3] font-semibold text-sm sm:text-base">
+                            <i class="fas fa-eye text-[#437305] mr-2"></i> Transparence
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="space-y-4 sm:space-y-6">
-                    <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-[#437305]">Pourquoi nous choisir ?</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                        <div class="flex bg-white shadow-md overflow-hidden rounded-lg">
-                            <div class="flex items-center justify-center bg-[#437305] w-20 sm:w-24 md:w-28">
-                                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 2v6l-4 8v6h14v-6l-4-8V2H9z" />
-                                </svg>
-                            </div>
-                            <div class="p-3 sm:p-4 flex flex-col justify-center space-y-1">
-                                <h4 class="text-base sm:text-lg font-bold text-[#3f73a3]">Équipements récents</h4>
-                                <p class="text-xs sm:text-sm text-[#6A6A6A]">Des technologies innovantes pour des soins optimaux</p>
-                            </div>
-                        </div>
-                        <div class="flex bg-white shadow-md overflow-hidden rounded-lg">
-                            <div class="flex items-center justify-center bg-[#437305] w-20 sm:w-24 md:w-28">
-                                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h6l4 4v12a2 2 0 01-2 2z" />
-                                </svg>
-                            </div>
-                            <div class="p-3 sm:p-4 flex flex-col justify-center space-y-1">
-                                <h4 class="text-base sm:text-lg font-bold text-[#3f73a3]">Diagnostics sûrs</h4>
-                                <p class="text-xs sm:text-sm text-[#6A6A6A]">Analyses fiables pour des décisions médicales éclairées</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- Avantages -->
                 <div>
-                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#3f73a3] mb-2">Nos avantages</h2>
-                    <p class="text-sm sm:text-base text-black font-medium">Une expertise locale, un service réactif, une approche humaine.</p>
-                    <h3 class="text-base sm:text-lg md:text-xl text-[#437305] mt-4 mb-4 sm:mb-6">Des engagements concrets pour votre santé</h3>
-
-                    <div class="space-y-2 sm:space-y-4">
-                        <div class="flex items-start space-x-2 sm:space-x-3">
-                            <div class="bg-[#437305] p-1 sm:p-2 rounded-full">
-                                <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#3f73a3] mb-2 flex items-center gap-2">
+                        <i class="fas fa-star text-[#437305]"></i>
+                        Nos avantages
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex bg-white shadow-lg rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-center bg-[#437305] w-20">
+                                <i class="fas fa-microscope text-white text-2xl"></i>
                             </div>
-                            <p class="text-xs sm:text-sm md:text-base font-semibold text-[#3f73a3]">Technologie avancée</p>
+                            <div class="p-4 flex flex-col justify-center">
+                                <h4 class="text-lg font-bold text-[#3f73a3]">Technologie de pointe</h4>
+                                <p class="text-sm text-[#6A6A6A]">Des équipements récents pour des diagnostics fiables et rapides.</p>
+                            </div>
                         </div>
-                        <div class="flex items-start space-x-2 sm:space-x-3">
-                            <div class="bg-[#437305] p-1 sm:p-2 rounded-full">
-                                <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                        <div class="flex bg-white shadow-lg rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-center bg-[#437305] w-20">
+                                <i class="fas fa-user-shield text-white text-2xl"></i>
                             </div>
-                            <p class="text-xs sm:text-sm md:text-base font-semibold text-[#3f73a3]">Fiabilité garantie</p>
+                            <div class="p-4 flex flex-col justify-center">
+                                <h4 class="text-lg font-bold text-[#3f73a3]">Fiabilité & sécurité</h4>
+                                <p class="text-sm text-[#6A6A6A]">Des procédures certifiées et une confidentialité totale de vos données.</p>
+                            </div>
                         </div>
-                        <div class="flex items-start space-x-2 sm:space-x-3">
-                            <div class="bg-[#437305] p-1 sm:p-2 rounded-full">
-                                <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                        <div class="flex bg-white shadow-lg rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-center bg-[#437305] w-20">
+                                <i class="fas fa-users text-white text-2xl"></i>
                             </div>
-                            <p class="text-xs sm:text-sm md:text-base font-semibold text-[#3f73a3]">Service personnalisé</p>
+                            <div class="p-4 flex flex-col justify-center">
+                                <h4 class="text-lg font-bold text-[#3f73a3]">Équipe pluridisciplinaire</h4>
+                                <p class="text-sm text-[#6A6A6A]">Des experts passionnés à votre écoute, pour chaque étape de votre projet.</p>
+                            </div>
+                        </div>
+                        <div class="flex bg-white shadow-lg rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-center bg-[#437305] w-20">
+                                <i class="fas fa-hand-holding-heart text-white text-2xl"></i>
+                            </div>
+                            <div class="p-4 flex flex-col justify-center">
+                                <h4 class="text-lg font-bold text-[#3f73a3]">Accompagnement humain</h4>
+                                <p class="text-sm text-[#6A6A6A]">Un suivi personnalisé et bienveillant, centré sur vos besoins réels.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Accordéon  -->
-                <div class="w-full border border-gray-200 rounded-md">
-                    <button onclick="toggleAccordion(this)" class="w-full flex justify-between items-center px-4 py-3 cursor-pointer">
-                        <span class="text-blue-800 font-semibold text-left text-xs sm:text-base">Le cancer peut-il être détecté à l’aide d’une analyse de sang ?</span>
-                        <span class="icon relative w-6 h-6 flex items-center justify-center">
-                            <svg class="w-5 h-5 text-blue-600 transition-transform duration-300 plus" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                            <div class="hidden minus bg-green-700 rounded-full w-6 h-6 flex items-center justify-center">
-                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                <!-- Engagements -->
+                <div>
+                    <h3 class="text-lg sm:text-xl md:text-2xl text-[#437305] mt-4 mb-4 sm:mb-6 font-semibold flex items-center gap-2">
+                        <i class="fas fa-handshake-angle text-[#3f73a3]"></i>
+                        Nos engagements pour votre santé
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3">
+                            <span class="bg-[#437305] p-2 rounded-full">
+                                <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
-                            </div>
-                        </span>
-                    </button>
-                    <div class="accordion-content px-4 text-xs sm:text-sm text-gray-700 leading-relaxed">
-                        Il existe de nombreuses variantes de passages de lorem ipsum, mais la plupart d’entre eux ont été altérés d'une manière ou d'une autre par l’ajout d’humour ou de mots aléatoires.
-                    </div>
-                </div>
-
-                <div class="w-full border border-gray-200 rounded-md">
-                    <button onclick="toggleAccordion(this)" class="w-full flex justify-between items-center px-4 py-3 cursor-pointer">
-                        <span class="text-blue-800 font-semibold text-left text-xs sm:text-base">Quels types d’équipements proposez-vous ?</span>
-                        <span class="icon relative w-6 h-6 flex items-center justify-center">
-                        <svg class="w-5 h-5 text-blue-600 transition-transform duration-300 plus" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                        </svg>
-                        <div class="hidden minus bg-green-700 rounded-full w-6 h-6 flex items-center justify-center">
-                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
-                            </svg>
-                        </div>
-                        </span>
-                    </button>
-                    <div class="accordion-content px-4 text-xs sm:text-sm text-gray-700 leading-relaxed">
-                        Nous proposons une gamme complète d’équipements médicaux de diagnostic et d’analyse pour les professionnels de santé.
-                    </div>
-                </div>
-
-                <div class="w-full border border-gray-200 rounded-md">
-                    <button onclick="toggleAccordion(this)" class="w-full flex justify-between items-center px-4 py-3 cursor-pointer">
-                        <span class="text-blue-800 font-semibold text-left text-xs sm:text-base">Vos diagnostics sont-ils certifiés et fiables ?</span>
-                        <span class="icon relative w-6 h-6 flex items-center justify-center">
-                        <svg class="w-5 h-5 text-blue-600 transition-transform duration-300 plus" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                        </svg>
-                        <div class="hidden minus bg-green-700 rounded-full w-6 h-6 flex items-center justify-center">
-                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
-                            </svg>
-                        </div>
-                        </span>
-                    </button>
-                    <div class="accordion-content px-4 text-xs sm:text-sm text-gray-700 leading-relaxed">
-                        Oui, tous nos diagnostics sont réalisés conformément aux normes en vigueur et sont validés par des professionnels certifiés.
-                    </div>
+                            </span>
+                            <span class="text-base font-semibold text-[#3f73a3]">Conseils personnalisés et orientation claire</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="bg-[#437305] p-2 rounded-full">
+                                <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                            <span class="text-base font-semibold text-[#3f73a3]">Respect strict des normes internationales</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="bg-[#437305] p-2 rounded-full">
+                                <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                            <span class="text-base font-semibold text-[#3f73a3]">Transparence sur les tarifs et les délais</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="bg-[#437305] p-2 rounded-full">
+                                <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                            <span class="text-base font-semibold text-[#3f73a3]">Suivi continu et disponibilité 7j/7</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
