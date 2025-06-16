@@ -95,6 +95,7 @@
                                     <span>Nos Implentations</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
+                                <!-- Menu déroulant "Nos Implentations" -->
                                 <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block">
                                     <li>
                                         <a href="{{ route('accueil.togo') }}" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
@@ -468,9 +469,9 @@
                 </div>
                 <!-- Ligne 8 : 3 boutons côte à côte -->
                 <div class="flex flex-col sm:flex-row gap-2 md:gap-4 mt-4">
-                    <a href="{{ route('togo') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Togo</a>
-                    <a href="{{ route('benin') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Bénin</a>
-                    <a href="{{ route('niger') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Niger</a>
+                    <a href="{{ route('accueil.togo') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Togo</a>
+                    <a href="{{ route('accueil.benin') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Bénin</a>
+                    <a href="{{ route('accueil.niger') }}" class="bg-[#437305] text-white px-6 py-2 md:px-10 md:py-4 text-xs md:text-sm font-semibold rounded text-center">Niger</a>
                 </div>
             </div>
         </section>
