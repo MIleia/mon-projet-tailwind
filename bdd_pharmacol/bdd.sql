@@ -1,3 +1,4 @@
+-- Création de la base
 CREATE DATABASE IF NOT EXISTS pharmacol_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE pharmacol_db;
 DROP TABLE IF EXISTS newsletter;
@@ -48,9 +49,6 @@ CREATE TABLE IF NOT EXISTS postes (
     descriptif TEXT NOT NULL,
     localisation VARCHAR(255) NOT NULL
 );
-
-INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre1', 'ceci est un descriptif', 'localisation1');
-INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre2', 'ceci est un descriptif', 'localisation2');
 
 INSERT INTO utilisateur (mail, mot_de_passe) VALUES ('test@mail.com', '123456');
 
