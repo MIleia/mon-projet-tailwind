@@ -77,7 +77,6 @@
             </div>
 
             <!-- Bandeau Prestations & navbar responsive -->
-            <!-- Bandeau Prestations & navbar -->
                 <div class="relative z-0 qhero-prestations bg-cover bg-center h-[700px]" style="background-image: url('images/Page index/side-view-researcher-biotechnology-laboratory-with-plant-test-tube.jpg');">
                    
                 <div class="bg-white bg-opacity-100 backdrop-blur-md w-full md:w-[70%] mx-auto relative z-30">
@@ -94,20 +93,20 @@
                                 <i class="fas fa-bars"></i>
                             </button>
                             <!-- Menu principal -->
-                            <ul id="main-menu" class="hidden md:flex qnav-links flex-col md:flex-row flex md:items-center md:space-x-8 absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow md:shadow-none z-40 transition-all duration-300 ease-in-out">
+                            <ul id="main-menu" class="hidden md:flex qnav-links flex-col md:flex-row flex md:items-center md:space-x-10 absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow md:shadow-none z-40 transition-all duration-300 ease-in-out">
                                 <li class="qdropdown relative group">
-                                    <a href="#" class="text-[#437305] hover:text-green-600 flex items-center space-x-2 px-4 py-3 md:p-0">
+                                    <a href="#" class="text hover:text-gray-900 flex items-center space-x-2 px-4 py-3 md:p-0">
                                         <span>Nos Implentations</span>
                                         <i class="fas fa-chevron-down"></i>
                                     </a>
-                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block md:mt-2 z-50">
+                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block md:mt-0 z-50">
                                         <li>
                                             <a href="{{ route('accueil.togo') }}" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
                                                 <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="w-5 h-auto"> Togo
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('accueil.benin') }}" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
+                                            <a href="{{ route('accueil.benin') }}" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
                                                 <img src="https://flagcdn.com/w40/bj.png" alt="Benin" class="w-5 h-auto"> Benin
                                             </a>
                                         </li>
@@ -118,7 +117,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('prestation') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Prestations</a></li>
+                                <li><a href="{{ route('prestation') }}" class="text-gray-90 hover:text-green-600 block px-4 py-3 md:p-0">Prestations</a></li>
                                 <li><a href="{{ route('recrutement') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Recrutement</a></li>
                                 <li><a href="{{ route('blog') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Blog</a></li>
                                 <li><a href="{{ route('contact') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Contact</a></li>
@@ -127,38 +126,113 @@
                     </nav>
                 </div>
                 <script>
-                    // Menu burger responsive
+                // Menu burger responsive
+                const menuToggle = document.getElementById('menu-toggle');
+                const mainMenu = document.getElementById('main-menu');
+                menuToggle.addEventListener('click', () => {
+                    mainMenu.classList.toggle('hidden');
+                });
+
+                // Dropdown mobile (ouvre/ferme au clic, referme si déjà ouvert)
+                document.querySelectorAll('.qdropdown > a').forEach(drop => {
+                    drop.addEventListener('click', function(e) {
+                        if(window.innerWidth < 768) {
+                            e.preventDefault();
+                            const submenu = this.nextElementSibling;
+                            // Ferme si déjà ouvert, sinon ouvre et ferme les autres
+                            if (!submenu.classList.contains('hidden')) {
+                                submenu.classList.add('hidden');
+                            } else {
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    menu.classList.add('hidden');
+                                });
+                                submenu.classList.remove('hidden');
+                            }
+                        }
+                    });
+                });
+
+                // Fermer le sous-menu si on clique ailleurs sur mobile
+                document.addEventListener('click', function(e) {
+                    if(window.innerWidth < 768) {
+                        const isDropdown = e.target.closest('.qdropdown');
+                        const isMenuToggle = e.target.closest('#menu-toggle');
+                        if(!isDropdown && !isMenuToggle) {
+                            document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                menu.classList.add('hidden');
+                            });
+                        }
+                    }
+                });
+
+                // Gestion du dropdown "Nos Implentations" sur desktop
+                document.querySelectorAll('.qdropdown > a').forEach(drop => {
+                    drop.addEventListener('click', function(e) {
+                        if (window.innerWidth >= 768) {
+                            e.preventDefault();
+                            const submenu = this.nextElementSibling;
+                            submenu.classList.toggle('hidden');
+                        }
+                    });
+                });
+
+                // Fermer le sous-menu si on clique ailleurs (desktop uniquement)
+                document.addEventListener('click', function(e) {
+                    if (window.innerWidth >= 768) {
+                        const isDropdown = e.target.closest('.qdropdown');
+                        if (!isDropdown) {
+                            document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                menu.classList.add('hidden');
+                            });
+                        }
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', function () {
                     const menuToggle = document.getElementById('menu-toggle');
                     const mainMenu = document.getElementById('main-menu');
-                    menuToggle.addEventListener('click', () => {
-                        mainMenu.classList.toggle('hidden');
-                    });
 
-                    // Dropdown mobile (ouvre/ferme au clic, referme si déjà ouvert)
+                    // Burger menu
+                    if (menuToggle && mainMenu) {
+                        menuToggle.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            mainMenu.classList.toggle('hidden');
+                        });
+                        mainMenu.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                        });
+                        document.body.addEventListener('click', function () {
+                            if (window.innerWidth < 768) {
+                                mainMenu.classList.add('hidden');
+                                // Ferme aussi tous les sous-menus
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    menu.classList.add('hidden');
+                                });
+                            }
+                        });
+                    }
+
+                    // Dropdown mobile
                     document.querySelectorAll('.qdropdown > a').forEach(drop => {
                         drop.addEventListener('click', function(e) {
                             if(window.innerWidth < 768) {
                                 e.preventDefault();
                                 const submenu = this.nextElementSibling;
-                                // Ferme si déjà ouvert, sinon ouvre et ferme les autres
-                                if (!submenu.classList.contains('hidden')) {
-                                    submenu.classList.add('hidden');
-                                } else {
-                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                                        menu.classList.add('hidden');
-                                    });
-                                    submenu.classList.remove('hidden');
-                                }
+                                // Toggle le sous-menu
+                                submenu.classList.toggle('hidden');
+                                // Ferme les autres sous-menus
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    if (menu !== submenu) menu.classList.add('hidden');
+                                });
                             }
                         });
                     });
 
-                    // Fermer le sous-menu si on clique ailleurs sur mobile
+                    // Fermer le sous-menu mobile si on clique ailleurs
                     document.addEventListener('click', function(e) {
                         if(window.innerWidth < 768) {
                             const isDropdown = e.target.closest('.qdropdown');
-                            const isMenuToggle = e.target.closest('#menu-toggle');
-                            if(!isDropdown && !isMenuToggle) {
+                            if(!isDropdown) {
                                 document.querySelectorAll('.qdropdown-menu').forEach(menu => {
                                     menu.classList.add('hidden');
                                 });
@@ -166,105 +240,30 @@
                         }
                     });
 
-                    // Gestion du dropdown "Nos Implentations" sur desktop
-                        document.querySelectorAll('.qdropdown > a').forEach(drop => {
-                            drop.addEventListener('click', function(e) {
-                                if (window.innerWidth >= 768) {
-                                    e.preventDefault();
-                                    const submenu = this.nextElementSibling;
-                                    submenu.classList.toggle('hidden');
-                                }
-                            });
-                        });
-
-                        // Fermer le sous-menu si on clique ailleurs (desktop uniquement)
-                        document.addEventListener('click', function(e) {
+                    // Dropdown desktop
+                    document.querySelectorAll('.qdropdown > a').forEach(drop => {
+                        drop.addEventListener('click', function(e) {
                             if (window.innerWidth >= 768) {
-                                const isDropdown = e.target.closest('.qdropdown');
-                                if (!isDropdown) {
-                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                                        menu.classList.add('hidden');
-                                    });
-                                }
-                            }
-                        });
-
-                        document.addEventListener('DOMContentLoaded', function () {
-                        const menuToggle = document.getElementById('menu-toggle');
-                        const mainMenu = document.getElementById('main-menu');
-
-                        // Burger menu
-                        if (menuToggle && mainMenu) {
-                            menuToggle.addEventListener('click', function (e) {
-                                e.stopPropagation();
-                                mainMenu.classList.toggle('hidden');
-                            });
-                            mainMenu.addEventListener('click', function(e) {
-                                e.stopPropagation();
-                            });
-                            document.body.addEventListener('click', function () {
-                                if (window.innerWidth < 768) {
-                                    mainMenu.classList.add('hidden');
-                                    // Ferme aussi tous les sous-menus
-                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                                        menu.classList.add('hidden');
-                                    });
-                                }
-                            });
-                        }
-
-                        // Dropdown mobile
-                        document.querySelectorAll('.qdropdown > a').forEach(drop => {
-                            drop.addEventListener('click', function(e) {
-                                if(window.innerWidth < 768) {
-                                    e.preventDefault();
-                                    const submenu = this.nextElementSibling;
-                                    // Toggle le sous-menu
-                                    submenu.classList.toggle('hidden');
-                                    // Ferme les autres sous-menus
-                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                                        if (menu !== submenu) menu.classList.add('hidden');
-                                    });
-                                }
-                            });
-                        });
-
-                        // Fermer le sous-menu mobile si on clique ailleurs
-                        document.addEventListener('click', function(e) {
-                            if(window.innerWidth < 768) {
-                                const isDropdown = e.target.closest('.qdropdown');
-                                if(!isDropdown) {
-                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                                        menu.classList.add('hidden');
-                                    });
-                                }
-                            }
-                        });
-
-                        // Dropdown desktop
-                        document.querySelectorAll('.qdropdown > a').forEach(drop => {
-                            drop.addEventListener('click', function(e) {
-                                if (window.innerWidth >= 768) {
-                                    e.preventDefault();
-                                    const submenu = this.nextElementSibling;
-                                    submenu.classList.toggle('hidden');
-                                }
-                            });
-                        });
-
-                        // Fermer le sous-menu si on clique ailleurs (desktop)
-                        document.addEventListener('click', function(e) {
-                            if (window.innerWidth >= 768) {
-                                const isDropdown = e.target.closest('.qdropdown');
-                                if (!isDropdown) {
-                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                                        menu.classList.add('hidden');
-                                    });
-                                }
+                                e.preventDefault();
+                                const submenu = this.nextElementSibling;
+                                submenu.classList.toggle('hidden');
                             }
                         });
                     });
-                </script>
+
+                    // Fermer le sous-menu si on clique ailleurs (desktop)
+                    document.addEventListener('click', function(e) {
+                        if (window.innerWidth >= 768) {
+                            const isDropdown = e.target.closest('.qdropdown');
+                            if (!isDropdown) {
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    menu.classList.add('hidden');
+                                });
+                            }
+                        }
+                    });
+                });
+            </script>
 
                 <div class="absolute inset-0 flex flex-col gap-20 items-center justify-center text-white">
                     <h1 class="text-4xl md:text-5xl font-bold text-center">PHARMACOL, un réseau de <br> délégués médicaux sur le Togo, <br> le Bénin , le Niger</h1>
