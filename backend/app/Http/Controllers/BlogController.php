@@ -40,7 +40,7 @@ class BlogController extends Controller
         $data['date'] = now();
         Blog::create($data);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Article ajouté !');
+        return redirect()->to(route('admin.dashboard', [], false) . '#blog')->with('success', 'Article ajouté !');
     }
 
     public function edit($id)
@@ -68,14 +68,14 @@ class BlogController extends Controller
 
         $blog->update($data);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Article modifié !');
+        return redirect()->to(route('admin.dashboard', [], false) . '#blog')->with('success', 'Article modifié !');
     }
 
     public function destroy($id)
     {
         $blog = Blog::findOrFail($id);
         $blog->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Article supprimé !');
+        return redirect()->to(route('admin.dashboard', [], false) . '#blog')->with('success', 'Article supprimé !');
     }
 }
 

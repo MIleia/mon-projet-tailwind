@@ -436,9 +436,9 @@
                 }).addTo(map);
 
                 @foreach($entreprises as $e)
-                    L.marker([{{ $e->latitude }}, {{ $e->longitude }}])
-                        .addTo(map)
+                    var marker = L.marker([{{ $e->latitude }}, {{ $e->longitude }}]).addTo(map)
                         .bindPopup('<b>{{ addslashes($e->nom) }}</b><br>{{ addslashes($e->ville) }}<br>{{ addslashes($e->pays) }}');
+                    marker.bindTooltip("{{ addslashes($e->nom) }}, {{ addslashes($e->ville) }}", {permanent: true, direction: "top", offset: [-15, -10], className: "bg-white text-xs font-semibold px-2 py-1 rounded shadow"});
                 @endforeach
             }
         });
