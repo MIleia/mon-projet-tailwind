@@ -31,7 +31,10 @@ class BlogController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads', 'public');
+            $image = $request->file('image');
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image->getClientOriginalName());
+            $image->move(public_path('images/blog'), $filename);
+            $data['image'] = 'images/blog/' . $filename;
         }
 
         $data['date'] = now();
@@ -57,7 +60,10 @@ class BlogController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads', 'public');
+            $image = $request->file('image');
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image->getClientOriginalName());
+            $image->move(public_path('images/blog'), $filename);
+            $data['image'] = 'images/blog/' . $filename;
         }
 
         $blog->update($data);

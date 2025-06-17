@@ -287,6 +287,15 @@
                                 <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Créer</button>
                             </form>
                         </div>
+                        @if($errors->any())
+                            <div class="bg-red-100 text-red-700 p-2 rounded mb-2">
+                                <ul class="list-disc pl-5">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="overflow-x-auto">
                             <table class="min-w-full table-auto">
                                 <thead class="bg-gray-800 text-gray-300">

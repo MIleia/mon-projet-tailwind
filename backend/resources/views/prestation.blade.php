@@ -225,9 +225,9 @@
             </aside>
 
             <div class="md:col-span-2 flex items-center justify-center">
-                <img src="{{ asset('images/Page prestations 2/medical-doctor-girl-working-with-microscope-young-female-scientist-doing-vaccine-research.jpg') }}"
+                <img id="service-image" src="{{ asset('images/Page prestations 2/medical-doctor-girl-working-with-microscope-young-female-scientist-doing-vaccine-research.jpg') }}"
                     alt="Recherche médicale"
-                    class="rounded-2xl shadow-xl w-full max-w-3xl object-cover" />
+                    class="rounded-2xl shadow-xl w-full max-w-3xl object-cover transition-all duration-500" />
             </div>
         </div>
     </section>
@@ -416,10 +416,26 @@
             `
         };
 
+        // Images associées à chaque service
+        const servicesImages = {
+            promotion: "{{ asset('images/Page prestations 2/medical-doctor-girl-working-with-microscope-young-female-scientist-doing-vaccine-research.jpg') }}",
+            encadrement: "{{ asset('images/Page prestations 2/team-meeting-pharma.jpg') }}",
+            representation: "{{ asset('images/Page prestations 2/pharma-representation.jpg') }}",
+            autorisation: "{{ asset('images/Page prestations 2/autorisation-marche.jpg') }}",
+            marketing: "{{ asset('images/Page prestations 2/marketing-communication.jpg') }}",
+            consulting: "{{ asset('images/Page prestations 2/consulting-pharma.jpg') }}"
+        };
+
         // Fonction pour afficher le contenu selon le service choisi
         function showContent(key) {
             const area = document.getElementById('content-area');
             area.innerHTML = servicesContent[key] || '';
+            // Mettre à jour l'image
+            const img = document.getElementById('service-image');
+            if (img && servicesImages[key]) {
+                img.src = servicesImages[key];
+                img.alt = document.querySelector(`button[data-key="${key}"]`)?.innerText || '';
+            }
             // Optionnel : mettre à jour le style du bouton actif
             document.querySelectorAll('.service-btn').forEach(btn => {
                 btn.classList.remove('bg-[#3f73a3]', 'text-white');

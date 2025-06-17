@@ -23,6 +23,7 @@
             <select name="etat" class="w-full border rounded p-2" required>
                 <option value="en ligne">En ligne</option>
                 <option value="brouillon">Brouillon</option>
+                <option value="newsletter">Newsletter</option>
                 <option value="les 2">Les 2</option>
             </select>
         </div>
