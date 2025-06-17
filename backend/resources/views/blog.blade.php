@@ -13,6 +13,14 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
             body { font-family: 'Lexend', 'Inter', sans-serif; }
+            .accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+            .accordion-content.open {
+                padding-bottom: 0.75rem;
+            }
             .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
             @keyframes fade-in-up {
                 0% { opacity: 0; transform: translateY(20px);}

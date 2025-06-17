@@ -556,18 +556,18 @@
             });
         </script>
         
-        <section class="bg-gradient-to-br from-[#f8fafc] to-[#e6f2ff] px-2 sm:px-4 pb-16 sm:pb-24">
+        <section class="bg-gradient-to-br from-[#fafbfc] to-[#eff6fd] px-2 sm:px-4 pb-16 sm:pb-24">
             <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start">
                 <!-- Bloc aide rapide -->
                 <div class="flex flex-col justify-between space-y-8 self-start h-auto">
-                    <div class="bg-gradient-to-br from-[#3C74A8F5] to-[#437305] text-white rounded-3xl shadow-2xl p-8 flex flex-col items-center justify-center text-center border-2 border-[#e6f2ff]">
-                        <svg class="w-14 h-14 mb-5 text-white drop-shadow-lg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" />
+                    <div class="bg-white/90 border border-[#d1e7ef] rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center text-center">
+                        <svg class="w-14 h-14 mb-5 text-[#3C74A8] drop-shadow" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9" stroke="#3C74A8" stroke-width="2" fill="#e6f2ff"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" stroke="#437305" stroke-width="2"/>
                         </svg>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold mb-2 tracking-tight">Besoin d'une aide rapide ?</h2>
-                        <p class="mb-6 text-base sm:text-lg opacity-90">Notre équipe médicale vous répond gratuitement et en toute confidentialité.</p>
-                        <a href="{{ route('contact') }}" class="inline-block bg-white text-[#3f73a3] font-bold px-6 py-3 rounded-full shadow hover:bg-blue-100 transition-all duration-200">Contactez-nous</a>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold mb-2 tracking-tight text-[#3C74A8]">Besoin d'une aide rapide ?</h2>
+                        <p class="mb-6 text-base sm:text-lg text-[#437305] opacity-90">Notre équipe médicale vous répond gratuitement et en toute confidentialité.</p>
+                        <a href="{{ route('contact') }}" class="inline-block bg-[#3C74A8] text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-[#437305] transition-all duration-200">Contactez-nous</a>
                     </div>
                 </div>
 
@@ -575,9 +575,10 @@
                 <div class="md:col-span-2 flex flex-col space-y-10 sm:space-y-14">
                     <!-- Bloc Intro -->
                     <div class="space-y-3 sm:space-y-6">
-                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#3f73a3] text-center sm:text-left flex items-center gap-3">
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#3C74A8] text-center sm:text-left flex items-center gap-3">
                             <svg class="w-8 h-8 text-[#437305]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
+                                <circle cx="12" cy="12" r="8" stroke="#3C74A8" stroke-width="2" fill="#e6f2ff"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01" stroke="#437305"/>
                             </svg>
                             Pourquoi choisir notre expertise ?
                         </h2>
@@ -589,20 +590,20 @@
                     <!-- Valeurs -->
                     <div class="space-y-2 sm:space-y-4">
                         <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-[#437305] flex items-center gap-2">
-                            <i class="fas fa-heartbeat text-[#3f73a3]"></i>
+                            <i class="fas fa-heartbeat text-[#3C74A8]"></i>
                             Nos valeurs
                         </h3>
                         <ul class="flex flex-wrap gap-4 sm:gap-6">
-                            <li class="flex items-center bg-white rounded-lg shadow px-4 py-2 text-[#3f73a3] font-semibold text-sm sm:text-base">
+                            <li class="flex items-center bg-white border border-[#d1e7ef] rounded-lg shadow px-4 py-2 text-[#3C74A8] font-semibold text-sm sm:text-base">
                                 <i class="fas fa-bolt text-[#437305] mr-2"></i> Réactivité
                             </li>
-                            <li class="flex items-center bg-white rounded-lg shadow px-4 py-2 text-[#3f73a3] font-semibold text-sm sm:text-base">
+                            <li class="flex items-center bg-white border border-[#d1e7ef] rounded-lg shadow px-4 py-2 text-[#3C74A8] font-semibold text-sm sm:text-base">
                                 <i class="fas fa-sync-alt text-[#437305] mr-2"></i> Adaptabilité
                             </li>
-                            <li class="flex items-center bg-white rounded-lg shadow px-4 py-2 text-[#3f73a3] font-semibold text-sm sm:text-base">
+                            <li class="flex items-center bg-white border border-[#d1e7ef] rounded-lg shadow px-4 py-2 text-[#3C74A8] font-semibold text-sm sm:text-base">
                                 <i class="fas fa-balance-scale text-[#437305] mr-2"></i> Rigueur
                             </li>
-                            <li class="flex items-center bg-white rounded-lg shadow px-4 py-2 text-[#3f73a3] font-semibold text-sm sm:text-base">
+                            <li class="flex items-center bg-white border border-[#d1e7ef] rounded-lg shadow px-4 py-2 text-[#3C74A8] font-semibold text-sm sm:text-base">
                                 <i class="fas fa-eye text-[#437305] mr-2"></i> Transparence
                             </li>
                         </ul>
@@ -610,44 +611,44 @@
 
                     <!-- Avantages -->
                     <div>
-                        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#3f73a3] mb-2 flex items-center gap-2">
+                        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#3C74A8] mb-2 flex items-center gap-2">
                             <i class="fas fa-star text-[#437305]"></i>
                             Nos avantages
                         </h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="flex bg-white shadow-lg rounded-xl overflow-hidden">
-                                <div class="flex items-center justify-center bg-[#437305] w-20">
-                                    <i class="fas fa-microscope text-white text-2xl"></i>
+                            <div class="flex bg-white border border-[#d1e7ef] shadow rounded-xl overflow-hidden">
+                                <div class="flex items-center justify-center bg-[#e6f2ff] w-20">
+                                    <i class="fas fa-microscope text-[#3C74A8] text-2xl"></i>
                                 </div>
                                 <div class="p-4 flex flex-col justify-center">
-                                    <h4 class="text-lg font-bold text-[#3f73a3]">Technologie de pointe</h4>
+                                    <h4 class="text-lg font-bold text-[#3C74A8]">Technologie de pointe</h4>
                                     <p class="text-sm text-[#6A6A6A]">Des équipements récents pour des diagnostics fiables et rapides.</p>
                                 </div>
                             </div>
-                            <div class="flex bg-white shadow-lg rounded-xl overflow-hidden">
-                                <div class="flex items-center justify-center bg-[#437305] w-20">
-                                    <i class="fas fa-user-shield text-white text-2xl"></i>
+                            <div class="flex bg-white border border-[#d1e7ef] shadow rounded-xl overflow-hidden">
+                                <div class="flex items-center justify-center bg-[#e6f2ff] w-20">
+                                    <i class="fas fa-user-shield text-[#3C74A8] text-2xl"></i>
                                 </div>
                                 <div class="p-4 flex flex-col justify-center">
-                                    <h4 class="text-lg font-bold text-[#3f73a3]">Fiabilité & sécurité</h4>
+                                    <h4 class="text-lg font-bold text-[#3C74A8]">Fiabilité & sécurité</h4>
                                     <p class="text-sm text-[#6A6A6A]">Des procédures certifiées et une confidentialité totale de vos données.</p>
                                 </div>
                             </div>
-                            <div class="flex bg-white shadow-lg rounded-xl overflow-hidden">
-                                <div class="flex items-center justify-center bg-[#437305] w-20">
-                                    <i class="fas fa-users text-white text-2xl"></i>
+                            <div class="flex bg-white border border-[#d1e7ef] shadow rounded-xl overflow-hidden">
+                                <div class="flex items-center justify-center bg-[#e6f2ff] w-20">
+                                    <i class="fas fa-users text-[#3C74A8] text-2xl"></i>
                                 </div>
                                 <div class="p-4 flex flex-col justify-center">
-                                    <h4 class="text-lg font-bold text-[#3f73a3]">Équipe pluridisciplinaire</h4>
+                                    <h4 class="text-lg font-bold text-[#3C74A8]">Équipe pluridisciplinaire</h4>
                                     <p class="text-sm text-[#6A6A6A]">Des experts passionnés à votre écoute, pour chaque étape de votre projet.</p>
                                 </div>
                             </div>
-                            <div class="flex bg-white shadow-lg rounded-xl overflow-hidden">
-                                <div class="flex items-center justify-center bg-[#437305] w-20">
-                                    <i class="fas fa-hand-holding-heart text-white text-2xl"></i>
+                            <div class="flex bg-white border border-[#d1e7ef] shadow rounded-xl overflow-hidden">
+                                <div class="flex items-center justify-center bg-[#e6f2ff] w-20">
+                                    <i class="fas fa-hand-holding-heart text-[#3C74A8] text-2xl"></i>
                                 </div>
                                 <div class="p-4 flex flex-col justify-center">
-                                    <h4 class="text-lg font-bold text-[#3f73a3]">Accompagnement humain</h4>
+                                    <h4 class="text-lg font-bold text-[#3C74A8]">Accompagnement humain</h4>
                                     <p class="text-sm text-[#6A6A6A]">Un suivi personnalisé et bienveillant, centré sur vos besoins réels.</p>
                                 </div>
                             </div>
@@ -657,41 +658,41 @@
                     <!-- Engagements -->
                     <div>
                         <h3 class="text-lg sm:text-xl md:text-2xl text-[#437305] mt-4 mb-4 sm:mb-6 font-semibold flex items-center gap-2">
-                            <i class="fas fa-handshake-angle text-[#3f73a3]"></i>
+                            <i class="fas fa-handshake-angle text-[#3C74A8]"></i>
                             Nos engagements pour votre santé
                         </h3>
                         <ul class="space-y-3">
                             <li class="flex items-center gap-3">
-                                <span class="bg-[#437305] p-2 rounded-full">
-                                    <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <span class="bg-[#e6f2ff] p-2 rounded-full">
+                                    <svg class="h-5 w-5 text-[#3C74A8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </span>
-                                <span class="text-base font-semibold text-[#3f73a3]">Conseils personnalisés et orientation claire</span>
+                                <span class="text-base font-semibold text-[#3C74A8]">Conseils personnalisés et orientation claire</span>
                             </li>
                             <li class="flex items-center gap-3">
-                                <span class="bg-[#437305] p-2 rounded-full">
-                                    <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <span class="bg-[#e6f2ff] p-2 rounded-full">
+                                    <svg class="h-5 w-5 text-[#3C74A8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </span>
-                                <span class="text-base font-semibold text-[#3f73a3]">Respect strict des normes internationales</span>
+                                <span class="text-base font-semibold text-[#3C74A8]">Respect strict des normes internationales</span>
                             </li>
                             <li class="flex items-center gap-3">
-                                <span class="bg-[#437305] p-2 rounded-full">
-                                    <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <span class="bg-[#e6f2ff] p-2 rounded-full">
+                                    <svg class="h-5 w-5 text-[#3C74A8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </span>
-                                <span class="text-base font-semibold text-[#3f73a3]">Transparence sur les tarifs et les délais</span>
+                                <span class="text-base font-semibold text-[#3C74A8]">Transparence sur les tarifs et les délais</span>
                             </li>
                             <li class="flex items-center gap-3">
-                                <span class="bg-[#437305] p-2 rounded-full">
-                                    <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <span class="bg-[#e6f2ff] p-2 rounded-full">
+                                    <svg class="h-5 w-5 text-[#3C74A8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </span>
-                                <span class="text-base font-semibold text-[#3f73a3]">Suivi continu et disponibilité 7j/7</span>
+                                <span class="text-base font-semibold text-[#3C74A8]">Suivi continu et disponibilité 7j/7</span>
                             </li>
                         </ul>
                     </div>
