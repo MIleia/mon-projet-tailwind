@@ -491,7 +491,7 @@
                 <!-- Bouton -->
                 <div class="self-start">
                     <a href="{{ route('recrutement') }}" class="bg-white text-[#31689B] px-4 py-2 md:px-6 md:py-3 font-semibold shadow-md hover:bg-gray-100 transition rounded">
-                        Nous joindre
+                        Nous rejoindre
                     </a>
                 </div>
             </div>
@@ -501,7 +501,7 @@
         <div class="bg-white py-12 px-4 md:px-8">
             <div class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative">
                 <!-- Card 1 -->
-                <a href="recrutement.php" class="bg-white shadow-md p-6 flex-1 border border-gray-200 relative w-full mb-8 md:mb-0">
+                <a href="{{ route('recrutement') }}" class="bg-white shadow-md p-6 flex-1 border border-gray-200 relative w-full mb-8 md:mb-0">
                     <div class="w-16 h-16 md:w-20 md:h-20 absolute -top-8 left-6">
                         <img src="images/Page index/icon1.png" alt="Délégués" class="w-full h-full object-contain" />
                     </div>
@@ -511,7 +511,7 @@
                     </p>
                 </a>
                 <!-- Card 2 -->
-                <a href="recrutement.php" class="bg-white shadow-md p-6 flex-1 border border-gray-200 relative w-full">
+                <a href="{{ route('recrutement') }}" class="bg-white shadow-md p-6 flex-1 border border-gray-200 relative w-full">
                     <div class="w-16 h-16 md:w-20 md:h-20 absolute -top-8 left-6">
                         <img src="images/Page index/icon2.png" alt="Assistants" class="w-full h-full object-contain" />
                     </div>

@@ -214,23 +214,23 @@
 
             @if($dernier)
             <!-- Dernier article en grand -->
-            <article class="relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row animate-fade-in-up mb-12 blog-card border border-[#e0e7ef]">
+            <article class="relative bg-gradient-to-br from-[#eaf6ff] via-white to-[#f0f7fa] rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-fade-in-up mb-16 blog-card border border-[#d1e3f8] hover:shadow-2xl transition-all duration-300">
                 @if($dernier->image)
-                    <div class="md:w-1/2 w-full h-72 md:h-auto">
-                        <img src="{{ asset($dernier->image) }}" alt="Image de l'article" class="w-full h-full object-cover blog-img">
+                    <div class="md:w-1/2 w-full h-80 md:h-auto overflow-hidden">
+                        <img src="{{ asset($dernier->image) }}" alt="Image de l'article" class="w-full h-full object-cover blog-img scale-105 hover:scale-100 transition-transform duration-300">
                     </div>
                 @endif
-                <div class="flex-1 p-8 flex flex-col justify-center relative">
-                    <span class="dernier-article-badge">Dernier article</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-3 text-[#3C74A8] leading-tight">{{ $dernier->titre }}</h2>
-                    <div class="mb-4 text-base text-gray-700 leading-relaxed">
+                <div class="flex-1 p-10 flex flex-col justify-center relative">
+                    <span class="dernier-article-badge shadow-lg">Dernier article</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-[#2a527a] leading-tight drop-shadow-sm">{{ $dernier->titre }}</h2>
+                    <div class="mb-4 text-lg text-gray-700 leading-relaxed texte-extrait">
                         {{ \Illuminate\Support\Str::limit(strip_tags($dernier->texte), 300) }}
                     </div>
-                    <button class="btn-lire-suite text-[#437305] hover:underline flex items-center gap-1 font-semibold">
+                    <button class="btn-lire-suite text-[#437305] hover:underline flex items-center gap-1 font-semibold transition-colors duration-200">
                         <span>Lire la suite</span>
                         <i class="fas fa-chevron-down text-xs"></i>
                     </button>
-                    <div class="texte-complet hidden mt-4 text-gray-700 leading-relaxed">
+                    <div class="texte-complet hidden mt-4 text-gray-700 leading-relaxed bg-white/80 p-4 rounded-xl shadow-inner">
                         {!! $dernier->texte !!}
                     </div>
                 </div>
@@ -238,26 +238,31 @@
             @endif
 
             <!-- Les autres articles, 2 par ligne, sans bug d'affichage -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 @foreach($autres as $i => $article)
-                    <article class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col animate-fade-in-up blog-card border border-[#e0e7ef]">
+                    <article class="relative bg-gradient-to-br from-[#f7fafc] via-white to-[#eaf6ff] rounded-2xl shadow-lg overflow-hidden flex flex-col animate-fade-in-up blog-card border border-[#e0e7ef] hover:shadow-2xl transition-all duration-300 group">
                         @if($article->image)
-                            <img src="{{ asset($article->image) }}" alt="Image de l'article" class="w-full h-56 object-cover blog-img">
+                            <div class="overflow-hidden h-56">
+                                <img src="{{ asset($article->image) }}" alt="Image de l'article" class="w-full h-full object-cover blog-img group-hover:scale-105 transition-transform duration-300">
+                            </div>
                         @endif
-                        <div class="p-6 flex flex-col flex-1">
-                            <h2 class="text-2xl font-bold mb-2 text-[#3C74A8] leading-tight">{{ $article->titre }}</h2>
+                        <div class="p-7 flex flex-col flex-1">
+                            <h2 class="text-2xl font-bold mb-2 text-[#3C74A8] leading-tight group-hover:text-[#437305] transition-colors duration-200">{{ $article->titre }}</h2>
                             <div class="flex-1">
-                                <div class="texte-extrait text-gray-700 leading-relaxed">
+                                <div class="texte-extrait text-gray-700 leading-relaxed text-base">
                                     {{ \Illuminate\Support\Str::limit(strip_tags($article->texte), 180) }}
                                 </div>
-                                <div class="texte-complet hidden text-gray-700 leading-relaxed">
+                                <div class="texte-complet hidden text-gray-700 leading-relaxed bg-white/80 p-3 rounded-xl shadow-inner mt-2">
                                     {!! $article->texte !!}
                                 </div>
                             </div>
-                            <button class="btn-lire-suite mt-4 text-[#437305] hover:underline flex items-center gap-1 font-semibold">
+                            <button class="btn-lire-suite mt-4 text-[#437305] hover:underline flex items-center gap-1 font-semibold transition-colors duration-200">
                                 <span>Lire la suite</span>
                                 <i class="fas fa-chevron-down text-xs"></i>
                             </button>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-[#3C74A8] text-white text-xs px-3 py-1 rounded-full shadow-md opacity-80">
+                            {{ \Carbon\Carbon::parse($article->date)->translatedFormat('d M Y') }}
                         </div>
                     </article>
                 @endforeach
