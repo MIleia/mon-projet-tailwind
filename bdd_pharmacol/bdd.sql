@@ -50,6 +50,9 @@ CREATE TABLE IF NOT EXISTS postes (
     localisation VARCHAR(255) NOT NULL
 );
 
-INSERT INTO utilisateur (mail, mot_de_passe) VALUES ('test@mail.com', '123456');
+INSERT INTO utilisateur (mail, mot_de_passe, role) VALUES 
+('admin@pharmacol.com', '$2y$10$VscUIy.v0K0HNofz3ttTrOHbMNLXd8kQFEFfEC8KrKOEOGyFcUSqu', 'admin'),
+
+-- Mot de passe admin : 1234
 
 
