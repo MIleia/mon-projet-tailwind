@@ -305,7 +305,7 @@
                             <li>
                             <button onclick="showContent('autorisation')" data-key="autorisation"
                                 class="service-btn group w-full text-left flex justify-between items-center bg-white px-4 sm:px-5 py-3 sm:py-4 text-[#3f73a3] font-semibold hover:bg-[#3f73a3] hover:text-white shadow transition rounded">
-                                Autorisation sur le marché
+                                Autorisation de mise sur le marché
                                 <span class="text-[#437305] group-hover:text-blue-200 transition">&rarr;</span>
                             </button>
                             </li>
@@ -434,7 +434,7 @@
                     <div class="space-y-4">
                         <h2 class="text-2xl font-bold text-[#3f73a3] mb-4 flex items-center gap-2">
                             <i class="fas fa-certificate text-[#437305]"></i>
-                            Autorisation sur le marché
+                            Autorisation de mise sur le marché
                         </h2>
                         <p class="mb-2 text-gray-700 text-lg">
                             L’<strong>obtention de l’autorisation de mise sur le marché (AMM)</strong> est une étape cruciale pour la commercialisation de vos produits pharmaceutiques. Notre équipe vous accompagne à chaque phase du processus, de la constitution du dossier à la validation finale par les autorités compétentes.

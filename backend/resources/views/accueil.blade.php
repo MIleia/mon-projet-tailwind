@@ -347,7 +347,9 @@
             <!-- Encart vert - Années d'expérience -->
             <div class="absolute bottom-0 right-4 sm:right-20 bg-[#437305] w-[180px] h-[100px] sm:w-[250px] sm:h-[250px] text-white flex flex-col items-center justify-center px-4 sm:px-6 gap-2 sm:gap-4 overflow-hidden shadow-lg">
                 <img src="images/Page index/vector2.png" alt="" class="absolute w-full h-full object-cover opacity-20">
-                <div class="relative z-10 text-2xl sm:text-5xl font-bold">+25</div>
+                <div class="relative z-10 text-2xl sm:text-5xl font-bold">
+                    +{{ $general['experience'] ?? '-' }}
+                </div>
                 <div class="relative z-10 text-xs sm:text-lg font-bold text-center">Années d’Expérience</div>
             </div>
         
@@ -492,43 +494,35 @@
 
         <!-- Section avec fond image et grid centrée -->
         <section class="w-full h-screen bg-cover bg-center relative" style="background-image: url('images/Page index/portrait-female-pharmacist-working-drugstore.jpg');">
-        
-            <!-- Overlay (optionnel pour foncer un peu l’image de fond) -->
             <div class="absolute inset-0 bg-black/40"></div>
-        
-            <!-- Contenu centré -->
             <div class="relative z-10 flex items-center justify-center h-full">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
                     <!-- Élément 1 -->
                     <div class="flex flex-col items-center justify-center text-white gap-2">
                         <img src="images/Page index/10.png" class="w-16 h-16 mb-4" alt="Icone 1">
-                        <div class="text-3xl font-bold">3</div>
-                        <div class="text-sm text-center">Pays</div>
+                        <div class="text-3xl font-bold">{{ $general['pays_couverts'] ?? 3 }}</div>
+                        <div class="text-sm text-center">Pays couverts</div>
                     </div>
-            
                     <!-- Élément 2 -->
                     <div class="flex flex-col items-center justify-center text-white gap-2">
                         <img src="images/Page index/11.png" class="w-16 h-16 mb-4" alt="Icone 2">
-                        <div class="text-3xl font-bold">64</div>
-                        <div class="text-sm text-center">Délégués terrains</div>
+                        <div class="text-3xl font-bold">{{ $collaborateurs }}</div>
+                        <div class="text-sm text-center">Collaborateurs terrain mobilisés</div>
                     </div>
-            
                     <!-- Élément 3 -->
                     <div class="flex flex-col items-center justify-center text-white gap-2">
                         <img src="images/Page index/12.png" class="w-16 h-16 mb-4" alt="Icone 3">
-                        <div class="text-3xl font-bold">14</div>
-                        <div class="text-sm text-center">Laboratoires partenaires</div>
+                        <div class="text-3xl font-bold">{{ $laboratoires }}</div>
+                        <div class="text-sm text-center">Entreprises pharmaceutiques partenaires</div>
                     </div>
-            
                     <!-- Élément 4 -->
                     <div class="flex flex-col items-center justify-center text-white gap-2">
                         <img src="images/Page index/13.png" class="w-16 h-16 mb-4" alt="Icone 4">
-                        <div class="text-3xl font-bold">+25</div>
+                        <div class="text-3xl font-bold">+{{ $general['experience'] ?? '-' }}</div>
                         <div class="text-sm text-center">Années d’expérience</div>
                     </div>
                 </div>
             </div>
-        
         </section>
 
         <!-- Section Pourquoi nous choisir -->
@@ -552,12 +546,16 @@
                 <!-- Ligne 1 -->
                 <div class="flex items-start gap-2">
                     <img src="images/Page index/tick.png" alt="Check" class="w-4 h-4 md:w-5 md:h-5 mt-1">
-                    <div class="text-xs md:text-[14px] text-[#6A6A6A]">La pérennité de Pharmacol 25 ans d’expertise et de présence terrain</div>
+                    <div class="text-xs md:text-[14px] text-[#6A6A6A]">
+                        La pérennité de Pharmacol {{ $general['experience'] ?? '-' }} ans d’expertise et de présence terrain
+                    </div>
                 </div>
                 <!-- Ligne 2 -->
                 <div class="flex items-start gap-2">
                     <img src="images/Page index/tick.png" alt="Check" class="w-4 h-4 md:w-5 md:h-5 mt-1">
-                    <div class="text-xs md:text-[14px] text-[#6A6A6A]">Une force de vente composée de 64 délégués médicaux compétents et expérimentés</div>
+                    <div class="text-xs md:text-[14px] text-[#6A6A6A]">
+                        Une force de vente composée de {{ $collaborateurs }} délégués médicaux compétents et expérimentés
+                    </div>
                 </div>
                 <!-- Ligne 4 -->
                 <div class="flex items-start gap-2">
@@ -578,21 +576,21 @@
             </div>
         </section>
           
-  
 
         <!-- Section bleue principale -->
         <section class="bg-[#31689B] text-white py-10 md:py-16 px-4 md:px-8 ">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center flex-wrap gap-6">
                 <!-- Texte principal -->
-                <div class="max-w-4xl mb-6 md:mb-0">
+                <div class="max-w-4xl mb-6 md:mb-0 text-center md:text-left w-full md:w-auto">
                     <div class="text-xs md:text-sm tracking-widest uppercase mb-2 md:mb-4">Intégrer Pharmacol</div>
                     <h2 class="text-xl md:text-3xl lg:text-4xl font-bold leading-snug">
                         Vous souhaitez assurer l’information médicale et promouvoir les produits pharmaceutiques et leur bon usage dans le respect de l’éthique auprès des professionnels de santé de votre zone géographique
                     </h2>
                 </div>
-                <!-- Bouton -->
-                <div class="self-start">
-                    <a href="{{ route('recrutement') }}" class="bg-white text-[#31689B] px-4 py-2 md:px-6 md:py-3 font-semibold shadow-md hover:bg-gray-100 transition rounded">
+                <!-- Bouton centré -->
+                <div class="flex w-full md:w-auto justify-center md:justify-end items-center">
+                    <a href="{{ route('recrutement') }}"
+                    class="bg-white text-[#31689B] px-8 py-3 md:px-8 md:py-4 font-semibold shadow-md hover:bg-gray-100 transition rounded text-lg md:text-xl text-center w-full md:w-auto">
                         Nous rejoindre
                     </a>
                 </div>

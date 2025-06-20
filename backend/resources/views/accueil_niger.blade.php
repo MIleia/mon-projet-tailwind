@@ -290,7 +290,10 @@
             <div class="max-w-4xl mx-auto text-center relative z-10">
                 <h2 class="text-4xl md:text-5xl font-extrabold mb-3">Bienvenue chez Pharmacol Niger</h2>
                 <p class="text-lg md:text-xl mb-6">
-                    Ancrée au cœur du Sahel, notre agence soutient les laboratoires pharmaceutiques dans leur croissance en Afrique de l’Ouest, avec une approche résolument humaine et adaptée aux réalités locales.
+                    Ancrée au cœur du Sahel, notre agence soutient les laboratoires pharmaceutiques dans leur croissance en Afrique de l’Ouest, avec une approche résolument humaine et adaptée aux réalités locales.<br>
+                    <span class="font-semibold text-[#14b8a6]">
+                        {{ $general['experience'] ?? '-' }} ans d'expérience terrain
+                    </span>
                 </p>
                 <a href="#À propos de Pharmacol Niger" class="inline-block bg-white text-[#06788f] font-semibold px-8 py-3 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
                     Découvrez notre action
@@ -302,16 +305,16 @@
         <section class="py-20 px-4 sm:px-6 bg-gray-50" id="Chiffres Niger">
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
                 <div class="transform hover:scale-105 transition">
-                    <p class="text-6xl font-extrabold text-[#14b8a6]">3</p>
-                    <p class="mt-3 text-gray-700">Pays couverts : Togo, Bénin, Niger</p>
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $niger['bureaux'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Bureaux au Niger</p>
                 </div>
                 <div class="transform hover:scale-105 transition">
-                    <p class="text-6xl font-extrabold text-[#14b8a6]">9</p>
-                    <p class="mt-3 text-gray-700">Partenariats pharmaceutiques au Niger</p>
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $niger['laboratoires'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Entreprises pharmaceutiques partenaires</p>
                 </div>
                 <div class="transform hover:scale-105 transition">
-                    <p class="text-6xl font-extrabold text-[#14b8a6]">38</p>
-                    <p class="mt-3 text-gray-700">Professionnels terrain mobilisés</p>
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $niger['collaborateurs'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Collaborateurs terrain mobilisés</p>
                 </div>
             </div>
         </section>
@@ -320,7 +323,11 @@
         <section class="py-20 px-4 sm:px-6 bg-white" id="À propos de Pharmacol Niger">
             <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
                 <div class="w-full md:w-1/3 mb-8 md:mb-0 md:pr-6">
-                    <img src="{{ asset('images/Page accueil niger/directeur-niger.jpg') }}" alt="Directeur / équipe Pharmacol Niger" class="w-full rounded-lg shadow-lg max-w-xs md:max-w-full mx-auto">
+                    @if(!empty($niger['equipe_image']))
+                        <img src="{{ asset($niger['equipe_image']) }}" alt="Équipe Pharmacol Niger" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-full mx-auto" />
+                    @else
+                        <img src="{{ asset('images/Page accueil niger/directeur-niger.jpg') }}" alt="Directeur / équipe Pharmacol Niger" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-full mx-auto" />
+                    @endif
                 </div>
                 <div class="w-full md:w-2/3">
                     <h2 class="text-2xl font-bold text-[#06788f] mb-6">Pharmacol Niger, une implantation stratégique</h2>

@@ -35,7 +35,7 @@
         </button>
 
         <header>
-                <!-- Bandeau top -->
+            <!-- Bandeau top -->
             <div class="bg-gray-100 text-sm border-b border-gray-300 py-2">
                 <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row flex-wrap sm:justify-between text-gray-700 gap-2 sm:gap-0">
                     <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center">
@@ -86,96 +86,119 @@
                 </div>
             </div>
 
-                <!-- Bandeau Prestations & navbar -->
-                <div class="relative z-0 qhero-prestations bg-cover bg-center h-[500px]" style="background-image: url('images/Page accueil togo/header.png');">
-                    <div class="bg-white bg-opacity-100 backdrop-blur-md w-full md:w-[70%] mx-auto relative z-30">
-                    <nav class="relative z-20">
-                        <div class="qcontainer flex justify-around items-center px-4 py-3">
-                            <!-- Logo -->
-                            <a href="{{ route('accueil') }}" class="flex items-center space-x-2">
-                                <div class="qlogo">
-                                    <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-12 md:h-16">
-                                </div>
-                            </a>
-                            <!-- Hamburger bouton mobile -->
-                            <button id="menu-toggle" class="md:hidden text-[#3C74A8] text-3xl focus:outline-none">
-                                <i class="fas fa-bars"></i>
-                            </button>
-                            <!-- Menu principal -->
-                            <ul id="main-menu" class="hidden md:flex qnav-links flex-col md:flex-row flex md:items-center md:space-x-8 absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow md:shadow-none z-40 transition-all duration-300 ease-in-out">
-                                <li class="qdropdown relative group">
-                                    <a href="#" class="text-[#437305] hover:text-green-600 flex items-center space-x-2 px-4 py-3 md:p-0">
-                                        <span>Nos Implentations</span>
-                                        <i class="fas fa-chevron-down"></i>
-                                    </a>
-                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block md:mt-0 z-50">
-                                        <li>
-                                            <a href="{{ route('accueil.togo') }}" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
-                                                <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="w-5 h-auto"> Togo
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('accueil.benin') }}" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
-                                                <img src="https://flagcdn.com/w40/bj.png" alt="Benin" class="w-5 h-auto"> Benin
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('accueil.niger') }}" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
-                                                <img src="https://flagcdn.com/w40/ne.png" alt="Niger" class="w-5 h-auto"> Niger
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ route('prestation') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Prestations</a></li>
-                                <li><a href="{{ route('recrutement') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Recrutement</a></li>
-                                <li><a href="{{ route('blog') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Blog</a></li>
-                                <li><a href="{{ route('contact') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Contact</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+            <!-- Bandeau Prestations & navbar -->
+            <div class="relative z-0 qhero-prestations bg-cover bg-center h-[500px]" style="background-image: url('images/Page accueil togo/header.png');">
+                <div class="bg-white bg-opacity-100 backdrop-blur-md w-full md:w-[70%] mx-auto relative z-30">
+                <nav class="relative z-20">
+                    <div class="qcontainer flex justify-around items-center px-4 py-3">
+                        <!-- Logo -->
+                        <a href="{{ route('accueil') }}" class="flex items-center space-x-2">
+                            <div class="qlogo">
+                                <img src="images/Page prestations 2/logo-350100.png" alt="Logo Pharmacol" class="h-12 md:h-16">
+                            </div>
+                        </a>
+                        <!-- Hamburger bouton mobile -->
+                        <button id="menu-toggle" class="md:hidden text-[#3C74A8] text-3xl focus:outline-none">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <!-- Menu principal -->
+                        <ul id="main-menu" class="hidden md:flex qnav-links flex-col md:flex-row flex md:items-center md:space-x-8 absolute md:static top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow md:shadow-none z-40 transition-all duration-300 ease-in-out">
+                            <li class="qdropdown relative group">
+                                <a href="#" class="text-[#437305] hover:text-green-600 flex items-center space-x-2 px-4 py-3 md:p-0">
+                                    <span>Nos Implentations</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
+                                <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block md:mt-0 z-50">
+                                    <li>
+                                        <a href="{{ route('accueil.togo') }}" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
+                                            <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="w-5 h-auto"> Togo
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('accueil.benin') }}" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
+                                            <img src="https://flagcdn.com/w40/bj.png" alt="Benin" class="w-5 h-auto"> Benin
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('accueil.niger') }}" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-green-600">
+                                            <img src="https://flagcdn.com/w40/ne.png" alt="Niger" class="w-5 h-auto"> Niger
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ route('prestation') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Prestations</a></li>
+                            <li><a href="{{ route('recrutement') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Recrutement</a></li>
+                            <li><a href="{{ route('blog') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Blog</a></li>
+                            <li><a href="{{ route('contact') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Contact</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
 
-                    <div class="absolute inset-0 flex items-center justify-start text-white px-6">
-                        <div class="w-1/2 max-w-xl text-center ml-12">
-                            <h1 class="text-4xl md:text-5xl font-bold mb-4">PHARMACOL TOGO</h1>
-                            <h2 class="text-2xl md:text-3xl font-semibold mb-4">Vous accompagne</h2><br>
-                            <a href="#contact" class="inline-block bg-[#437305] hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg shadow">Évaluer la faisabilité de votre projet</a>
-                        </div>
+                <div class="absolute inset-0 flex items-center justify-start text-white px-6">
+                    <div class="w-1/2 max-w-xl text-center ml-12">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4">PHARMACOL TOGO</h1>
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-4">Vous accompagne</h2><br>
+                        <a href="#contact" class="inline-block bg-[#437305] hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg shadow">Évaluer la faisabilité de votre projet</a>
                     </div>
                 </div>
-                <script>
-                    // Menu burger responsive
-                    const menuToggle = document.getElementById('menu-toggle');
-                    const mainMenu = document.getElementById('main-menu');
-                    menuToggle.addEventListener('click', () => {
-                        mainMenu.classList.toggle('hidden');
-                    });
+            </div>
+            <script>
+                // Menu burger responsive
+                const menuToggle = document.getElementById('menu-toggle');
+                const mainMenu = document.getElementById('main-menu');
+                menuToggle.addEventListener('click', () => {
+                    mainMenu.classList.toggle('hidden');
+                });
 
-                    // Dropdown mobile (ouvre/ferme au clic, referme si déjà ouvert)
+                // Dropdown mobile (ouvre/ferme au clic, referme si déjà ouvert)
+                document.querySelectorAll('.qdropdown > a').forEach(drop => {
+                    drop.addEventListener('click', function(e) {
+                        if(window.innerWidth < 768) {
+                            e.preventDefault();
+                            const submenu = this.nextElementSibling;
+                            // Ferme si déjà ouvert, sinon ouvre et ferme les autres
+                            if (!submenu.classList.contains('hidden')) {
+                                submenu.classList.add('hidden');
+                            } else {
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    menu.classList.add('hidden');
+                                });
+                                submenu.classList.remove('hidden');
+                            }
+                        }
+                    });
+                });
+
+                // Fermer le sous-menu si on clique ailleurs sur mobile
+                document.addEventListener('click', function(e) {
+                    if(window.innerWidth < 768) {
+                        const isDropdown = e.target.closest('.qdropdown');
+                        const isMenuToggle = e.target.closest('#menu-toggle');
+                        if(!isDropdown && !isMenuToggle) {
+                            document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                menu.classList.add('hidden');
+                            });
+                        }
+                    }
+                });
+
+                // Gestion du dropdown "Nos Implentations" sur desktop
                     document.querySelectorAll('.qdropdown > a').forEach(drop => {
                         drop.addEventListener('click', function(e) {
-                            if(window.innerWidth < 768) {
+                            if (window.innerWidth >= 768) {
                                 e.preventDefault();
                                 const submenu = this.nextElementSibling;
-                                // Ferme si déjà ouvert, sinon ouvre et ferme les autres
-                                if (!submenu.classList.contains('hidden')) {
-                                    submenu.classList.add('hidden');
-                                } else {
-                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                                        menu.classList.add('hidden');
-                                    });
-                                    submenu.classList.remove('hidden');
-                                }
+                                submenu.classList.toggle('hidden');
                             }
                         });
                     });
 
-                    // Fermer le sous-menu si on clique ailleurs sur mobile
+                    // Fermer le sous-menu si on clique ailleurs (desktop uniquement)
                     document.addEventListener('click', function(e) {
-                        if(window.innerWidth < 768) {
+                        if (window.innerWidth >= 768) {
                             const isDropdown = e.target.closest('.qdropdown');
-                            const isMenuToggle = e.target.closest('#menu-toggle');
-                            if(!isDropdown && !isMenuToggle) {
+                            if (!isDropdown) {
                                 document.querySelectorAll('.qdropdown-menu').forEach(menu => {
                                     menu.classList.add('hidden');
                                 });
@@ -183,106 +206,83 @@
                         }
                     });
 
-                    // Gestion du dropdown "Nos Implentations" sur desktop
-                        document.querySelectorAll('.qdropdown > a').forEach(drop => {
-                            drop.addEventListener('click', function(e) {
-                                if (window.innerWidth >= 768) {
-                                    e.preventDefault();
-                                    const submenu = this.nextElementSibling;
-                                    submenu.classList.toggle('hidden');
-                                }
-                            });
-                        });
+                    document.addEventListener('DOMContentLoaded', function () {
+                    const menuToggle = document.getElementById('menu-toggle');
+                    const mainMenu = document.getElementById('main-menu');
 
-                        // Fermer le sous-menu si on clique ailleurs (desktop uniquement)
-                        document.addEventListener('click', function(e) {
-                            if (window.innerWidth >= 768) {
-                                const isDropdown = e.target.closest('.qdropdown');
-                                if (!isDropdown) {
-                                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                                        menu.classList.add('hidden');
-                                    });
-                                }
+                    // Burger menu
+                    if (menuToggle && mainMenu) {
+                        menuToggle.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            mainMenu.classList.toggle('hidden');
+                        });
+                        mainMenu.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                        });
+                        document.body.addEventListener('click', function () {
+                            if (window.innerWidth < 768) {
+                                mainMenu.classList.add('hidden');
+                                // Ferme aussi tous les sous-menus
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    menu.classList.add('hidden');
+                                });
                             }
                         });
+                    }
 
-                        document.addEventListener('DOMContentLoaded', function () {
-        const menuToggle = document.getElementById('menu-toggle');
-        const mainMenu = document.getElementById('main-menu');
-
-        // Burger menu
-        if (menuToggle && mainMenu) {
-            menuToggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                mainMenu.classList.toggle('hidden');
-            });
-            mainMenu.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-            document.body.addEventListener('click', function () {
-                if (window.innerWidth < 768) {
-                    mainMenu.classList.add('hidden');
-                    // Ferme aussi tous les sous-menus
-                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                        menu.classList.add('hidden');
+                    // Dropdown mobile
+                    document.querySelectorAll('.qdropdown > a').forEach(drop => {
+                        drop.addEventListener('click', function(e) {
+                            if(window.innerWidth < 768) {
+                                e.preventDefault();
+                                const submenu = this.nextElementSibling;
+                                // Toggle le sous-menu
+                                submenu.classList.toggle('hidden');
+                                // Ferme les autres sous-menus
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    if (menu !== submenu) menu.classList.add('hidden');
+                                });
+                            }
+                        });
                     });
-                }
-            });
-        }
 
-        // Dropdown mobile
-        document.querySelectorAll('.qdropdown > a').forEach(drop => {
-            drop.addEventListener('click', function(e) {
-                if(window.innerWidth < 768) {
-                    e.preventDefault();
-                    const submenu = this.nextElementSibling;
-                    // Toggle le sous-menu
-                    submenu.classList.toggle('hidden');
-                    // Ferme les autres sous-menus
-                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                        if (menu !== submenu) menu.classList.add('hidden');
+                    // Fermer le sous-menu mobile si on clique ailleurs
+                    document.addEventListener('click', function(e) {
+                        if(window.innerWidth < 768) {
+                            const isDropdown = e.target.closest('.qdropdown');
+                            if(!isDropdown) {
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    menu.classList.add('hidden');
+                                });
+                            }
+                        }
                     });
-                }
-            });
-        });
 
-        // Fermer le sous-menu mobile si on clique ailleurs
-        document.addEventListener('click', function(e) {
-            if(window.innerWidth < 768) {
-                const isDropdown = e.target.closest('.qdropdown');
-                if(!isDropdown) {
-                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                        menu.classList.add('hidden');
+                    // Dropdown desktop
+                    document.querySelectorAll('.qdropdown > a').forEach(drop => {
+                        drop.addEventListener('click', function(e) {
+                            if (window.innerWidth >= 768) {
+                                e.preventDefault();
+                                const submenu = this.nextElementSibling;
+                                submenu.classList.toggle('hidden');
+                            }
+                        });
                     });
-                }
-            }
-        });
 
-        // Dropdown desktop
-        document.querySelectorAll('.qdropdown > a').forEach(drop => {
-            drop.addEventListener('click', function(e) {
-                if (window.innerWidth >= 768) {
-                    e.preventDefault();
-                    const submenu = this.nextElementSibling;
-                    submenu.classList.toggle('hidden');
-                }
-            });
-        });
-
-        // Fermer le sous-menu si on clique ailleurs (desktop)
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth >= 768) {
-                const isDropdown = e.target.closest('.qdropdown');
-                if (!isDropdown) {
-                    document.querySelectorAll('.qdropdown-menu').forEach(menu => {
-                        menu.classList.add('hidden');
+                    // Fermer le sous-menu si on clique ailleurs (desktop)
+                    document.addEventListener('click', function(e) {
+                        if (window.innerWidth >= 768) {
+                            const isDropdown = e.target.closest('.qdropdown');
+                            if (!isDropdown) {
+                                document.querySelectorAll('.qdropdown-menu').forEach(menu => {
+                                    menu.classList.add('hidden');
+                                });
+                            }
+                        }
                     });
-                }
-            }
-        });
-    });
-                </script>
-            </header>
+                });
+            </script>
+        </header>
 
         <!-- HERO SECTION -->
         <section class="bg-gradient-to-r from-[#3C74A8] to-[#14b8a6] text-white pt-20 pb-12 px-6 relative overflow-hidden">
@@ -290,11 +290,12 @@
             <div class="max-w-4xl mx-auto text-center relative z-10">
                 <h2 class="text-4xl md:text-5xl font-extrabold mb-3">Qui sommes nous ?</h2>
                 <p class="text-lg md:text-xl mb-6">
-                Nous sommes une agence de représentation pharmaceutique ancrée en Afrique de l’Ouest, forte de 25 ans d'expertise terrain
-                et de partenariats solides avec des laboratoires de renom.
+                    Nous sommes une agence de représentation pharmaceutique ancrée en Afrique de l’Ouest, forte de 
+                    {{ $general['experience'] ?? '-' }} ans d'expertise terrain
+                    et de partenariats solides avec des laboratoires de renom.
                 </p>
                 <a href="#À propos de Pharmacol Togo" class="inline-block bg-white text-[#06788f] font-semibold px-8 py-3 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
-                Apprenez-en plus sur nous
+                    Apprenez-en plus sur nous
                 </a>
             </div>
         </section>
@@ -303,16 +304,16 @@
         <section class="py-20 px-6 bg-gray-50" id="Chiffres Togo">
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                 <div class="transform hover:scale-105 transition">
-                    <p class="text-6xl font-extrabold text-[#14b8a6]">3</p>
-                    <p class="mt-3 text-gray-700">Pays d'intervention : Togo, Bénin, Niger</p>
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $togo['bureaux'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Bureaux au Togo</p>
                 </div>
                 <div class="transform hover:scale-105 transition">
-                    <p class="text-6xl font-extrabold text-[#14b8a6]">14</p>
-                    <p class="mt-3 text-gray-700">Laboratoires partenaires représentés</p>
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $togo['laboratoires'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Entreprises pharmaceutiques partenaires</p>
                 </div>
                 <div class="transform hover:scale-105 transition">
-                    <p class="text-6xl font-extrabold text-[#14b8a6]">64</p>
-                    <p class="mt-3 text-gray-700">Délégués médicaux en force de vente</p>
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $togo['collaborateurs'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Collaborateurs terrain mobilisés</p>
                 </div>
             </div>
         </section>
@@ -321,7 +322,11 @@
         <section class="py-20 px-2 sm:px-4 bg-white" id="À propos de Pharmacol Togo">
             <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
                 <div class="w-full md:w-1/3 pr-0 md:pr-6 mb-8 md:mb-0">
-                    <img src="{{ asset('images/Page accueil togo/PHOTO-DG-FOND-BIBLIO2-768x768.png') }}" alt="Pharmacol Togo" class="w-full max-w-xs md:max-w-full rounded-lg shadow-lg mx-auto">
+                    @if(!empty($togo['equipe_image']))
+                        <img src="{{ asset($togo['equipe_image']) }}" alt="Équipe Pharmacol Togo" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-full mx-auto" />
+                    @else
+                        <img src="{{ asset('images/Page accueil togo/PHOTO-DG-FOND-BIBLIO2-768x768.png') }}" alt="Directeur / équipe Pharmacol Togo" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-full mx-auto" />
+                    @endif
                 </div>
                 <div class="w-full md:w-2/3">
                     <h2 class="text-2xl font-bold text-[#06788f] mb-6 text-center md:text-left">À propos de Pharmacol Togo</h2>

@@ -291,195 +291,199 @@
             <div class="max-w-4xl mx-auto text-center relative z-10">
                 <h2 class="text-4xl md:text-5xl font-extrabold mb-3">Pharmacol Bénin : votre relais local</h2>
                 <p class="text-lg md:text-xl mb-6">
-                Une présence engagée au Bénin pour accompagner les laboratoires dans une expansion maîtrisée, ancrée sur plus de deux décennies de terrain.
+                    Une présence engagée au Bénin pour accompagner les laboratoires dans une expansion maîtrisée, ancrée sur 
+                    {{ $general['experience'] ?? '-' }} ans de terrain.
                 </p>
                 <a href="#À propos de Pharmacol Bénin" class="inline-block bg-white text-[#06788f] font-semibold px-8 py-3 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
-                En savoir plus
+                    En savoir plus
                 </a>
             </div>
         </section>
 
         <!-- CHIFFRES CLÉS -->
         <section class="py-20 px-4 sm:px-6 bg-gray-50" id="Chiffres Bénin">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
-            <div class="transform hover:scale-105 transition">
-                <p class="text-6xl font-extrabold text-[#14b8a6]">2</p>
-                <p class="mt-3 text-gray-700">Bureaux principaux à Cotonou et Parakou</p>
-            </div>
-            <div class="transform hover:scale-105 transition">
-                <p class="text-6xl font-extrabold text-[#14b8a6]">12</p>
-                <p class="mt-3 text-gray-700">Laboratoires pharmaceutiques représentés</p>
-            </div>
-            <div class="transform hover:scale-105 transition">
-                <p class="text-6xl font-extrabold text-[#14b8a6]">45</p>
-                <p class="mt-3 text-gray-700">Collaborateurs terrain mobilisés</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- À PROPOS -->
-    <section class="py-20 px-4 sm:px-6 bg-white" id="À propos de Pharmacol Bénin">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div class="w-full md:w-1/2 mb-8 md:mb-0">
-                <img src="{{ asset('images/Page accueil benin/dg-benin.png') }}" alt="Directeur / équipe Pharmacol Bénin" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-full mx-auto" />
-            </div>
-            <div class="w-full md:w-1/2">
-                <h2 class="text-2xl font-bold text-[#06788f] mb-6">Une équipe dédiée au service de la santé au Bénin</h2>
-                <p class="text-base mb-4 text-justify leading-relaxed">Depuis Cotonou, Pharmacol Bénin opère avec rigueur pour représenter les laboratoires internationaux auprès des professionnels de santé béninois. Grâce à une parfaite connaissance du terrain, notre équipe adapte chaque stratégie aux réalités locales.</p>
-                <p class="text-base text-justify leading-relaxed">Que ce soit pour la mise sur le marché, la promotion médicale ou la veille réglementaire, nous accompagnons chaque étape avec transparence et efficacité, toujours en lien avec les autorités de santé locales.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTEXTE DU BÉNIN -->
-    <section class="py-20 px-4 sm:px-6 bg-gray-100">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start">
-            <!-- Texte -->
-            <div class="md:col-span-2 w-full mb-8 md:mb-0">
-                <h2 class="text-2xl font-bold text-[#06788f] mb-6">Pourquoi le Bénin est stratégique ?</h2>
-                <p class="text-base text-gray-800 mb-4 text-justify">Le Bénin est un pays dynamique d'Afrique de l'Ouest, frontalier du Togo, du Nigeria, du Niger et du Burkina Faso. Sa capitale économique, Cotonou, est un pôle logistique régional majeur. Le pays dispose d’un système de santé en amélioration continue, et présente un fort potentiel de croissance dans le secteur pharmaceutique.</p>
-                <p class="text-base text-gray-800 mb-4 text-justify">Avec une population de plus de 13 millions d’habitants et une volonté politique de renforcer l'accès aux soins, le Bénin constitue un marché prometteur pour les laboratoires souhaitant développer une présence durable et éthique.</p>
-                <ul class="list-disc list-inside text-base text-gray-700 space-y-2">
-                    <li>Superficie : 114 763 km² – 12 départements sanitaires</li>
-                    <li>Près de 1600 structures de santé réparties sur le territoire</li>
-                    <li>Accès croissant aux médicaments essentiels grâce aux réformes</li>
-                </ul>
-            </div>
-
-            <!-- Carte du Bénin -->
-            <div class="w-full" id="Carte Bénin">
-                <div class="bg-white border rounded-xl shadow-lg p-4 h-96 flex flex-col" >
-                    <div id="map-benin" class="rounded w-full h-64 sm:h-80 md:h-96"></div>
-                    <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Bénin</p>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
+                <div class="transform hover:scale-105 transition">
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $benin['bureaux'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Bureaux au Bénin</p>
+                </div>
+                <div class="transform hover:scale-105 transition">
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $benin['laboratoires'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Entreprises pharmaceutiques partenaires</p>
+                </div>
+                <div class="transform hover:scale-105 transition">
+                    <p class="text-6xl font-extrabold text-[#14b8a6]">{{ $benin['collaborateurs'] ?? '-' }}</p>
+                    <p class="mt-3 text-gray-700">Collaborateurs terrain mobilisés</p>
                 </div>
             </div>
-        </div>
-        <script>
-            var mapBenin = L.map('map-benin').setView([9.0, 2.0], 6);
+        </section>
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-            }).addTo(mapBenin);
+        <!-- À PROPOS -->
+        <section class="py-20 px-4 sm:px-6 bg-white" id="À propos de Pharmacol Bénin">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <div class="w-full md:w-1/2 mb-8 md:mb-0">
+                    @if(!empty($benin['equipe_image']))
+                        <img src="{{ asset($benin['equipe_image']) }}" alt="Équipe Pharmacol Bénin" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-full mx-auto" />
+                    @else
+                        <img src="{{ asset('images/Page accueil benin/dg-benin.png') }}" alt="Directeur / équipe Pharmacol Bénin" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-full mx-auto" />
+                    @endif
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-2xl font-bold text-[#06788f] mb-6">Une équipe dédiée au service de la santé au Bénin</h2>
+                    <p class="text-base mb-4 text-justify leading-relaxed">Depuis Cotonou, Pharmacol Bénin opère avec rigueur pour représenter les laboratoires internationaux auprès des professionnels de santé béninois. Grâce à une parfaite connaissance du terrain, notre équipe adapte chaque stratégie aux réalités locales.</p>
+                    <p class="text-base text-justify leading-relaxed">Que ce soit pour la mise sur le marché, la promotion médicale ou la veille réglementaire, nous accompagnons chaque étape avec transparence et efficacité, toujours en lien avec les autorités de santé locales.</p>
+                </div>
+            </div>
+        </section>
 
-            function loadMarkersBenin() {
-                fetch('/api/entreprises?benin=1')
-                    .then(response => {
-                        if (!response.ok) throw new Error("Erreur réseau");
-                        return response.json();
-                    })
-                    .then(data => {
-                        data.forEach(marker => {
-                            const lat = parseFloat(marker.latitude);
-                            const lng = parseFloat(marker.longitude);
-                            const nom = marker.nom;
-                            const ville = marker.ville;
+        <!-- CONTEXTE DU BÉNIN -->
+        <section class="py-20 px-4 sm:px-6 bg-gray-100">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start">
+                <!-- Texte -->
+                <div class="md:col-span-2 w-full mb-8 md:mb-0">
+                    <h2 class="text-2xl font-bold text-[#06788f] mb-6">Pourquoi le Bénin est stratégique ?</h2>
+                    <p class="text-base text-gray-800 mb-4 text-justify">Le Bénin est un pays dynamique d'Afrique de l'Ouest, frontalier du Togo, du Nigeria, du Niger et du Burkina Faso. Sa capitale économique, Cotonou, est un pôle logistique régional majeur. Le pays dispose d’un système de santé en amélioration continue, et présente un fort potentiel de croissance dans le secteur pharmaceutique.</p>
+                    <p class="text-base text-gray-800 mb-4 text-justify">Avec une population de plus de 13 millions d’habitants et une volonté politique de renforcer l'accès aux soins, le Bénin constitue un marché prometteur pour les laboratoires souhaitant développer une présence durable et éthique.</p>
+                    <ul class="list-disc list-inside text-base text-gray-700 space-y-2">
+                        <li>Superficie : 114 763 km² – 12 départements sanitaires</li>
+                        <li>Près de 1600 structures de santé réparties sur le territoire</li>
+                        <li>Accès croissant aux médicaments essentiels grâce aux réformes</li>
+                    </ul>
+                </div>
 
-                            if (!isNaN(lat) && !isNaN(lng)) {
-                                L.marker([lat, lng])
-                                    .addTo(mapBenin)
-                                    .bindTooltip(`<div class="font-bold">${nom}</div><div class="text-xs">${ville}</div>`, {
-                                        direction: 'top',
-                                        offset: [-15, -10],
-                                        permanent: true,
-                                        className: 'leaflet-tooltip-custom'
-                                    });
-                            }
+                <!-- Carte du Bénin -->
+                <div class="w-full" id="Carte Bénin">
+                    <div class="bg-white border rounded-xl shadow-lg p-4 h-96 flex flex-col" >
+                        <div id="map-benin" class="rounded w-full h-64 sm:h-80 md:h-96"></div>
+                        <p class="mt-2 text-center text-sm text-gray-500 italic">Carte interactive du Bénin</p>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var mapBenin = L.map('map-benin').setView([9.0, 2.0], 6);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                }).addTo(mapBenin);
+
+                function loadMarkersBenin() {
+                    fetch('/api/entreprises?benin=1')
+                        .then(response => {
+                            if (!response.ok) throw new Error("Erreur réseau");
+                            return response.json();
+                        })
+                        .then(data => {
+                            data.forEach(marker => {
+                                const lat = parseFloat(marker.latitude);
+                                const lng = parseFloat(marker.longitude);
+                                const nom = marker.nom;
+                                const ville = marker.ville;
+
+                                if (!isNaN(lat) && !isNaN(lng)) {
+                                    L.marker([lat, lng])
+                                        .addTo(mapBenin)
+                                        .bindTooltip(`<div class="font-bold">${nom}</div><div class="text-xs">${ville}</div>`, {
+                                            direction: 'top',
+                                            offset: [-15, -10],
+                                            permanent: true,
+                                            className: 'leaflet-tooltip-custom'
+                                        });
+                                }
+                            });
+                        })
+                        .catch(error => {
+                            console.error("Erreur lors du chargement des marqueurs Bénin :", error);
                         });
-                    })
-                    .catch(error => {
-                        console.error("Erreur lors du chargement des marqueurs Bénin :", error);
-                    });
-            }
+                }
 
-            document.addEventListener("DOMContentLoaded", function () {
-                loadMarkersBenin();
-            });
-        </script>
-    </section>
+                document.addEventListener("DOMContentLoaded", function () {
+                    loadMarkersBenin();
+                });
+            </script>
+        </section>
 
-    <!-- NOS SERVICES -->
-    <section class="py-20 px-4 sm:px-6 bg-white">
-        <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-2xl font-bold text-[#06788f] mb-12">Notre accompagnement au Bénin</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
-                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Implantation & AMM</h3>
-                    <ul class="text-left list-disc list-inside text-gray-700">
-                        <li>Constitution des dossiers</li>
-                        <li>Suivi avec les autorités locales</li>
-                        <li>Obtention des autorisations</li>
-                    </ul>
-                </div>
-                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
-                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Promotion médicale</h3>
-                    <ul class="text-left list-disc list-inside text-gray-700">
-                        <li>Visites auprès des prescripteurs</li>
-                        <li>Formation continue</li>
-                        <li>Événements scientifiques</li>
-                    </ul>
-                </div>
-                <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
-                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Logistique & Reporting</h3>
-                    <ul class="text-left list-disc list-inside text-gray-700">
-                        <li>Distribution sécurisée</li>
-                        <li>Suivi terrain & reporting</li>
-                        <li>Tableaux de bord décisionnels</li>
-                    </ul>
+        <!-- NOS SERVICES -->
+        <section class="py-20 px-4 sm:px-6 bg-white">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-2xl font-bold text-[#06788f] mb-12">Notre accompagnement au Bénin</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Implantation & AMM</h3>
+                        <ul class="text-left list-disc list-inside text-gray-700">
+                            <li>Constitution des dossiers</li>
+                            <li>Suivi avec les autorités locales</li>
+                            <li>Obtention des autorisations</li>
+                        </ul>
+                    </div>
+                    <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Promotion médicale</h3>
+                        <ul class="text-left list-disc list-inside text-gray-700">
+                            <li>Visites auprès des prescripteurs</li>
+                            <li>Formation continue</li>
+                            <li>Événements scientifiques</li>
+                        </ul>
+                    </div>
+                    <div class="bg-[#14b8a6]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-4">Logistique & Reporting</h3>
+                        <ul class="text-left list-disc list-inside text-gray-700">
+                            <li>Distribution sécurisée</li>
+                            <li>Suivi terrain & reporting</li>
+                            <li>Tableaux de bord décisionnels</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- POURQUOI PHARMACOL BÉNIN -->
-    <section class="py-20 px-4 sm:px-6 bg-[#3C74A8] text-white text-center">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold mb-4">Pourquoi faire confiance à Pharmacol Bénin ?</h2>
-            <p class="text-base mb-6 leading-relaxed">Parce que nous allions la connaissance du terrain à une approche stratégique rigoureuse. Parce que notre objectif est commun : la santé des populations et la croissance durable des laboratoires partenaires.</p>
-            <a href="#contact" class="inline-block mt-4 bg-white text-[#3C74A8] font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition">Parlons de votre projet</a>
-        </div>
-    </section>
-
-    <!-- RECRUTEMENT -->
-    <section class="py-20 px-4 sm:px-6 bg-white" id="recrutement">
-        <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-3xl font-extrabold text-[#06788f] mb-4">Rejoignez l’équipe Pharmacol Bénin</h2>
-            <p class="text-lg text-gray-700 mb-12">
-            Passion, Excellence, Impact.<br class="hidden md:inline" />
-            Si ces mots vous parlent, nous serions ravis de vous rencontrer.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 text-left">
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
-                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Délégué médical – Zone Nord</h3>
-                    <p class="text-gray-700 mb-4 text-sm">Poste basé à Parakou – Candidatures ouvertes</p>
-                    <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Postuler maintenant</a>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
-                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Responsable Réglementaire</h3>
-                    <p class="text-gray-700 mb-4 text-sm">Cotonou – Expérience requise</p>
-                    <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Voir les missions</a>
-                </div>
-                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
-                    <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Assistant(e) administratif(ve)</h3>
-                    <p class="text-gray-700 mb-4 text-sm">Stage de 6 mois – Cotonou</p>
-                    <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Envoyer une candidature</a>
-                </div>
+        <!-- POURQUOI PHARMACOL BÉNIN -->
+        <section class="py-20 px-4 sm:px-6 bg-[#3C74A8] text-white text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-4">Pourquoi faire confiance à Pharmacol Bénin ?</h2>
+                <p class="text-base mb-6 leading-relaxed">Parce que nous allions la connaissance du terrain à une approche stratégique rigoureuse. Parce que notre objectif est commun : la santé des populations et la croissance durable des laboratoires partenaires.</p>
+                <a href="#contact" class="inline-block mt-4 bg-white text-[#3C74A8] font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition">Parlons de votre projet</a>
             </div>
-            <a href="{{ route('recrutement') }}" class="inline-block px-6 py-3 bg-[#3C74A8E8] text-white font-semibold rounded-full shadow-md hover:bg-[#3C74A8] transition">Voir toutes nos offres</a>
-        </div>
-    </section>
+        </section>
 
-    <!-- CONTACT -->
-    <section class="py-20 px-4 sm:px-6 bg-gray-100" id="contact">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold text-[#3C74A8E8] mb-4">Contactez-nous</h2>
-            <p class="text-lg mb-6">Intéressé par notre accompagnement ? Échangeons sur la faisabilité de votre projet au Togo.</p>
-            <a href="/contact.html" class="inline-block bg-[#14b8a6] text-white px-10 py-4 rounded-full hover:bg-[#0f827d] transition">Contactez-nous</a>
-        </div>
-    </section>
+        <!-- RECRUTEMENT -->
+        <section class="py-20 px-4 sm:px-6 bg-white" id="recrutement">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl font-extrabold text-[#06788f] mb-4">Rejoignez l’équipe Pharmacol Bénin</h2>
+                <p class="text-lg text-gray-700 mb-12">
+                Passion, Excellence, Impact.<br class="hidden md:inline" />
+                Si ces mots vous parlent, nous serions ravis de vous rencontrer.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 text-left">
+                    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Délégué médical – Zone Nord</h3>
+                        <p class="text-gray-700 mb-4 text-sm">Poste basé à Parakou – Candidatures ouvertes</p>
+                        <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Postuler maintenant</a>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Responsable Réglementaire</h3>
+                        <p class="text-gray-700 mb-4 text-sm">Cotonou – Expérience requise</p>
+                        <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Voir les missions</a>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
+                        <h3 class="text-xl font-semibold text-[#14b8a6] mb-2">Assistant(e) administratif(ve)</h3>
+                        <p class="text-gray-700 mb-4 text-sm">Stage de 6 mois – Cotonou</p>
+                        <a href="#contact" class="text-[#3C74A8E8] font-medium hover:underline">Envoyer une candidature</a>
+                    </div>
+                </div>
+                <a href="{{ route('recrutement') }}" class="inline-block px-6 py-3 bg-[#3C74A8E8] text-white font-semibold rounded-full shadow-md hover:bg-[#3C74A8] transition">Voir toutes nos offres</a>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="py-20 px-4 sm:px-6 bg-gray-100" id="contact">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-[#3C74A8E8] mb-4">Contactez-nous</h2>
+                <p class="text-lg mb-6">Intéressé par notre accompagnement ? Échangeons sur la faisabilité de votre projet au Togo.</p>
+                <a href="/contact.html" class="inline-block bg-[#14b8a6] text-white px-10 py-4 rounded-full hover:bg-[#0f827d] transition">Contactez-nous</a>
+            </div>
+        </section>
 
 
-        <!-- Footer -->
         <!-- Footer -->
         <footer class="bg-[#3C74A8E8] text-gray-100 relative">
             <div class="max-w-7xl mx-auto py-8 md:py-12 px-4 grid grid-cols-1 md:grid-cols-4 gap-8">

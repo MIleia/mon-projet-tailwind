@@ -9,6 +9,7 @@
     use App\Models\Poste;
     use App\Models\Entreprise;
     use Illuminate\Support\Facades\Hash;
+    use Illuminate\Support\Facades\Storage;
 
     class AdminController extends Controller
     {
@@ -50,7 +51,16 @@
             $postes = Poste::all();
             $utilisateurs = Utilisateur::all();
             $entreprises = Entreprise::all();
-            return view('admin.dashboard', compact('newsletters', 'blogs', 'postes', 'utilisateurs', 'entreprises'));
+
+            // Ajout pour les chiffres
+            $chiffres = [];
+            if (Storage::exists('chiffres.json')) {
+                $chiffres = json_decode(Storage::get('chiffres.json'), true) ?? [];
+            }
+
+            return view('admin.dashboard', compact(
+                'newsletters', 'blogs', 'postes', 'utilisateurs', 'entreprises', 'chiffres'
+            ));
         }
     }
 ?>

@@ -54,6 +54,9 @@
                         <i class="fas fa-users mr-3"></i> Utilisateurs
                     </button>
                     @endif
+                    <button type="button" onclick="showSection('chiffres')" class="sidebar-link flex items-center w-full p-3 rounded-lg hover:bg-blue-50 hover:text-blue-900 transition">
+                        <i class="fas fa-chart-bar mr-3"></i> Chiffres & images
+                    </button>
                     <div class="flex-1"></div>
                     <a href="{{ route('admin.logout') }}"
                     class="logout-btn flex items-center w-full p-3 rounded-lg bg-red-600 text-white hover:bg-red-700 transition mt-4 mb-2 justify-center">
@@ -335,6 +338,77 @@
                 </section>
                 @endif
 
+                <!-- Section Chiffres et images -->
+                <section id="chiffres" class="section-content hidden">
+                    <div class="card bg-white p-6 mb-8">
+                        <h2 class="text-2xl font-semibold text-[#437305] mb-6">Chiffres et images</h2>
+                        <form id="chiffres-form" method="POST" enctype="multipart/form-data" action="{{ route('admin.chiffres.update') }}">
+                            @csrf
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                @foreach(['Togo','Bénin','Niger'] as $pays)
+                                    @php
+                                        $data = collect($chiffres)->firstWhere('pays', $pays) ?? [];
+                                        $imgPath = $data['equipe_image'] ?? '';
+                                    @endphp
+                                    <div class="border rounded-lg p-4 shadow-sm">
+                                        <h3 class="text-lg font-bold mb-4 text-[#31689B]">{{ $pays }}</h3>
+                                        <label class="block mb-2 text-sm">Bureaux</label>
+                                        <input type="number" name="chiffres[{{ $pays }}][bureaux]" value="{{ $data['bureaux'] ?? '' }}" class="border rounded p-2 w-full mb-3" required>
+                                        <label class="block mb-2 text-sm">Laboratoires partenaires</label>
+                                        <input type="number" name="chiffres[{{ $pays }}][laboratoires]" value="{{ $data['laboratoires'] ?? '' }}" class="border rounded p-2 w-full mb-3" required>
+                                        <label class="block mb-2 text-sm">Collaborateurs</label>
+                                        <input type="number" name="chiffres[{{ $pays }}][collaborateurs]" value="{{ $data['collaborateurs'] ?? '' }}" class="border rounded p-2 w-full mb-3" required>
+                                        <label class="block mb-2 text-sm">Image équipe (.png, .jpg, .jpeg)</label>
+                                        <div class="mb-2">
+                                            @if($imgPath)
+                                                <img src="{{ asset($imgPath) }}" alt="Equipe {{ $pays }}" class="w-full h-24 object-cover rounded mb-2 border">
+                                            @endif
+                                        </div>
+                                        <input type="hidden" name="chiffres[{{ $pays }}][equipe_image]" value="{{ $imgPath }}">
+                                        <input type="file" name="equipe_image_{{ $pays }}" accept=".jpg,.jpeg,.png" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-[#31689B] file:text-white hover:file:bg-[#437305]"/>
+                                    </div>
+                                @endforeach
+                                @php
+                                    $general = collect($chiffres)->firstWhere('pays', 'general') ?? [];
+                                @endphp
+                                <div class="border rounded-lg p-4 shadow-sm md:col-span-3">
+                                    <h3 class="text-lg font-bold mb-4 text-[#31689B]">Informations générales</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <label class="block mb-2 text-sm">Collaborateurs</label>
+                                            <input type="number" name="chiffres[general][collaborateurs]" value="{{ $general['collaborateurs'] ?? '' }}" class="border rounded p-2 w-full mb-3" required>
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm">Années d'expérience</label>
+                                            <input type="number" name="chiffres[general][experience]" value="{{ $general['experience'] ?? '' }}" class="border rounded p-2 w-full mb-3" required>
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2 text-sm">Pays couverts</label>
+                                            <input type="number" name="chiffres[general][pays_couverts]" value="{{ $general['pays_couverts'] ?? '' }}" class="border rounded p-2 w-full mb-3" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="mt-6 bg-[#437305] hover:bg-[#31689B] text-white px-6 py-2 rounded shadow">Enregistrer</button>
+                        </form>
+                    </div>
+                </section>
+
+                @if(session('success'))
+                    <div id="success-popup" class="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 bg-green-100 text-green-800 border border-green-300 px-8 py-4 rounded-lg shadow-lg text-center font-semibold transition-opacity duration-500 opacity-100">
+                        {{ session('success') }}
+                    </div>
+                    <script>
+                        setTimeout(() => {
+                            const popup = document.getElementById('success-popup');
+                            if (popup) {
+                                popup.style.opacity = '0';
+                                setTimeout(() => popup.remove(), 600);
+                            }
+                        }, 2500);
+                    </script>
+                @endif
+
             </main>
         </div>
         <script>
@@ -442,6 +516,20 @@
                 @endforeach
             }
         });
+
+        function addChiffreRow() {
+            const list = document.getElementById('chiffres-list');
+            const idx = list.children.length;
+            const div = document.createElement('div');
+            div.className = "flex flex-col md:flex-row gap-4 items-center chiffre-row";
+            div.innerHTML = `
+                <input type="text" name="chiffres[${idx}][label]" class="border rounded p-2 w-48" placeholder="Label" required>
+                <input type="number" name="chiffres[${idx}][valeur]" class="border rounded p-2 w-32" placeholder="Valeur" required>
+                <input type="text" name="chiffres[${idx}][image]" class="border rounded p-2 w-64" placeholder="Lien image" required>
+                <button type="button" onclick="this.closest('.chiffre-row').remove()" class="text-red-600 hover:underline">Supprimer</button>
+            `;
+            list.appendChild(div);
+        }
         </script>
     </body>
 </html>
