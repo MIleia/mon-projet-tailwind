@@ -625,22 +625,54 @@
             </div>
         </div>
 
-
-
-
         <!-- Section blog -->
-        <section class="py-20 flex flex-col items-center" id="blog-home">
+        <section class="py-16 bg-[#f7fafc] flex flex-col items-center" id="blog-home">
+            <div class="w-full max-w-3xl px-2">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-[#31689B] mb-2">Dernier article du blog</h2>
+                <div class="text-center text-gray-500 mb-6 text-sm md:text-base">
+                    Découvrez nos actualités, conseils et analyses sur la promotion pharmaceutique en Afrique de l’Ouest.
+                </div>
+                @php
+                    $dernierArticle = \App\Models\Blog::whereIn('etat', ['en ligne', 'les 2'])
+                        ->orderBy('date', 'desc')
+                        ->first();
+                @endphp
 
-
+                @if($dernierArticle)
+                    <a href="{{ route('blog') }}" class="block group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer max-w-2xl mx-auto">
+                        @if($dernierArticle->image)
+                            <div class="relative">
+                                <img src="{{ asset($dernierArticle->image) }}" alt="{{ $dernierArticle->titre }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-2 left-2 bg-[#437305] text-white text-[10px] px-2 py-0.5 rounded-full shadow">Nouveau</span>
+                            </div>
+                        @endif
+                        <div class="p-4 flex flex-col gap-3">
+                            <h3 class="text-lg md:text-xl font-bold text-[#31689B] mb-1 group-hover:text-[#437305] transition-colors duration-300">
+                                {{ $dernierArticle->titre }}
+                            </h3>
+                            <div class="flex items-center gap-2 text-gray-500 text-xs mb-2">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ \Carbon\Carbon::parse($dernierArticle->date)->format('d/m/Y') }}
+                            </div>
+                            <p class="text-gray-700 text-xs md:text-sm line-clamp-3 mb-2">
+                                {{ \Illuminate\Support\Str::limit(strip_tags($dernierArticle->texte), 120) }}
+                            </p>
+                            <div class="mt-1 text-[#437305] font-semibold group-hover:underline flex items-center gap-2 text-xs md:text-sm">
+                                Lire plus <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                @else
+                    <div class="text-gray-400 text-center text-base">Aucun article disponible pour le moment.</div>
+                @endif
+            </div>
         </section>
 
-
-
         <!-- partenaire -->
-        <section class="bg-white py-20 px-4">
+        <section class="bg-white py-10 px-4">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-2xl md:text-4xl font-bold text-center text-blue-400 mb-8 md:mb-12">Nos partenaires</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 mb-20 md:mb-40 place-items-center">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-4 mb-8">
                     <img src="images/Page index/Crosspharm_logo.png" alt="Crosspharm" class="h-20 md:h-32 w-auto" />
                     <img src="images/Page index/ferrer_logo.png" alt="Ferrer" class="h-20 md:h-32 w-auto" />
                     <img src="images/Page index/salvat_logo.png" alt="Salvat" class="h-20 md:h-32 w-auto" />
@@ -710,8 +742,22 @@
                     </ul>
                 </div>
             </div>
-            <div class="bg-[#3C74A8] text-center py-4 text-xs md:text-sm">
-                <a href="https://www.neostart.tech/" target="_blank">Copyright © 2025 Neo Start Technology Tous droits réservés.</a>
+            <div class="bg-[#3C74A8] py-4 text-xs md:text-sm shadow-inner">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-y-2 px-4">
+                    <div class="w-full md:w-2/5 flex justify-center md:justify-end mb-2 md:mb-0">
+                        <span class="text-white text-center md:text-right tracking-wide flex items-center gap-2">
+                            <i class="fa-regular fa-copyright"></i>
+                            Copyright Pharmacol 2025. Tous droits réservés.
+                        </span>
+                    </div>
+                    <span class="hidden md:inline text-white mx-6 text-lg opacity-60">|</span>
+                    <div class="w-full md:w-2/5 flex justify-center md:justify-start">
+                        <a href="https://www.neostart.tech/" target="_blank" class="text-white hover:underline text-center md:text-left tracking-wide flex items-center gap-2 transition-all duration-200">
+                            <i class="fas fa-code"></i>
+                            Développé par Neo Start Technology
+                        </a>
+                    </div>
+                </div>
             </div>
         </footer>
     </body>

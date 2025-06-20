@@ -335,7 +335,7 @@
             </div>
         </section>
 
-        <section class="bg-gray-50 px-2 sm:px-4 py-10 sm:py-20">
+        <section class="bg-gray-50 px-2 sm:px-4 py-10 sm:py-5">
             <div class="max-w-screen-xl mx-auto md:col-span-2 p-4 sm:p-10 md:p-20" id="content-area">
                 <!-- Le contenu dynamique s'affichera ici -->
             </div>
@@ -761,8 +761,22 @@
                     </ul>
                 </div>
             </div>
-            <div class="bg-[#3C74A8] text-center py-4 text-xs md:text-sm">
-                <a href="https://www.neostart.tech/" target="_blank">Copyright © 2025 Neo Start Technology Tous droits réservés.</a>
+            <div class="bg-[#3C74A8] py-4 text-xs md:text-sm shadow-inner">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-y-2 px-4">
+                    <div class="w-full md:w-2/5 flex justify-center md:justify-end mb-2 md:mb-0">
+                        <span class="text-white text-center md:text-right tracking-wide flex items-center gap-2">
+                            <i class="fa-regular fa-copyright"></i>
+                            Copyright Pharmacol 2025. Tous droits réservés.
+                        </span>
+                    </div>
+                    <span class="hidden md:inline text-white mx-6 text-lg opacity-60">|</span>
+                    <div class="w-full md:w-2/5 flex justify-center md:justify-start">
+                        <a href="https://www.neostart.tech/" target="_blank" class="text-white hover:underline text-center md:text-left tracking-wide flex items-center gap-2 transition-all duration-200">
+                            <i class="fas fa-code"></i>
+                            Développé par Neo Start Technology
+                        </a>
+                    </div>
+                </div>
             </div>
         </footer>
     </body>

@@ -108,7 +108,7 @@
                                         <span>Nos Implentations</span>
                                         <i class="fas fa-chevron-down"></i>
                                     </a>
-                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block md:mt-2 z-50">
+                                    <ul class="qdropdown-menu absolute left-0 hidden bg-white border border-gray-300 rounded shadow-md w-48 group-hover:block md:mt-0 z-50">
                                         <li>
                                             <a href="{{ route('accueil.togo') }}" class="flex items-center gap-2 px-4 py-2 text-[#437305] hover:text-green-600 font-bold">
                                                 <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="w-5 h-auto"> Togo
@@ -540,8 +540,22 @@
                     </ul>
                 </div>
             </div>
-            <div class="bg-[#3C74A8] text-center py-4 text-xs md:text-sm">
-                <a href="https://www.neostart.tech/" target="_blank">Copyright © 2025 Neo Start Technology Tous droits réservés.</a>
+            <div class="bg-[#3C74A8] py-4 text-xs md:text-sm shadow-inner">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-y-2 px-4">
+                    <div class="w-full md:w-2/5 flex justify-center md:justify-end mb-2 md:mb-0">
+                        <span class="text-white text-center md:text-right tracking-wide flex items-center gap-2">
+                            <i class="fa-regular fa-copyright"></i>
+                            Copyright Pharmacol 2025. Tous droits réservés.
+                        </span>
+                    </div>
+                    <span class="hidden md:inline text-white mx-6 text-lg opacity-60">|</span>
+                    <div class="w-full md:w-2/5 flex justify-center md:justify-start">
+                        <a href="https://www.neostart.tech/" target="_blank" class="text-white hover:underline text-center md:text-left tracking-wide flex items-center gap-2 transition-all duration-200">
+                            <i class="fas fa-code"></i>
+                            Développé par Neo Start Technology
+                        </a>
+                    </div>
+                </div>
             </div>
         </footer>
     </body>

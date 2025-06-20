@@ -52,8 +52,60 @@ CREATE TABLE IF NOT EXISTS postes (
 
 
 -- Insertion de test : postes
-INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre1', 'ceci est un descriptif', 'localisation1');
-INSERT INTO postes (titre, descriptif, localisation) VALUES ('titre2', 'ceci est un descriptif', 'localisation2');
+INSERT INTO postes (titre, descriptif, localisation) VALUES
+('Délégué médical', 
+'Vous serez chargé de la promotion des produits pharmaceutiques auprès des professionnels de santé. 
+Missions principales :
+- Présenter les produits aux médecins et pharmaciens
+- Assurer un suivi régulier des clients
+- Participer à des réunions scientifiques et formations
+Profil recherché : Bac+3 minimum, expérience souhaitée dans le secteur médical, aisance relationnelle.', 
+'Lomé, Togo'),
+
+('Responsable qualité', 
+'Assurer la conformité des processus de production et de distribution selon les normes en vigueur. 
+Vous serez le garant du respect des procédures et de la traçabilité des produits. 
+Expérience exigée : 2 ans minimum dans un poste similaire.', 
+'Cotonou, Bénin'),
+
+('Assistant administratif', 
+'Poste polyvalent : gestion des appels, organisation des dossiers, suivi des commandes et facturation. 
+Bonne maîtrise des outils bureautiques et sens de l’organisation requis.', 
+'Niamey, Niger'),
+
+('Chargé de communication', 
+'Développer la visibilité de l’entreprise sur les réseaux sociaux et auprès des partenaires. 
+Rédaction de contenus, gestion de la newsletter, organisation d’événements.', 
+'Lomé, Togo'),
+
+('Pharmacien conseil', 
+'Conseil auprès des patients et validation des ordonnances. 
+Participation à la gestion des stocks et à la formation de l’équipe officinale.', 
+'Cotonou, Bénin'),
+
+('Délégué Médical',
+'Promotion des produits auprès des professionnels de santé.',
+'Lomé, Togo'),
+
+('Superviseur Terrain',
+'Management des équipes et suivi opérationnel.',
+'Cotonou, Bénin'),
+
+('Directeur des Ventes',
+'Stratégie commerciale et pilotage national.',
+'Niamey, Niger'),
+
+('Délégué médical – Zone Nord',
+'Poste basé à Parakou – Candidatures ouvertes. Postuler maintenant.',
+'Parakou, Bénin'),
+
+('Responsable Réglementaire',
+'Cotonou – Expérience requise. Voir les missions.',
+'Cotonou, Bénin'),
+
+('Assistant(e) administratif(ve)',
+'Stage de 6 mois – Cotonou.',
+'Cotonou, Bénin');
 
 -- Insertion de test : utilisateur
 INSERT INTO utilisateur (mail, mot_de_passe, role) VALUES 
@@ -69,6 +121,18 @@ INSERT INTO newsletter (mail, nom, prenom) VALUES
 
 -- Insertion de test : blog
 INSERT INTO blog (image, titre, texte, date, etat) VALUES
+('images/blog/1750150524_pharma-representation.jpg', 'Ouverture de notre nouvelle agence à Lomé',
+'Nous sommes heureux d’annoncer l’ouverture de notre nouvelle agence à Lomé. Cette implantation nous permettra de mieux servir nos partenaires et de renforcer notre présence au Togo.',
+'2025-05-10', 'en ligne'),
+
+('images/blog/1750150524_pharma-representation.jpg', 'La traçabilité des médicaments : un enjeu majeur',
+'La traçabilité des médicaments est essentielle pour garantir la sécurité des patients. Découvrez nos solutions innovantes pour un suivi optimal des lots et des stocks.',
+'2025-05-20', 'en ligne'),
+
+('images/blog/1750150556_autorisation-marche.jpg', 'Retour sur notre séminaire annuel',
+'Notre séminaire annuel a réuni plus de 100 professionnels du secteur pharmaceutique venus du Togo, du Bénin et du Niger. 
+Au programme : conférences, ateliers pratiques et échanges sur les bonnes pratiques.',
+'2025-06-01', 'newsletter'),
 ('images/blog/test.jpg', 'Lancement de Pharmacol Niger', 'Nous avons lancé notre nouvelle plateforme au Niger.', '2025-04-01', 'en ligne'),
 ('images/blog/test.jpg', 'Les enjeux pharmaceutiques en Afrique', 'Analyse des besoins de santé et de la distribution en Afrique de l’Ouest.', '2025-04-15', 'newsletter'),
 ('images/blog/test.jpg', 'Partenariat avec les pharmacies locales', 'Nous avons signé un partenariat avec plusieurs pharmacies rurales.', '2025-05-01', 'les 2'),
