@@ -161,10 +161,10 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('prestation') }}" class="text-gray-900 hover:text-green-600">Prestations</a></li>
-                                <li><a href="{{ route('recrutement') }}" class="text-gray-900 hover:text-green-600">Recrutement</a></li>
-                                <li><a href="{{ route('blog') }}" class="text-[#437305] hover:text-green-600 font-bold">Blog</a></li>
-                                <li><a href="{{ route('contact') }}" class="text-gray-900 hover:text-green-600">Contact</a></li>
+                                <li><a href="{{ route('prestation') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Prestations</a></li>
+                                <li><a href="{{ route('recrutement') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Recrutement</a></li>
+                                <li><a href="{{ route('blog') }}" class="text-[#437305] hover:text-green-600 block px-4 py-3 md:p-0 font-bold">Blog</a></li>
+                                <li><a href="{{ route('contact') }}" class="text-gray-900 hover:text-green-600 block px-4 py-3 md:p-0">Contact</a></li>
                             </ul>
                         </div>
                     </nav>
