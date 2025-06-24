@@ -50,9 +50,15 @@ CREATE TABLE IF NOT EXISTS postes (
     localisation VARCHAR(255) NOT NULL
 );
 
+-- Insertion de l'admin
 INSERT INTO utilisateur (mail, mot_de_passe, role) VALUES 
-('admin@pharmacol.com', '$2y$10$VscUIy.v0K0HNofz3ttTrOHbMNLXd8kQFEFfEC8KrKOEOGyFcUSqu', 'admin'),
-
+('admin@pharmacol.com', '$2y$10$VscUIy.v0K0HNofz3ttTrOHbMNLXd8kQFEFfEC8KrKOEOGyFcUSqu', 'admin');
 -- Mot de passe admin : 1234
+
+-- Insertion de test : blog
+INSERT INTO blog (image, titre, texte, date, etat) VALUES
+('images/blog/1750150524_pharma-representation.jpg', 'Ouverture de notre nouvelle agence à Lomé',
+'Nous sommes heureux d’annoncer l’ouverture de notre nouvelle agence à Lomé. Cette implantation nous permettra de mieux servir nos partenaires et de renforcer notre présence au Togo.',
+'2025-05-10', 'en ligne');
 
 
